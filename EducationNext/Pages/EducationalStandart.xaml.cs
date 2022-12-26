@@ -14,17 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EducationNext
+namespace EducationNext.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EducationalStandart.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EducationalStandart : UserControl
     {
-        public MainWindow()
+        public EducationalStandart()
         {
             InitializeComponent();
-            DataContext = MainWindowVM.GetInstance();
+            DataContext = EducationalStandartVM.GetInstance();
         }
     }
 }

@@ -1,15 +1,21 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataBase.Entities
 {
-    internal class EducationalStandartStateFinalCertification
+    [Index("EducationalStandartID", "StateFinalCertificationID", IsUnique = true)]
+    public class EducationalStandartStateFinalCertification
     {
+        [Key]
         public int Id { get; set; }
         public int EducationalStandartID { get; set; }
+        public EducationalStandart? EducationalStandart { get; set; }
         public int StateFinalCertificationID { get; set; }
+        public StateFinalCertification? StateFinalCertification { get; set; }
     }
 }

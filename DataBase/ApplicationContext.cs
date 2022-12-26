@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
-    internal class ApplicationContext : DbContext
+    public class ApplicationContext : DbContext
     {
         public DbSet<Competence> Competences { get; set; }
         public DbSet<Discipline> Disciplines { get; set; }
