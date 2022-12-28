@@ -5,24 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EducationNext.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1200">
     <Grid>
-        <DataGrid 
-                    ItemsSource="{Binding DataGridParty, Mode=OneWay}" 
-                    AutoGenerateColumns="False"
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <Button
+                    Height="20"
+                    Width="150"
                     HorizontalAlignment="Left"
-                    ScrollViewer.CanContentScroll="True"
-                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto"
-                    DockPanel.Dock="Top"
-                    RowHeaderWidth="0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Product.Name}" Width="*" Header="Наименование товара"/>
-                <DataGridTextColumn Binding="{Binding Quantity}" Width="SizeToHeader" Header="Остаток"/>
-                <DataGridTextColumn Binding="{Binding Document.Invoice.Supplier.Name}" Width="*" Header="Поставщик"/>
-                <DataGridTextColumn Binding="{Binding Document.Invoice.SupplierNumber}" Width="*" Header="Номер накладной"/>
-                <DataGridTextColumn Binding="{Binding Document.Invoice.DateOfInvoice}" Width="*" Header="Дата поставки"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                    Command="{Binding EditEducationalStandart}">
+                    Редактировать стандарт
+                </Button>
+            </DockPanel>
+            <DockPanel>
+                <DataGrid 
+                            ItemsSource="{Binding DataGridEducationalStandart, Mode=OneWay}"
+                            SelectedItem="{Binding SelectedItem}"
+                            AutoGenerateColumns="False"
+                            HorizontalAlignment="Left"
+                            ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"
+                            DockPanel.Dock="Top"
+                            RowHeaderWidth="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding SpecializationCode}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock>
+                                    Код направления <LineBreak/> подготовки
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="SizeToHeader" Header="Объём программы в з.е."/>
+                        <DataGridTextColumn Binding="{Binding QuantityTerm}" Width="SizeToHeader" Header="Сроки получения образования (семестров)"/>
+                        <DataGridTextColumn Binding="{Binding MaxQuantityCreditUnitPerYear}" Width="SizeToHeader" Header="Максимальное количество з.е. за один год"/>
+                        <DataGridComboBoxColumn />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

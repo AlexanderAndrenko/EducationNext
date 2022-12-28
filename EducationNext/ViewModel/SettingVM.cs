@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic
+namespace EducationNext
 {
-    public class SyllabusVM : BaseVM
+    public class SettingVM : BaseVM
     {
-        private static SyllabusVM instance;
+        private static SettingVM instance;
 
-        public static SyllabusVM GetInstance()
+        public static SettingVM GetInstance()
         {
             if (instance == null)
-                instance = new SyllabusVM();
+                instance = new SettingVM();
             return instance;
         }
-        private SyllabusVM()
+        private SettingVM()
         {
 
         }

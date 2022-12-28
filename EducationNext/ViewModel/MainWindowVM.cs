@@ -1,7 +1,10 @@
-﻿using System.Buffers.Text;
+﻿using DataBase;
+using System.Buffers.Text;
 using System.Collections.ObjectModel;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
-namespace BusinessLogic
+namespace EducationNext
 {
     public class MainWindowVM : BaseVM
     {
@@ -15,6 +18,22 @@ namespace BusinessLogic
         }
         private MainWindowVM()
         {
+            ApplicationContext db = new ApplicationContext();
+            db.Database.EnsureCreated();
+
+            if (db.EducationalStandarts.Count() == 0)
+            {
+                db.EducationalStandarts.Add(
+                    new DataBase.Entities.EducationalStandart()
+                    {
+                        SpecializationCode = "09.03.01",
+                        QuantityCreditUnit = 300,
+                        QuantityTerm = 8,
+                        MaxQuantityCreditUnitPerYear = 50
+                    }
+                    );
+                db.SaveChanges();
+            }
 
             #region CreateListOfPages
             MenuItemsData = new ObservableCollection<MenuItemDataVM>()

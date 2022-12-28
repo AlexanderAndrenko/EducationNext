@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataBase.Entities;
+using DataBase.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,11 @@ namespace DataBase
 
         #region Methods
 
+        public List<EducationalStandart> GetEducationalStandarts()
+        {
+            EducationalStandartModel m = new();
+            return m.GetEducationalStandarts();
+        }
 
         #endregion //Methods
 
