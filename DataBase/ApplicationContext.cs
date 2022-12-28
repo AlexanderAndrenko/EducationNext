@@ -29,7 +29,7 @@ namespace DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=EducationNext");
+            optionsBuilder.UseSqlite("Data Source=EducationNextDB");
         }
     }
 }

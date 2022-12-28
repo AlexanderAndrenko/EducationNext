@@ -1,0 +1,34 @@
+﻿<Window x:Class="EducationNext.Pages.EditCompetence"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EducationNext.Pages"
+        mc:Ignorable="d"
+        Title="Редактирование компетенции" Height="380" Width="400">
+    <Grid
+        Margin="15">
+        <StackPanel
+            Orientation="Vertical">
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="0,20,0,0">
+                <TextBlock Width="170">Название компетенции (код)</TextBlock>
+                <TextBox Margin="20,0,0,0" Width="170" Text="{Binding NameNewCompetence}"/>
+            </StackPanel>
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="0,20,0,0">
+                <TextBlock Width="170">Тип компетенции</TextBlock>
+                <TextBox Margin="20,0,0,0" Width="170" Text="{Binding TypeNewCompetence}"/>
+            </StackPanel>
+            <StackPanel 
+                Orientation="Vertical"
+                Margin="0,20,0,0">
+                <TextBlock TextAlignment="Center">Описание</TextBlock>
+                <TextBox Margin="0,10,0,0" Height="150" Text="{Binding DescriptionNewCompetence}"/>
+            </StackPanel>
+            <Button Width="100" Height="25" Content="Сохранить" Margin="0,20,0,0" Command="{Binding SaveCompetence}"/>
+        </StackPanel>
+    </Grid>
+</Window>

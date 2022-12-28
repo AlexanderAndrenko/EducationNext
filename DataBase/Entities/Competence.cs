@@ -13,7 +13,10 @@ namespace DataBase.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
+        public string TypeCompetence { get; set; } = "";
+        public string ShortTypeCompetence { get; set; } = "";
 
         public List<DisciplineCompetence> DisciplineCompetences { get; set; } = new();
         public List<PracticCompetence> PracticCompetences { get; set; } = new();

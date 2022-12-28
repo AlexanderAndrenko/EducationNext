@@ -30,6 +30,22 @@ namespace DataBase
             return m.GetEducationalStandarts();
         }
 
+        public List<Competence> GetCompetences()
+        {
+            CompetenceModel m = new();
+            return m.GetCompetences();
+        }
+        public void SetCompetence(Competence competence)
+        {
+            CompetenceModel m = new();
+            m.SetCompetence(competence);
+        }
+        public void DeleteCompetence(Competence competence)
+        {
+            CompetenceModel m = new();
+            m.DeleteCompetence(competence);
+        }
+
         #endregion //Methods
 
     }

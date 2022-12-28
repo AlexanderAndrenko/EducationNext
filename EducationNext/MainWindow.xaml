@@ -11,6 +11,9 @@
         <DataTemplate DataType="{x:Type local:EducationalStandartVM}">
             <views:EducationalStandart/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:CompetenceVM}">
+            <views:CompetenceModule/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid Margin="5">
