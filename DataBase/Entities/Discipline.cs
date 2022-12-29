@@ -16,7 +16,7 @@ namespace DataBase.Entities
         public float QuantityAcademicHour { get; set; }
         public string? FormIntermediateCertification { get; set; }
         public string? Place { get; set; }
-        public bool IsIncludeToEducatiopnalProgramm { get; set; } = true;
+        public bool IsIncludeToEducatiopnalProgram { get; set; } = true;
 
         public List<EducationalStandartDiscipline>? EducationalStandartDisciplines { get; set; }
         public List<SyllabusDiscipline>? SyllabusDisciplines { get; set; }

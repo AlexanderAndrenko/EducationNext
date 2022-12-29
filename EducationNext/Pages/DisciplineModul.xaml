@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="EducationNext.Pages.DisciplineModul"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EducationNext.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1200">
+    <Grid>
+        <DockPanel Grid.ColumnSpan="2">
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <Button
+                    Height="20"
+                    Width="180"
+                    HorizontalAlignment="Left"
+                    Command="{Binding NewDiscipline}">
+                    Создать дисциплину
+                </Button>
+                <Button
+                    Height="20"
+                    Width="180"
+                    HorizontalAlignment="Left"
+                    
+                    Margin="10,0,0,0"
+                    Command="{Binding EditDiscipline}">
+                    Редактировать дисциплину
+                </Button>
+                <Button
+                    Height="20"
+                    Width="180"
+                    HorizontalAlignment="Left"
+                    Margin="10,0,0,0"
+                    Command="{Binding DeleteDiscipline}">
+                    Удалить дисциплину
+                </Button>
+            </DockPanel>
+            <DockPanel>
+                <DataGrid 
+                            ItemsSource="{Binding DataGridDiscipline, Mode=OneWay}"
+                            SelectedItem="{Binding SelectedItem}"
+                            AutoGenerateColumns="False"
+                            HorizontalAlignment="Left"
+                            ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"
+                            DockPanel.Dock="Top"
+                            RowHeaderWidth="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center">
+                                    Название дисциплины
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center">
+                                    Объём<LineBreak/>учебной дисциплины<LineBreak/>в зачетных единицах
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding QuantityAcademicHour}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center">
+                                    Объём дисциплины<LineBreak/>в академических часах
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding FormIntermediateCertification}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center">
+                                    Форма<LineBreak/>промежуточной<LineBreak/>аттестации
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Place}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center">
+                                    Место<LineBreak/>дисциплины в структуре<LineBreak/>образовательной программы
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding IsIncludeToEducatiopnalProgramm}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center">
+                                    Учитывается<LineBreak/>при расчете объёма<LineBreak/>образовательной программы
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

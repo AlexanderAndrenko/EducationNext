@@ -43,7 +43,16 @@ namespace EducationNext
         }
 
         public string NameNewCompetence { get; set; }
-        public string TypeNewCompetence { get; set; }
+
+        private string typeNewCompetence;
+        public string TypeNewCompetence 
+        { 
+            get => typeNewCompetence;
+            set 
+            {
+                typeNewCompetence = value.ToString();
+            }
+        }
         public string DescriptionNewCompetence { get; set; }
 
         public Competence SelectedItem { get; set; }

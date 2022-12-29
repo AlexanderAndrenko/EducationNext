@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DataBase.Model
 {
-    internal class DisciplineModel
+    internal class PracticeModel
     {
         #region Constructor
-        public DisciplineModel()
+        public PracticeModel()
         {
 
         }
@@ -21,49 +21,49 @@ namespace DataBase.Model
 
         #region Methods
 
-        public List<Discipline> GetDisciplines()
+        public List<Practic> GetPractices()
         {
-            List<Discipline> disciplines = new();
+            List<Practic> practices = new();
 
             try
             {
                 using (ApplicationContext db = new())
                 {
-                    disciplines =
-                        db.Disciplines.ToList();
-                    return disciplines;
+                    practices =
+                        db.Practics.ToList();
+                    return practices;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Ошибка! " + ex.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return disciplines;
+                return practices;
             }
         }
 
-        public void SetDiscipline(Discipline discipline)
+        public void SetPractice(Practic practice)
         {
             try
             {
                 using (ApplicationContext db = new())
                 {
-                    db.Disciplines.Add(discipline);
+                    db.Practics.Add(practice);
                     db.SaveChanges();
                 }
             }
             catch (Exception)
             {
-                
+
             }
         }
 
-        public void DeleteDiscipline(Discipline discipline)
+        public void DeletePractice(Practic practice)
         {
             try
             {
                 using (ApplicationContext db = new())
                 {
-                    db.Remove(discipline);
+                    db.Remove(practice);
                     db.SaveChanges();
                 }
             }

@@ -19,8 +19,14 @@
             <StackPanel 
                 Orientation="Horizontal"
                 Margin="0,20,0,0">
-                <TextBlock Width="170">Тип компетенции</TextBlock>
-                <TextBox Margin="20,0,0,0" Width="170" Text="{Binding TypeNewCompetence}"/>
+                <TextBlock Width="170">Вид компетенции</TextBlock>
+                <!--<TextBox Margin="20,0,0,0" Width="170" Text="{Binding TypeNewCompetence}"/>-->
+                <ComboBox Margin="20,0,0,0" Width="170" SelectedItem="{Binding TypeNewCompetence}">
+                    <TextBlock>Универсальная</TextBlock>
+                    <TextBlock>Общекультурная</TextBlock>
+                    <TextBlock>Общепрофессиональная</TextBlock>
+                    <TextBlock>Профессиональная</TextBlock>
+                </ComboBox>
             </StackPanel>
             <StackPanel 
                 Orientation="Vertical"
