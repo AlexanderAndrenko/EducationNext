@@ -11,10 +11,27 @@
             <DockPanel DockPanel.Dock="Top" Margin="5">
                 <Button
                     Height="20"
+                    Width="180"
+                    HorizontalAlignment="Left"
+                    Command="{Binding NewEducationalStandart}">
+                    Создать стандарт
+                </Button>
+                <Button
+                    Height="20"
                     Width="150"
+                    Margin="10,0,0,0"
                     HorizontalAlignment="Left"
                     Command="{Binding EditEducationalStandart}">
                     Редактировать стандарт
+                </Button>
+                
+                <Button
+                    Height="20"
+                    Width="180"
+                    HorizontalAlignment="Left"
+                    Margin="10,0,0,0"
+                    Command="{Binding DeleteEducationalStandart}">
+                    Удалить стандарт
                 </Button>
             </DockPanel>
             <DockPanel>
@@ -31,15 +48,36 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding SpecializationCode}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
-                                <TextBlock>
+                                <TextBlock
+                                    TextAlignment="Center">
                                     Код направления <LineBreak/> подготовки
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="SizeToHeader" Header="Объём программы в з.е."/>
-                        <DataGridTextColumn Binding="{Binding QuantityTerm}" Width="SizeToHeader" Header="Сроки получения образования (семестров)"/>
-                        <DataGridTextColumn Binding="{Binding MaxQuantityCreditUnitPerYear}" Width="SizeToHeader" Header="Максимальное количество з.е. за один год"/>
-                        <DataGridComboBoxColumn />
+                        <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock
+                                    TextAlignment="Center">
+                                    Объём<LineBreak/>программы в з.е.
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding QuantityTerm}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock
+                                    TextAlignment="Center">
+                                    Сроки получения<LineBreak/>образования (семестров)
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding MaxQuantityCreditUnitPerYear}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock
+                                    TextAlignment="Center">
+                                    Максимальное количество<LineBreak/>з.е. за один год
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

@@ -25,6 +25,9 @@ namespace EducationNext
         {
             GetEducationalStandart();
             EditEducationalStandart = new(OpenWindowEditEducationalStandart);
+            NewEducationalStandart = new(OpenWindowNewEducationalStandart);
+            SaveEducationalStandart = new(SaveNewEducationalStandart);
+            DeleteEducationalStandart = new(DeleteSelectedEducationalStandart);
         }
 
         #endregion //Constructor
@@ -47,6 +50,10 @@ namespace EducationNext
 
         public OwnCommand EditEducationalStandart { get; set; }
 
+        public OwnCommand NewEducationalStandart { get; set; }
+        public OwnCommand SaveEducationalStandart { get; set; }
+        public OwnCommand DeleteEducationalStandart { get; set; }
+
         #endregion //Properties
 
         #region Methods
@@ -56,12 +63,32 @@ namespace EducationNext
             ConnectorDatabase cdb = new ConnectorDatabase();
             DataGridEducationalStandart = cdb.GetEducationalStandarts();
         }
-
         private void OpenWindowEditEducationalStandart()
         {
+            if (SelectedItem == null)
+                SelectedItem = new();
             var window = new Pages.EducationalStandartNew();
             window.DataContext = this;
             window.ShowDialog();
+        }
+        private void OpenWindowNewEducationalStandart()
+        {
+            SelectedItem = new();
+            var window = new Pages.EducationalStandartNew();
+            window.DataContext = this;
+            window.ShowDialog();
+        }
+        private void SaveNewEducationalStandart()
+        {
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            cdb.SetEducationalStandart(SelectedItem);
+            GetEducationalStandart();
+        }
+        private void DeleteSelectedEducationalStandart()
+        {
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            cdb.DeleteEducationalStandart(SelectedItem);
+            GetEducationalStandart();
         }
 
         #endregion //Methods

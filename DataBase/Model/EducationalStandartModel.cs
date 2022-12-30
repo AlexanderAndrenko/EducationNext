@@ -50,6 +50,38 @@ namespace DataBase.Model
             }
         }
 
+        public void SetStandart(EducationalStandart standart)
+        {
+            try
+            {
+                using (ApplicationContext db = new())
+                {
+                    db.EducationalStandarts.Add(standart);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void DeleteStandart(EducationalStandart standart)
+        {
+            try
+            {
+                using (ApplicationContext db = new())
+                {
+                    db.Remove(standart);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         #endregion //Methods
     }
 }

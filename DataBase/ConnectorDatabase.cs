@@ -30,6 +30,16 @@ namespace DataBase
             EducationalStandartModel m = new();
             return m.GetEducationalStandarts();
         }
+        public void SetEducationalStandart(EducationalStandart standart)
+        {
+            EducationalStandartModel m = new();
+            m.SetStandart(standart);
+        }
+        public void DeleteEducationalStandart(EducationalStandart standart)
+        {
+            EducationalStandartModel m = new();
+            m.DeleteStandart(standart);
+        }
         #endregion //EducationalStandart
 
         #region Competence
