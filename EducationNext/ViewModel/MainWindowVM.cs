@@ -42,7 +42,8 @@ namespace EducationNext
                 new MenuItemDataVM("Образовательная программа", EducationalProgramVM.GetInstance()),
                 new MenuItemDataVM("Учебный план", SyllabusVM.GetInstance()),
                 new MenuItemDataVM("Дисциплина", DisciplineVM.GetInstance()),
-                new MenuItemDataVM("Практика", PraticeVM.GetInstance()),
+                new MenuItemDataVM("Практика", PracticeVM.GetInstance()),
+                new MenuItemDataVM("ГИА", StateFinalCertificationVM.GetInstance()),
                 new MenuItemDataVM("Компетенция", CompetenceVM.GetInstance()),
                 new MenuItemDataVM("Настройки", SettingVM.GetInstance())
             };

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EducationNext;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace EducationNext.Pages
         public PracticModule()
         {
             InitializeComponent();
-            DataContext = PraticeVM.GetInstance();
+            DataContext = PracticeVM.GetInstance();
         }
     }
 }

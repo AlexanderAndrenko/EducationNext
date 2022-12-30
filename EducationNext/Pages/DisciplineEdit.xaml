@@ -54,7 +54,8 @@
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Width="170" TextAlignment="Center">Выберите компетенции<LineBreak/> в дисциплине</TextBlock>
-                    <ListBox>
+                    <ListBox
+                        Height="330">
                         
                     </ListBox>
                 </StackPanel>

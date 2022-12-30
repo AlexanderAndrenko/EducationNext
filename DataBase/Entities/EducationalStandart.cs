@@ -12,6 +12,7 @@ namespace DataBase.Entities
         [Key]
         public int Id { get; set; }
         public string SpecializationCode { get; set; } = "";
+        public string? Name { get; set; }
         public float QuantityCreditUnit { get; set; }    
         public int QuantityTerm { get; set; }
         public float MaxQuantityCreditUnitPerYear { get; set; }

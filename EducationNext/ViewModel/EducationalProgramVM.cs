@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataBase.Entities;
+using DataBase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +20,70 @@ namespace EducationNext
         }
         private EducationalProgramVM()
         {
-
+            GetEducationalProgram();
+            EditEducationalProgram = new(OpenWindowEditEducationalProgram);
+            NewEducationalProgram = new(OpenWindowNewEducationalProgram);
+            SaveEducationalProgram = new(SaveNewEducationalProgram);
+            DeleteEducationalProgram = new(DeleteSelectedEducationalProgram);
         }
+
+        #region Properties
+
+        private List<EducationalProgram> dataGridEducationalProgram;
+        public List<EducationalProgram> DataGridEducationalProgram
+        {
+            get => dataGridEducationalProgram;
+            set
+            {
+                dataGridEducationalProgram = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public EducationalProgram SelectedItem { get; set; }
+
+        public OwnCommand EditEducationalProgram { get; set; }
+        public OwnCommand NewEducationalProgram { get; set; }
+        public OwnCommand SaveEducationalProgram { get; set; }
+        public OwnCommand DeleteEducationalProgram { get; set; }
+
+        #endregion //Properties
+
+        #region Methods
+
+        public void GetEducationalProgram()
+        {
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            DataGridEducationalProgram = cdb.GetEducationalPrograms();
+        }
+        private void OpenWindowEditEducationalProgram()
+        {
+            if (SelectedItem == null)
+                SelectedItem = new();
+            var window = new Pages.EducationalProgramEdit();
+            window.DataContext = this;
+            window.ShowDialog();
+        }
+        private void OpenWindowNewEducationalProgram()
+        {
+            SelectedItem = new();
+            var window = new Pages.EducationalProgramEdit();
+            window.DataContext = this;
+            window.ShowDialog();
+        }
+        private void SaveNewEducationalProgram()
+        {
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            cdb.SetEducationalProgram(SelectedItem);
+            GetEducationalProgram();
+        }
+        private void DeleteSelectedEducationalProgram()
+        {
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            cdb.DeleteEducationalProgram(SelectedItem);
+            GetEducationalProgram();
+        }
+
+        #endregion //Methods
     }
 }

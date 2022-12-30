@@ -86,6 +86,42 @@ namespace DataBase
         }
         #endregion //Practice
 
+        #region StateFinalCertification
+        public List<StateFinalCertification> GetStateFinalCertifications()
+        {
+            StateFinalCertificationModel m = new();
+            return m.GetStateFinalCertifications();
+        }
+        public void SetStateFinalCertification(StateFinalCertification stateFinalCertification)
+        {
+            StateFinalCertificationModel m = new();
+            m.SetStateFinalCertification(stateFinalCertification);
+        }
+        public void DeleteStateFinalCertification(StateFinalCertification stateFinalCertification)
+        {
+            StateFinalCertificationModel m = new();
+            m.DeleteStateFinalCertification(stateFinalCertification);
+        }
+        #endregion //StateFinalCertification
+
+        #region EducationalProgram
+        public List<EducationalProgram> GetEducationalPrograms()
+        {
+            EducationalProgramModel m = new();
+            return m.GetEducationalPrograms();
+        }
+        public void SetEducationalProgram(EducationalProgram educationalProgram)
+        {
+            EducationalProgramModel m = new();
+            m.SetEducationalProgram(educationalProgram);
+        }
+        public void DeleteEducationalProgram(EducationalProgram educationalProgram)
+        {
+            EducationalProgramModel m = new();
+            m.DeleteEducationalProgram(educationalProgram);
+        }
+        #endregion //EducationalProgram
+
         #endregion //Methods
 
     }

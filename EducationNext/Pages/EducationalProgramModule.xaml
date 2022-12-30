@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="EducationNext.Pages.PracticModule"
+﻿<UserControl x:Class="EducationNext.Pages.EducationalProgramModule"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,29 +13,29 @@
                     Height="20"
                     Width="180"
                     HorizontalAlignment="Left"
-                    Command="{Binding NewPractice}">
-                    Создать дисциплину
+                    Command="{Binding NewEducationalProgram}">
+                    Создать программу
                 </Button>
                 <Button
                     Height="20"
                     Width="180"
                     HorizontalAlignment="Left"                    
                     Margin="10,0,0,0"
-                    Command="{Binding EditPractice}">
-                    Редактировать дисциплину
+                    Command="{Binding EditEducationalProgram}">
+                    Редактировать программу
                 </Button>
                 <Button
                     Height="20"
                     Width="180"
                     HorizontalAlignment="Left"
                     Margin="10,0,0,0"
-                    Command="{Binding DeletePractice}">
-                    Удалить дисциплину
+                    Command="{Binding DeleteEducationalProgram}">
+                    Удалить программу
                 </Button>
             </DockPanel>
             <DockPanel>
                 <DataGrid 
-                            ItemsSource="{Binding DataGridPractice, Mode=OneWay}"
+                            ItemsSource="{Binding DataGridEducationalProgram, Mode=OneWay}"
                             SelectedItem="{Binding SelectedItem}"
                             AutoGenerateColumns="False"
                             HorizontalAlignment="Left"
@@ -48,28 +48,21 @@
                         <DataGridTextColumn Binding="{Binding Name}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Название практики
+                                    Название образовательной программы
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding MainType}" Width="SizeToHeader">
+                        <DataGridTextColumn Binding="{Binding EducationalStandart.SpecializationCode}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Вид практики
+                                    Код образовательного стандарта
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding Type}" Width="SizeToHeader">
+                        <DataGridTextColumn Binding="{Binding EducationalStandart.Name}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Тип практики
-                                </TextBlock>
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="SizeToHeader">
-                            <DataGridTextColumn.Header>
-                                <TextBlock TextAlignment="Center">
-                                    Количество зачетных единиц
+                                    Наименование образовательного стандарта
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>

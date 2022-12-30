@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="PracticeEdit" Height="450" Width="800">
+        Title="Редактирование/Создание практики" Height="350" Width="600">
     <Grid
         Margin="15">
         <StackPanel
@@ -18,48 +18,48 @@
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Название дисциплины</TextBlock>
+                        <TextBlock Width="170" TextAlignment="Center">Название практики</TextBlock>
                         <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Name}"/>
                     </StackPanel>
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Объём<LineBreak/>учебной дисциплины<LineBreak/>в зачетных единицах</TextBlock>
+                        <TextBlock Width="170" TextAlignment="Center">Вид практики</TextBlock>
+                        <ComboBox 
+                            Margin="20,0,0,0" 
+                            Width="170" 
+                            Text="{Binding MainTypeNewPractice}">
+                            <TextBlock>Учебная</TextBlock>
+                            <TextBlock>Производственная</TextBlock>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="170" TextAlignment="Center">Тип практики</TextBlock>
+                        <ComboBox 
+                            Margin="20,0,0,0" 
+                            Width="170" 
+                            SelectedItem="{Binding SelectedItem.Type}" 
+                            ItemsSource="{Binding ComboBoxList}">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="170" TextAlignment="Center">Количество зачетных единиц</TextBlock>
                         <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
-                    </StackPanel>
-                    <StackPanel 
-                        Orientation="Horizontal"
-                        Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Объём дисциплины<LineBreak/>в академических часах</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.QuantityAcademicHour}"/>
-                    </StackPanel>
-                    <StackPanel 
-                        Orientation="Horizontal"
-                        Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Форма<LineBreak/>промежуточной<LineBreak/>аттестации</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.FormIntermediateCertification}"/>
-                    </StackPanel>
-                    <StackPanel 
-                        Orientation="Horizontal"
-                        Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Место<LineBreak/>дисциплины в структуре<LineBreak/>образовательной программы</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Place}"/>
-                    </StackPanel>
-                    <StackPanel 
-                        Orientation="Horizontal"
-                        Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Учитывается<LineBreak/>при расчете объёма<LineBreak/>образовательной программы</TextBlock>
-                        <CheckBox Margin="20,0,0,0" IsChecked="{Binding SelectedItem.IsIncludeToEducatiopnalProgram}" ></CheckBox>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock Width="170" TextAlignment="Center">Выберите компетенции<LineBreak/> в дисциплине</TextBlock>
-                    <ListBox>
+                    <TextBlock Width="170" TextAlignment="Center">Выберите компетенции<LineBreak/> в практике</TextBlock>
+                    <ListBox
+                        Height="200">
 
                     </ListBox>
                 </StackPanel>
             </StackPanel>
-            <Button Width="100" Height="25" Content="Сохранить" Margin="0,20,0,0" Command="{Binding SaveDiscipline}"/>
+            <Button Width="100" Height="25" Content="Сохранить" Margin="0,20,0,0" Command="{Binding SavePractice}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -10,18 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace EducationNext.Pages
 {
     /// <summary>
-    /// Interaction logic for PracticEdit.xaml
+    /// Interaction logic for StateFinalCertificationModule.xaml
     /// </summary>
-    public partial class PracticeEdit : Window
+    public partial class StateFinalCertificationModule : UserControl
     {
-        public PracticeEdit()
+        public StateFinalCertificationModule()
         {
             InitializeComponent();
+            DataContext = StateFinalCertificationVM.GetInstance();
         }
     }
 }

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace EducationNext.Pages
 {
     /// <summary>
-    /// Interaction logic for PracticEdit.xaml
+    /// Interaction logic for StateFinalCertificationEdit.xaml
     /// </summary>
-    public partial class PracticeEdit : Window
+    public partial class StateFinalCertificationEdit : Window
     {
-        public PracticeEdit()
+        public StateFinalCertificationEdit()
         {
             InitializeComponent();
         }

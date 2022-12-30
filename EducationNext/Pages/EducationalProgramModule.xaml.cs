@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace EducationNext.Pages
 {
     /// <summary>
-    /// Interaction logic for PracticEdit.xaml
+    /// Interaction logic for EducationalProgramModule.xaml
     /// </summary>
-    public partial class PracticeEdit : Window
+    public partial class EducationalProgramModule : UserControl
     {
-        public PracticeEdit()
+        public EducationalProgramModule()
         {
             InitializeComponent();
         }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EducationNext.ViewModel
+namespace EducationNext
 {
     public class PracticeVM : BaseVM
     {
@@ -25,6 +25,9 @@ namespace EducationNext.ViewModel
             NewPractice = new(OpenWindowNewPractice);
             SavePractice = new(SaveNewPractice);
             DeletePractice = new(DeleteSelectedPractice);
+            SelectionComboBoxChanged = new(GetComboBoxList);
+            SelectedItem = new();
+            MainTypeNewPractice = new(SelectedItem.MainType);        
         }
 
         #region Properties
@@ -40,12 +43,45 @@ namespace EducationNext.ViewModel
             }
         }
 
-        public Practic SelectedItem { get; set; }
+        private List<string> comboBoxList;
+        public List<string> ComboBoxList 
+        { 
+            get => comboBoxList;
+            set
+            {
+                comboBoxList = value; 
+                RaisePropertyChanged();
+            }
+        }
+
+        private Practic selectedItem;
+        public Practic SelectedItem 
+        {
+            get => selectedItem;
+            set
+            {
+                selectedItem = value;
+            }
+        }
+
+        private string mainTypeNewPractice;
+        public string MainTypeNewPractice
+        {
+            get => mainTypeNewPractice;
+            set
+            {
+                mainTypeNewPractice = value;
+                RaisePropertyChanged();
+                SelectedItem.MainType = value;
+                GetComboBoxList();                
+            }
+        }
 
         public OwnCommand EditPractice { get; set; }
         public OwnCommand NewPractice { get; set; }
         public OwnCommand SavePractice { get; set; }
         public OwnCommand DeletePractice { get; set; }
+        public OwnCommand SelectionComboBoxChanged { get; set; }
 
         #endregion //Properties
 
@@ -82,6 +118,33 @@ namespace EducationNext.ViewModel
             ConnectorDatabase cdb = new ConnectorDatabase();
             cdb.DeletePractice(SelectedItem);
             GetPractice();
+        }
+
+        private void GetComboBoxList()
+        {
+            if (SelectedItem.MainType == "Учебная")
+            {
+                ComboBoxList = new()
+                {
+                    "Ознакомительная",
+                    "Технологическая (проектно-технологическая)",
+                    "Эксплуатационная",
+                    "Научно-исследовательская работа (получение первичных навыков научно-исследовательской работы)"
+                };
+            }
+            else if (SelectedItem.MainType == "Производственная")
+            {
+                ComboBoxList = new()
+                {
+                    "Технологическая (проектно-технологическая)",
+                    "Эксплуатационная",
+                    "Научно-исследовательская работа"
+                };
+            }
+            else
+            {
+                ComboBoxList = new();
+            }
         }
 
         #endregion //Methods

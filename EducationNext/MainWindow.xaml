@@ -17,6 +17,12 @@
         <DataTemplate DataType="{x:Type local:DisciplineVM}">
             <views:DisciplineModul/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:PracticeVM}">
+            <views:PracticModule/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:StateFinalCertificationVM}">
+            <views:StateFinalCertificationModule/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid Margin="5">
