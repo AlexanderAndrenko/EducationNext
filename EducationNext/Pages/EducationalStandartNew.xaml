@@ -6,8 +6,73 @@
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
         Title="EducationalStandartNew" Height="450" Width="800">
-    <Grid>
-        <TextBlock Text="{Binding SelectedItem.SpecializationCode}">            
-        </TextBlock>
+    <Grid
+        Margin="15">
+        <StackPanel
+            Orientation="Vertical">
+            <StackPanel
+                Orientation="Horizontal">
+                <StackPanel
+                    Orientation="Vertical">
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="170" TextAlignment="Center">Код направления подготовки</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Name}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="170" TextAlignment="Center">Объём программы в з.е.</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Name}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical">
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="170" TextAlignment="Center">Сроки получения образования<LineBreak/>(семестров)</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Name}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="170" TextAlignment="Center">Максимальное количество з.е.<LineBreak/>за один ученый год</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel
+                Orientation="Horizontal">
+                <StackPanel
+                    Orientation="Vertical">
+                    <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>дисциплины</TextBlock>
+                    <ListBox
+                        Height="200">
+
+                    </ListBox>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical">
+                    <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>дисциплины</TextBlock>
+                    <ListBox
+                        Height="200">
+
+                    </ListBox>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical">
+                    <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>дисциплины</TextBlock>
+                    <ListBox
+                        Height="200">
+
+                    </ListBox>
+                </StackPanel>
+                
+            </StackPanel>
+            <Button Width="100" Height="25" Content="Сохранить" Margin="0,20,0,0" Command="{Binding SavePractice}"/>
+        </StackPanel>
     </Grid>
 </Window>

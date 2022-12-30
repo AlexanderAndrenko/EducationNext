@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="EducationalProgramEdit" Height="450" Width="800">
-    <Grid>
-        
+        Title="Редактирование/Создание образовательной программы" Height="200" Width="400">
+    <Grid
+        Margin="15">
+        <StackPanel
+            Orientation="Vertical">
+            <StackPanel
+                Orientation="Horizontal">
+                <StackPanel
+                    Orientation="Vertical"
+                    Margin="0,0,20,0">
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="170" TextAlignment="Center">Название программы</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Name}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="170" TextAlignment="Center">ФГОС</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <Button Width="100" Height="25" Content="Сохранить" Margin="0,20,0,0" Command="{Binding SaveStateFinalCertification}"/>
+        </StackPanel>
     </Grid>
 </Window>
