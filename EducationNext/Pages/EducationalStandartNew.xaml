@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Редактирование/Создание образовательного стандарта" Height="480" Width="800">
+        Title="Редактирование/Создание образовательного стандарта" Height="480" Width="830">
     <Grid
         Margin="15">
         <StackPanel
@@ -14,7 +14,7 @@
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
                 <TextBlock Width="170" TextAlignment="Center">Наименование стандарта</TextBlock>
-                <TextBox Margin="20,0,0,0" Width="550" Height="20" Text="{Binding SelectedItem.Name}"/>
+                <TextBox Margin="20,0,0,0" Width="580" Height="20" Text="{Binding SelectedItem.Name}"/>
             </StackPanel>
             <StackPanel
                 Orientation="Horizontal">
@@ -23,13 +23,13 @@
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Код направления подготовки</TextBlock>
+                        <TextBlock Width="200" TextAlignment="Center">Код направления подготовки</TextBlock>
                         <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.SpecializationCode}"/>
                     </StackPanel>
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Объём программы в з.е.</TextBlock>
+                        <TextBlock Width="200" TextAlignment="Center">Объём программы в з.е.</TextBlock>
                         <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
                     </StackPanel>
                 </StackPanel>
@@ -56,35 +56,72 @@
                 Margin="0,10,0,0">
                 <StackPanel
                     Orientation="Vertical"
-                    Width="250">
+                    Width="200">
                     <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>дисциплины</TextBlock>
                     <ListBox
+                        ItemsSource="{Binding ListDiscipline}"
                         Height="200"
                         Width="170">
-
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                    IsChecked="{Binding IsChecked}"
+                                    Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
                 <StackPanel
                     Orientation="Vertical"
-                    Width="250">
+                    Width="200">
                     <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>практики</TextBlock>
                     <ListBox
+                        ItemsSource="{Binding ListPractice}"
                         Height="200"
                         Width="170">
-
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                    IsChecked="{Binding IsChecked}"
+                                    Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
                 <StackPanel
                     Orientation="Vertical"
-                    Width="250">
+                    Width="200">
                     <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>ГИА</TextBlock>
                     <ListBox
+                        ItemsSource="{Binding ListSFC}"
                         Height="200"
                         Width="170">
-
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                    IsChecked="{Binding IsChecked}"
+                                    Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
-                
+                <StackPanel
+                    Orientation="Vertical"
+                    Width="200">
+                    <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>компетенции</TextBlock>
+                    <ListBox
+                        ItemsSource="{Binding ListСompetence}"
+                        Height="200"
+                        Width="170">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                    IsChecked="{Binding IsChecked}"
+                                    Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
             </StackPanel>
             <Button Width="100" Height="25" Content="Сохранить" Margin="0,20,0,0" Command="{Binding SaveEducationalStandart}"/>
         </StackPanel>

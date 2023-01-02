@@ -54,8 +54,16 @@
                 <StackPanel>
                     <TextBlock Width="170" TextAlignment="Center">Выберите компетенции<LineBreak/> в практике</TextBlock>
                     <ListBox
-                        Height="200">
-
+                        ItemsSource="{Binding ListCompetenceListItem}"
+                        Height="200"
+                        Width="170">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                    IsChecked="{Binding IsChecked}"
+                                    Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
             </StackPanel>

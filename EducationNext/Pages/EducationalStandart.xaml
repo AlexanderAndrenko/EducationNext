@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EducationNext.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1200">
+             d:DesignHeight="450" d:DesignWidth="1500">
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top" Margin="5">
@@ -18,7 +18,7 @@
                 </Button>
                 <Button
                     Height="20"
-                    Width="150"
+                    Width="180"
                     Margin="10,0,0,0"
                     HorizontalAlignment="Left"
                     Command="{Binding EditEducationalStandart}">
@@ -34,7 +34,8 @@
                     Удалить стандарт
                 </Button>
             </DockPanel>
-            <DockPanel>
+            <StackPanel
+                Orientation="Horizontal">
                 <DataGrid 
                             ItemsSource="{Binding DataGridEducationalStandart, Mode=OneWay}"
                             SelectedItem="{Binding SelectedItem}"
@@ -80,7 +81,37 @@
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-            </DockPanel>
+                <StackPanel
+                    Orientation="Vertical"
+                    Width="220">
+                    <TextBlock Width="170" TextAlignment="Center">Обязательные<LineBreak/>дисциплины</TextBlock>
+                    <ListBox
+                        Height="200"
+                        Width="170">
+
+                    </ListBox>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical"
+                    Width="220">
+                    <TextBlock Width="170" TextAlignment="Center">Обязательные<LineBreak/>практики</TextBlock>
+                    <ListBox
+                        Height="200"
+                        Width="170">
+
+                    </ListBox>
+                </StackPanel>
+                <StackPanel
+                    Orientation="Vertical"
+                    Width="220">
+                    <TextBlock Width="170" TextAlignment="Center">Обязательные<LineBreak/>ГИА</TextBlock>
+                    <ListBox
+                        Height="200"
+                        Width="170">
+
+                    </ListBox>
+                </StackPanel>
+            </StackPanel>
         </DockPanel>
     </Grid>
 </UserControl>

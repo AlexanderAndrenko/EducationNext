@@ -14,7 +14,7 @@
                     Width="180"
                     HorizontalAlignment="Left"
                     Command="{Binding NewPractice}">
-                    Создать дисциплину
+                    Создать практику
                 </Button>
                 <Button
                     Height="20"
@@ -22,7 +22,7 @@
                     HorizontalAlignment="Left"                    
                     Margin="10,0,0,0"
                     Command="{Binding EditPractice}">
-                    Редактировать дисциплину
+                    Редактировать практику
                 </Button>
                 <Button
                     Height="20"
@@ -30,52 +30,66 @@
                     HorizontalAlignment="Left"
                     Margin="10,0,0,0"
                     Command="{Binding DeletePractice}">
-                    Удалить дисциплину
+                    Удалить практику
                 </Button>
             </DockPanel>
             <DockPanel>
-                <DataGrid 
-                            ItemsSource="{Binding DataGridPractice, Mode=OneWay}"
-                            SelectedItem="{Binding SelectedItem}"
-                            AutoGenerateColumns="False"
-                            HorizontalAlignment="Left"
-                            ScrollViewer.CanContentScroll="True"
-                            ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                            ScrollViewer.VerticalScrollBarVisibility="Auto"
-                            DockPanel.Dock="Top"
-                            RowHeaderWidth="0">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}" Width="SizeToHeader">
-                            <DataGridTextColumn.Header>
-                                <TextBlock TextAlignment="Center">
-                                    Название практики
-                                </TextBlock>
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding MainType}" Width="SizeToHeader">
-                            <DataGridTextColumn.Header>
-                                <TextBlock TextAlignment="Center">
-                                    Вид практики
-                                </TextBlock>
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding Type}" Width="SizeToHeader">
-                            <DataGridTextColumn.Header>
-                                <TextBlock TextAlignment="Center">
-                                    Тип практики
-                                </TextBlock>
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="SizeToHeader">
-                            <DataGridTextColumn.Header>
-                                <TextBlock TextAlignment="Center">
-                                    Количество зачетных единиц
-                                </TextBlock>
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </DockPanel>
+                <StackPanel
+                    Orientation="Horizontal">
+                    <DataGrid 
+                                ItemsSource="{Binding DataGridPractice, Mode=OneWay}"
+                                SelectedItem="{Binding SelectedItem}"
+                                AutoGenerateColumns="False"
+                                HorizontalAlignment="Left"
+                                ScrollViewer.CanContentScroll="True"
+                                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                DockPanel.Dock="Top"
+                                RowHeaderWidth="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" Width="SizeToHeader">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock TextAlignment="Center">
+                                        Название практики
+                                    </TextBlock>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding MainType}" Width="SizeToHeader">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock TextAlignment="Center">
+                                        Вид практики
+                                    </TextBlock>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Type}" Width="SizeToHeader">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock TextAlignment="Center">
+                                        Тип практики
+                                    </TextBlock>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="SizeToHeader">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock TextAlignment="Center">
+                                        Количество зачетных единиц
+                                    </TextBlock>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel
+                        Orientation="Vertical"
+                        Width="220">
+                        <TextBlock Width="170" TextAlignment="Center">Обязательные<LineBreak/>дисциплины</TextBlock>
+                        <ListBox
+                            Height="200"
+                            Width="170"
+                            ItemsSource="{Binding SelectedItem.PracticCompetences.Practic}"
+                            DisplayMemberPath="Name">
+                        </ListBox>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>                
         </DockPanel>
     </Grid>
 </UserControl>

@@ -13,6 +13,7 @@ namespace DataBase.Entities
     {
         [Key]
         public int Id { get; set; }
+        public string Name { get; set; } = "";
         public int EducationalProgramID { get; set; }
         public EducationalProgram? EducationalProgram { get; set; }
 

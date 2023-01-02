@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EducationNext.DisciplineVM;
+using System.Windows;
 
 namespace EducationNext
 {
@@ -77,11 +79,23 @@ namespace EducationNext
             }
         }
 
+        private List<CompetenceListItem> listCompetenceListItem;
+        public List<CompetenceListItem> ListCompetenceListItem
+        {
+            get => listCompetenceListItem;
+            set
+            {
+                listCompetenceListItem = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public OwnCommand EditPractice { get; set; }
         public OwnCommand NewPractice { get; set; }
         public OwnCommand SavePractice { get; set; }
         public OwnCommand DeletePractice { get; set; }
         public OwnCommand SelectionComboBoxChanged { get; set; }
+        public Window WindowEdit { get; set; }
 
         #endregion //Properties
 
@@ -96,28 +110,67 @@ namespace EducationNext
         {
             if (SelectedItem == null)
                 SelectedItem = new();
-            var window = new Pages.PracticeEdit();
-            window.DataContext = this;
-            window.ShowDialog();
+            OpenWindow();
         }
         private void OpenWindowNewPractice()
         {
             SelectedItem = new();
-            var window = new Pages.PracticeEdit();
-            window.DataContext = this;
-            window.ShowDialog();
+            OpenWindow();
         }
         private void SaveNewPractice()
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
+
+
+            List<PracticCompetence> practicCompetences = ListCompetenceListItem.Where(x => x.IsChecked == true).Select(x => new PracticCompetence() { PracticID = x.ParentId, CompetenceID = x.Id }).ToList();
+
+            SelectedItem.PracticCompetences = practicCompetences;
+
             cdb.SetPractice(SelectedItem);
+
             GetPractice();
+            WindowEdit.DialogResult = true;
         }
         private void DeleteSelectedPractice()
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
             cdb.DeletePractice(SelectedItem);
             GetPractice();
+        }
+        private void OpenWindow()
+        {
+            UpdateListCompetence();
+
+            WindowEdit = new Pages.PracticeEdit();
+            WindowEdit.DataContext = this;
+            WindowEdit.ShowDialog();
+        }
+        private void UpdateListCompetence()
+        {
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            List<Competence> listCompetence = cdb.GetCompetences();
+
+            ListCompetenceListItem = listCompetence.Select(
+                x => new CompetenceListItem()
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }
+            ).ToList();
+
+            if (SelectedItem.PracticCompetences != null)
+            {
+                foreach (var item in ListCompetenceListItem)
+                {
+                    foreach (var itemSI in SelectedItem.PracticCompetences)
+                    {
+                        if (item.Id == itemSI.CompetenceID)
+                        {
+                            item.IsChecked = true;
+                        }
+                    }
+                }
+            }            
         }
 
         private void GetComboBoxList()
@@ -148,5 +201,13 @@ namespace EducationNext
         }
 
         #endregion //Methods
+        public class CompetenceListItem
+        {
+            public int Id { get; set; } = 0;
+            public int ParentId { get; set; } = 0;
+            public string Name { get; set; } = string.Empty;
+            public bool IsChecked { get; set; } = false;
+
+        }
     }
 }

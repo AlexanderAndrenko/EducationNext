@@ -1,4 +1,5 @@
 ﻿using DataBase.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,12 @@ namespace DataBase.Model
                 using (ApplicationContext db = new())
                 {
                     practices =
-                        db.Practics.ToList();
+                        db.Practics
+                        .AsNoTracking()
+                        .Include(x=>x.PracticCompetences).ThenInclude(y=>y.Competence)
+                        .ToList();
+
+                    db.ChangeTracker.Clear();
                     return practices;
                 }
             }
@@ -47,7 +53,23 @@ namespace DataBase.Model
             {
                 using (ApplicationContext db = new())
                 {
-                    db.Practics.Add(practice);
+                    if (practice.Id != 0)
+                    {
+                        db.Entry(practice).State = EntityState.Modified;
+
+                        var practiceCompetence = new List<PracticCompetence>(practice.PracticCompetences);
+
+                        db.PracticsCompetences.RemoveRange(
+                            db.PracticsCompetences.Where(x=>x.PracticID == practice.Id)
+                            );
+
+                        db.PracticsCompetences.AddRange(practiceCompetence);       
+                    }
+                    else
+                    {
+                        db.Practics.Add(practice);
+                    }
+
                     db.SaveChanges();
                 }
             }
@@ -56,6 +78,8 @@ namespace DataBase.Model
 
             }
         }
+
+
 
         public void DeletePractice(Practic practice)
         {

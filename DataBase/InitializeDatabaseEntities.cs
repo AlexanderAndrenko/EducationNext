@@ -145,6 +145,28 @@ namespace DataBase
                                 Description = "Владением навыками работы с компьютером как средством управления информацией"
                             }
                         };
+
+                    List<EducationalStandart> educationalStandart = new List<EducationalStandart>()
+                    {
+                        new EducationalStandart()
+                        {
+                            SpecializationCode = "09.04.04",
+                            Name = "Программная инженерия",
+                            QuantityCreditUnit = 120,
+                            QuantityTerm = 4,
+                            MaxQuantityCreditUnitPerYear = 70
+                        }
+                    };
+
+                    List<EducationalProgram> educationalPrograms = new List<EducationalProgram>()
+                    {
+                        new EducationalProgram()
+                        {
+
+                        }
+                    };
+
+
                 }
             }
             catch (Exception)

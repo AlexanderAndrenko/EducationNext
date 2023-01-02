@@ -132,6 +132,24 @@ namespace DataBase
         }
         #endregion //EducationalProgram
 
+        #region Syllabus
+        public List<Syllabus> GetSyllabuses()
+        {
+            SyllabusModel m = new();
+            return m.GetSyllabuses();
+        }
+        public void SetSyllabus(Syllabus syllabus)
+        {
+            SyllabusModel m = new();
+            m.SetSyllabus(syllabus);
+        }
+        public void DeleteSyllabus(Syllabus syllabus)
+        {
+            SyllabusModel m = new();
+            m.DeleteSyllabus(syllabus);
+        }
+        #endregion //Syllabus
+
         #endregion //Methods
 
     }

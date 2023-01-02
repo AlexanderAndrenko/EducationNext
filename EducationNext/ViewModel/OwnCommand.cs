@@ -15,6 +15,7 @@ namespace EducationNext
         {
             _execute = execute;
         }
+
         public bool CanExecute(object parameter)
         {
             return true;

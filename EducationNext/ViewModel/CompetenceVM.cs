@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EducationNext
 {
@@ -61,6 +62,7 @@ namespace EducationNext
         public OwnCommand NewCompetence { get; set; }
         public OwnCommand SaveCompetence { get; set; }
         public OwnCommand DeleteCompetence { get; set; }
+        public Window WindowEdit { get; set; }
 
         #endregion //Properties
 
@@ -79,9 +81,7 @@ namespace EducationNext
             NameNewCompetence = SelectedItem.Name;
             TypeNewCompetence = SelectedItem.TypeCompetence;
             DescriptionNewCompetence = SelectedItem.Description;
-            var window = new Pages.EditCompetence();
-            window.DataContext = this;
-            window.ShowDialog();
+            OpenWindow();
         }
         private void OpenWindowNewCompetence()
         {
@@ -89,28 +89,43 @@ namespace EducationNext
             NameNewCompetence = SelectedItem.Name;
             TypeNewCompetence = SelectedItem.TypeCompetence;
             DescriptionNewCompetence = SelectedItem.Description;
-            var window = new Pages.EditCompetence();
-            window.DataContext = this;
-            window.ShowDialog();
+            OpenWindow();
         }
         private void SaveNewCompetence()
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
+            string shortTypeCompetence = TypeNewCompetence
+                switch
+                {
+                    "Универсальная" => "УК",
+                    "Общекультурная" => "ОК",
+                    "Общепрофессиональная" => "ОПК",
+                    "Профессиональная" => "ПО"
+                };
             Competence competence =
                 new()
                 {
                     Name = NameNewCompetence,
                     TypeCompetence = TypeNewCompetence,
+                    ShortTypeCompetence = shortTypeCompetence,
                     Description = DescriptionNewCompetence
                 };
             cdb.SetCompetence(competence);
             GetCompetence();
+            WindowEdit.DialogResult = true;
         }
         private void DeleteSelectedCompetence()
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
             cdb.DeleteCompetence(SelectedItem);
             GetCompetence();
+        }
+
+        private void OpenWindow()
+        {
+            WindowEdit = new Pages.EditCompetence();
+            WindowEdit.DataContext = this;
+            WindowEdit.ShowDialog();
         }
 
         #endregion //Methods

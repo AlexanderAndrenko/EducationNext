@@ -31,5 +31,6 @@ namespace DataBase
         {
             optionsBuilder.UseSqlite("Data Source=EducationNextDB");
         }
+
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Редактирование/Создание дисциплины" Height="480" Width="580">
+        Title="Редактирование/Создание дисциплины" Height="480" Width="600">
     <Grid
         Margin="15">
         <StackPanel
@@ -55,8 +55,16 @@
                 <StackPanel>
                     <TextBlock Width="170" TextAlignment="Center">Выберите компетенции<LineBreak/> в дисциплине</TextBlock>
                     <ListBox
-                        Height="330">
-                        
+                        ItemsSource="{Binding ListCompetenceListItem}"
+                        Height="330"
+                        Width="170">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                    IsChecked="{Binding IsChecked}"
+                                    Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
             </StackPanel>

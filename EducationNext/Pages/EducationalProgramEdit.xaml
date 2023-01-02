@@ -25,11 +25,18 @@
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
                         <TextBlock Width="170" TextAlignment="Center">ФГОС</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
+                        <ComboBox 
+                            Margin="20,0,0,0" 
+                            Width="170"                            
+                            SelectedValue="{Binding SelectedItem.EducationalStandartID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                            
+                            ItemsSource="{Binding  ComboBoxListES}"  
+                            SelectedValuePath="Id"
+                            DisplayMemberPath="Name">
+                        </ComboBox>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <Button Width="100" Height="25" Content="Сохранить" Margin="0,20,0,0" Command="{Binding SaveStateFinalCertification}"/>
+            <Button Width="100" Height="25" Content="Сохранить" Margin="0,20,0,0" Command="{Binding SaveEducationalProgram}"/>
         </StackPanel>
     </Grid>
 </Window>

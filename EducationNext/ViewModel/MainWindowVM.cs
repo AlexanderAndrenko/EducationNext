@@ -3,6 +3,8 @@ using System.Buffers.Text;
 using System.Collections.ObjectModel;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Collections.Generic;
+using DataBase.Entities;
 
 namespace EducationNext
 {
@@ -23,15 +25,18 @@ namespace EducationNext
 
             if (db.EducationalStandarts.Count() == 0)
             {
-                db.EducationalStandarts.Add(
-                    new DataBase.Entities.EducationalStandart()
+                List<EducationalStandart> educationalStandart = new List<EducationalStandart>()
                     {
-                        SpecializationCode = "09.03.01",
-                        QuantityCreditUnit = 300,
-                        QuantityTerm = 8,
-                        MaxQuantityCreditUnitPerYear = 50
-                    }
-                    );
+                        new EducationalStandart()
+                        {
+                            SpecializationCode = "09.04.04",
+                            Name = "Программная инженерия",
+                            QuantityCreditUnit = 120,
+                            QuantityTerm = 4,
+                            MaxQuantityCreditUnitPerYear = 70
+                        }
+                    };
+                db.EducationalStandarts.AddRange(educationalStandart);
                 db.SaveChanges();
             }
 

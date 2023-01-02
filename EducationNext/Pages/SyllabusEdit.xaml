@@ -1,0 +1,44 @@
+﻿<Window x:Class="EducationNext.Pages.SyllabusEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EducationNext.Pages"
+        mc:Ignorable="d"
+        Title="Редактирование/Создание учебного плана" Height="850" Width="1200">
+    <Grid>
+        <StackPanel
+            Orientation="Vertical"
+            Margin="10">
+            <StackPanel>
+                <StackPanel
+                    Orientation="Horizontal">
+                    <TextBlock>Наименование учебного плана</TextBlock>
+                    <TextBox
+                        Margin="20,0,0,0"
+                        Width="200"
+                        Text="{Binding SelectedItem.Name}"></TextBox>
+                    <TextBlock 
+                        Width="170" 
+                        TextAlignment="Center"
+                        Margin="20,0,0,0">
+                        Образовательная программа
+                    </TextBlock>
+                    <ComboBox 
+                            Margin="20,0,0,0" 
+                            Width="170"                            
+                            SelectedItem="{Binding SelectedItem.EducationalProgramID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                            
+                            ItemsSource="{Binding  ComboBoxEducationalProgram}"  
+                            SelectedValuePath="Id"
+                            DisplayMemberPath="Name">
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="0,10,0,0">                
+                
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

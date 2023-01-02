@@ -40,6 +40,16 @@ namespace EducationNext
             }
         }
 
+        public List<EducationalStandart> comboBoxListES;
+        public List<EducationalStandart> ComboBoxListES 
+        { 
+            get => comboBoxListES; 
+            set
+            {
+                comboBoxListES = value;
+                RaisePropertyChanged();
+            }
+        }
         public EducationalProgram SelectedItem { get; set; }
 
         public OwnCommand EditEducationalProgram { get; set; }
@@ -56,6 +66,12 @@ namespace EducationNext
             ConnectorDatabase cdb = new ConnectorDatabase();
             DataGridEducationalProgram = cdb.GetEducationalPrograms();
         }
+
+        public void GetEducationalStandart()
+        {
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            ComboBoxListES = cdb.GetEducationalStandarts();
+        }
         private void OpenWindowEditEducationalProgram()
         {
             if (SelectedItem == null)
@@ -68,6 +84,7 @@ namespace EducationNext
         {
             SelectedItem = new();
             var window = new Pages.EducationalProgramEdit();
+            GetEducationalStandart();
             window.DataContext = this;
             window.ShowDialog();
         }

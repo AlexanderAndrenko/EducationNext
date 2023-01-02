@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using static EducationNext.EducationalStandartVM;
 
 namespace EducationNext
 {
@@ -40,12 +42,25 @@ namespace EducationNext
             }
         }
 
+        private List<CompetenceListItem> listCompetenceListItem;
+        public List<CompetenceListItem> ListCompetenceListItem
+        {
+            get => listCompetenceListItem;
+            set
+            {
+                listCompetenceListItem = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
         public Discipline SelectedItem { get; set; }
 
         public OwnCommand EditDiscipline { get; set; }
         public OwnCommand NewDiscipline { get; set; }
         public OwnCommand SaveDiscipline { get; set; }
         public OwnCommand DeleteDiscipline { get; set; }
+        public Window WindowEdit { get; set; }
 
         #endregion //Properties
 
@@ -60,22 +75,23 @@ namespace EducationNext
         {
             if (SelectedItem == null)
                 SelectedItem = new();
-            var window = new Pages.DisciplineEdit();
-            window.DataContext = this;
-            window.ShowDialog();
+            OpenWindow();
         }
         private void OpenWindowNewDiscipline()
         {
             SelectedItem = new();
-            var window = new Pages.DisciplineEdit();
-            window.DataContext = this;
-            window.ShowDialog();
+            OpenWindow();
         }
         private void SaveNewDiscipline()
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
+
+            List<DisciplineCompetence> discilineCompetences = ListCompetenceListItem.Where(x => x.IsChecked == true).Select(x => new DisciplineCompetence() { DisciplineID = x.ParentId, CompetenceID = x.Id }).ToList();
+            SelectedItem.DisciplineCompetences = discilineCompetences;
             cdb.SetDiscipline(SelectedItem);
+
             GetDiscipline();
+            WindowEdit.DialogResult = true;
         }
         private void DeleteSelectedDiscipline()
         {
@@ -84,6 +100,51 @@ namespace EducationNext
             GetDiscipline();
         }
 
+        public void OpenWindow()
+        {
+            UpdateListCompetence();
+            WindowEdit = new Pages.DisciplineEdit();
+            WindowEdit.DataContext = this;
+            WindowEdit.ShowDialog();
+        }
+
+        private void UpdateListCompetence()
+        {
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            List<Competence> listCompetence = cdb.GetCompetences();
+
+            ListCompetenceListItem = listCompetence.Select(
+                x => new CompetenceListItem()
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }
+            ).ToList();
+
+            if (SelectedItem.DisciplineCompetences != null)
+            {
+                foreach (var item in ListCompetenceListItem)
+                {
+                    foreach (var itemSI in SelectedItem.DisciplineCompetences)
+                    {
+                        if (item.Id == itemSI.CompetenceID)
+                        {
+                            item.IsChecked = true;
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion //Methods
+
+        public class CompetenceListItem
+        {
+            public int Id { get; set; } = 0;
+            public int ParentId { get; set; } = 0;
+            public string Name { get; set; } = string.Empty;
+            public bool IsChecked { get; set; } = false;
+
+        }
     }
 }

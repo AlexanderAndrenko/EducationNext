@@ -4,6 +4,32 @@
              xmlns:local="clr-namespace:EducationNext"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Cascadia Mono"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5,0" 
+                            EndPoint="0.5,1">
+                        <GradientStop Color="#00B4D8" Offset="0.0" />
+                        <GradientStop Color="#0077B6" Offset="0.9" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Cascadia Mono"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Cascadia Mono"/>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#CAF0F8"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="FontFamily" Value="Cascadia Mono"/>
+        </Style>
     </Application.Resources>
 </Application>
