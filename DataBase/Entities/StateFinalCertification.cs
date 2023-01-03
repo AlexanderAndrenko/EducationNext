@@ -11,8 +11,10 @@ namespace DataBase.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public float QuantityCreditUnit { get; set; }
+        public string Name { get; set; } = "";
+        public string Place { get; set; } = "";
+        public float QuantityCreditUnit { get; set; } = 0;
+        public float QuantityAcademicHour { get; set; } = 0;
         public List<EducationalStandartStateFinalCertification>? EducationalStandartStateFinalCertifications { get; set; }
         public List<SyllabusStateFinalCertification>? SyllabusStateFinalCertifications { get; set; }
     }

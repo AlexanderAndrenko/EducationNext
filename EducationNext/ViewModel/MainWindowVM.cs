@@ -22,23 +22,8 @@ namespace EducationNext
         {
             ApplicationContext db = new ApplicationContext();
             db.Database.EnsureCreated();
-
-            if (db.EducationalStandarts.Count() == 0)
-            {
-                List<EducationalStandart> educationalStandart = new List<EducationalStandart>()
-                    {
-                        new EducationalStandart()
-                        {
-                            SpecializationCode = "09.04.04",
-                            Name = "Программная инженерия",
-                            QuantityCreditUnit = 120,
-                            QuantityTerm = 4,
-                            MaxQuantityCreditUnitPerYear = 70
-                        }
-                    };
-                db.EducationalStandarts.AddRange(educationalStandart);
-                db.SaveChanges();
-            }
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            cdb.InitializeDatabaseEntities();
 
             #region CreateListOfPages
             MenuItemsData = new ObservableCollection<MenuItemDataVM>()

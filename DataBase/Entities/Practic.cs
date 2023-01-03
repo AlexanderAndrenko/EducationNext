@@ -14,8 +14,9 @@ namespace DataBase.Entities
         public string Name { get; set; } = "";
         public string MainType { get; set; } = "";
         public string Type { get; set; } = "";
-        public float QuantityCreditUnit { get; set; }
-
+        public string Place { get; set; } = "";
+        public float QuantityCreditUnit { get; set; } = 0;
+        public float QuantityAcademicHour { get; set; } = 0;
         public List<PracticCompetence>? PracticCompetences { get; set; }
         public List<SyllabusPractic>? SyllabusPractics { get; set; }
         public List<EducationalStandartPractice>? EducationalStandartPractices { get; set; }

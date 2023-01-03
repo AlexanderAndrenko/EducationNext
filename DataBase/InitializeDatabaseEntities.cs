@@ -11,17 +11,13 @@ namespace DataBase
     {
         public InitializeDatabaseEntities() { }
 
-        public void InitializeEnitites()
-        {
-
-        }
-
-        public void InitializeCompetences()
+        public void InitializeEntities()
         {
             try
             {
                 using (ApplicationContext db = new())
                 {
+                    //Инициализируем компетенции
                     List<Competence> competences =
                         new List<Competence>()
                         {
@@ -187,31 +183,7 @@ namespace DataBase
                             }
                         };
 
-                    EducationalStandart educationalStandart =
-                        new EducationalStandart()
-                        {
-                            SpecializationCode = "09.04.04",
-                            Name = "Программная инженерия",
-                            QuantityCreditUnit = 120,
-                            QuantityTerm = 4,
-                            MaxQuantityCreditUnitPerYear = 70
-                        };
-
-                    EducationalProgram educationalProgram =
-                        new EducationalProgram()
-                        {
-                            Name = "Программная инженерия",
-                            Profile = "Системы программной поддержки жизненного цикла изделий",
-                            EducationalStandartID = 1
-                        };
-
-                    Syllabus syllabus =
-                        new Syllabus()
-                        {
-                            Name = "Учебный план №1 09.04.04",
-                            EducationalProgramID = 1
-                        };
-
+                    //Инициализируем дисциплины
                     List<Discipline> disciplines = new List<Discipline>()
                     {
                         //1 Методология программной инженерии
@@ -773,14 +745,167 @@ namespace DataBase
                                     CompetenceID = 2
                                 }
                             }
-                        },
+                        }
                     };
 
+                    //Инициализируем практики
+                    List<Practic> practics = new List<Practic>()
+                    {
+                        new Practic()
+                        {
+                            Name = "09.04.04 Учебная №1",
+                            MainType = "Учебная",
+                            Type = "Ознакомительная практика",
+                            Place = "Б2.Б.У1",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108
+                        },
+                        new Practic()
+                        {
+                            Name = "09.04.04 Производственная №1",
+                            MainType = "Производственная",
+                            Type = "Научно-исследовательская работа",
+                            Place = "Б2.Б.П1",
+                            QuantityCreditUnit = 6,
+                            QuantityAcademicHour = 216
+                        },
+                        new Practic()
+                        {
+                            Name = "09.04.04 Производственная №2",
+                            MainType = "Производственная",
+                            Type = "Педагогическая",
+                            Place = "Б2.Б.П2",
+                            QuantityCreditUnit = 6,
+                            QuantityAcademicHour = 216
+                        },
+                        new Practic()
+                        {
+                            Name = "09.04.04 Производственная №3",
+                            MainType = "Производственная",
+                            Type = "Научно-исследовательская",
+                            Place = "Б2.Б.П3",
+                            QuantityCreditUnit = 9,
+                            QuantityAcademicHour = 324
+                        },
+                        new Practic()
+                        {
+                            Name = "09.04.04 Производственная №4",
+                            MainType = "Производственная",
+                            Type = "Преддипломная",
+                            Place = "Б2.Б.П4",
+                            QuantityCreditUnit = 6,
+                            QuantityAcademicHour = 216
+                        }
+                    };
+
+                    //Инициализируем ГИА
+                    List<StateFinalCertification> stateFinalCertifications = new List<StateFinalCertification>()
+                    {
+                        new StateFinalCertification()
+                        {
+                            Name = "Подготовка к сдаче и сдача государственного экзамена",
+                            Place = "Б3.ГИА1",
+                            QuantityCreditUnit = 1,
+                            QuantityAcademicHour = 36
+                        },
+                        new StateFinalCertification()
+                        {
+                            Name = "Выполнение и защита выпускной квалификационной работы",
+                            Place = "Б3.ГИА2",
+                            QuantityCreditUnit = 8,
+                            QuantityAcademicHour = 288
+                        }
+                    };
+
+                    //Инициализируем списки дисциплин для стандарта и для учебного плана
+                    List<EducationalStandartDiscipline> educationalStandartDisciplines = new List<EducationalStandartDiscipline>();
+                    List<SyllabusDiscipline> syllabusDisciplines = new List<SyllabusDiscipline>();
+
+                    for(int i = 1; i <= disciplines.Count(); i++)
+                    {
+                        educationalStandartDisciplines.Add(new EducationalStandartDiscipline() { DisciplineID = i });
+                        syllabusDisciplines.Add(new SyllabusDiscipline() { DisciplineID = i });
+
+                    }
+
+                    //Инициализируем списки практик для стандарта и для учебного плана
+                    List<EducationalStandartPractice> educationalStandartPractices = new List<EducationalStandartPractice>();
+                    List<SyllabusPractic> syllabusPractics = new List<SyllabusPractic>();
+
+                    for (int i = 1; i <= practics.Count(); i++)
+                    {
+                        educationalStandartPractices.Add(new EducationalStandartPractice() { PracticeID = i });
+                        syllabusPractics.Add(new SyllabusPractic() { PracticID = i });
+
+                    }
+
+                    //Инициализируем списки ГИА для стандарта и для учебного плана
+                    List<EducationalStandartStateFinalCertification> educationalStandartStateFinalCertifications = new List<EducationalStandartStateFinalCertification>();
+                    List<SyllabusStateFinalCertification> syllabusStateFinalCertifications = new List<SyllabusStateFinalCertification>();
+
+                    for (int i = 1; i <= stateFinalCertifications.Count(); i++)
+                    {
+                        educationalStandartStateFinalCertifications.Add(new EducationalStandartStateFinalCertification() { StateFinalCertificationID = i });
+                        syllabusStateFinalCertifications.Add(new SyllabusStateFinalCertification() { StateFinalCertificationID = i });
+
+                    }
+
+                    //Инициализируем список компетенций для стандарта
+                    List<EducationalStandartCompetence> educationalStandartCompetences = new List<EducationalStandartCompetence>();
+
+                    for (int i = 1; i <= 18; i++)
+                    {
+                        educationalStandartCompetences.Add(new EducationalStandartCompetence() { CompetenceID = i });
+                    }
+
+                    //Инициализируем стандарт
+                    EducationalStandart educationalStandart =
+                        new EducationalStandart()
+                        {
+                            SpecializationCode = "09.04.04",
+                            Name = "Программная инженерия",
+                            QuantityCreditUnit = 120,
+                            QuantityTerm = 4,
+                            MaxQuantityCreditUnitPerYear = 70,
+                            EducationalStandartDisciplines = educationalStandartDisciplines,
+                            EducationalStandartPractices = educationalStandartPractices,
+                            EducationalStandartStateFinalCertifications = educationalStandartStateFinalCertifications,
+                            EducationalStandartCompetences = educationalStandartCompetences
+                        };
+
+                    //Инициализируем программу
+                    EducationalProgram educationalProgram =
+                        new EducationalProgram()
+                        {
+                            Name = "Программная инженерия",
+                            Profile = "Системы программной поддержки жизненного цикла изделий",
+                            EducationalStandartID = 1
+                        };
+
+                    //Инициализируем учебный план
+                    Syllabus syllabus =
+                        new Syllabus()
+                        {
+                            Name = "Учебный план №1 09.04.04",
+                            EducationalProgramID = 1,
+                            SyllabusDisciplines = syllabusDisciplines,
+                            SyllabusPractics = syllabusPractics,
+                            SyllabusStateFinalCertifications = syllabusStateFinalCertifications
+                        };
+
+                    db.Competences.AddRange(competences);
+                    db.Disciplines.AddRange(disciplines);
+                    db.Practics.AddRange(practics);
+                    db.StateFinalCertifications.AddRange(stateFinalCertifications);
+                    db.EducationalStandarts.Add(educationalStandart);
+                    db.EducationalPrograms.Add(educationalProgram);
+                    db.Syllabuses.Add(syllabus);
+                    db.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine("ERROR " + ex.Message);
             }
         }
     }

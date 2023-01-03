@@ -150,6 +150,12 @@ namespace DataBase
         }
         #endregion //Syllabus
 
+        public void InitializeDatabaseEntities()
+        {
+            InitializeDatabaseEntities init = new InitializeDatabaseEntities();
+            init.InitializeEntities();
+        }
+
         #endregion //Methods
 
     }
