@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EducationNext
 {
@@ -47,6 +48,8 @@ namespace EducationNext
         public OwnCommand SaveStateFinalCertification { get; set; }
         public OwnCommand DeleteStateFinalCertification { get; set; }
 
+        public Window WindowEdit { get; set; }
+
         #endregion //Properties
 
         #region Methods
@@ -60,28 +63,32 @@ namespace EducationNext
         {
             if (SelectedItem == null)
                 SelectedItem = new();
-            var window = new Pages.StateFinalCertificationEdit();
-            window.DataContext = this;
-            window.ShowDialog();
+            OpenWindow();
         }
         private void OpenWindowNewStateFinalCertification()
         {
             SelectedItem = new();
-            var window = new Pages.StateFinalCertificationEdit();
-            window.DataContext = this;
-            window.ShowDialog();
+            OpenWindow();
         }
         private void SaveNewStateFinalCertification()
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
             cdb.SetStateFinalCertification(SelectedItem);
             GetStateFinalCertification();
+            WindowEdit.DialogResult = true;
         }
         private void DeleteSelectedStateFinalCertification()
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
             cdb.DeleteStateFinalCertification(SelectedItem);
             GetStateFinalCertification();
+        }
+
+        public void OpenWindow()
+        {
+            WindowEdit = new Pages.StateFinalCertificationEdit();
+            WindowEdit.DataContext = this;
+            WindowEdit.ShowDialog();
         }
 
         #endregion //Methods

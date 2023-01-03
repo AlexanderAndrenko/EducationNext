@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EducationNext
 {
@@ -56,6 +57,7 @@ namespace EducationNext
         public OwnCommand NewEducationalProgram { get; set; }
         public OwnCommand SaveEducationalProgram { get; set; }
         public OwnCommand DeleteEducationalProgram { get; set; }
+        public Window WindowEdit { get; set; }
 
         #endregion //Properties
 
@@ -76,29 +78,32 @@ namespace EducationNext
         {
             if (SelectedItem == null)
                 SelectedItem = new();
-            var window = new Pages.EducationalProgramEdit();
-            window.DataContext = this;
-            window.ShowDialog();
+            OpenWindow();
         }
         private void OpenWindowNewEducationalProgram()
         {
             SelectedItem = new();
-            var window = new Pages.EducationalProgramEdit();
             GetEducationalStandart();
-            window.DataContext = this;
-            window.ShowDialog();
         }
         private void SaveNewEducationalProgram()
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
             cdb.SetEducationalProgram(SelectedItem);
             GetEducationalProgram();
+            WindowEdit.DialogResult = true;
         }
         private void DeleteSelectedEducationalProgram()
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
             cdb.DeleteEducationalProgram(SelectedItem);
             GetEducationalProgram();
+        }
+
+        public void OpenWindow()
+        {
+            WindowEdit = new Pages.EducationalProgramEdit();
+            WindowEdit.DataContext = this;
+            WindowEdit.ShowDialog();
         }
 
         #endregion //Methods

@@ -1,0 +1,71 @@
+﻿<Window x:Class="EducationNext.Pages.SyllabusChooseElement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EducationNext.Pages"
+        mc:Ignorable="d"
+        Title="Настройка элементов учебного плана" Height="450" Width="800">
+    <Grid>
+        <StackPanel
+            Orientation="Vertical">
+            <StackPanel
+            Orientation="Horizontal"
+            Margin="0,10,0,0">
+                <StackPanel
+                Orientation="Vertical"
+                Width="270">
+                    <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>дисциплины</TextBlock>
+                    <ListBox
+                    ItemsSource="{Binding ListDiscipline}"
+                    Height="200"
+                    Width="170">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                IsChecked="{Binding IsChecked}"
+                                Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+                <StackPanel
+                Orientation="Vertical"
+                Width="270">
+                    <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>практики</TextBlock>
+                    <ListBox
+                    ItemsSource="{Binding ListPractice}"
+                    Height="200"
+                    Width="170">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                IsChecked="{Binding IsChecked}"
+                                Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+                <StackPanel
+                Orientation="Vertical"
+                Width="260">
+                    <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>ГИА</TextBlock>
+                    <ListBox
+                    ItemsSource="{Binding ListSFC}"
+                    Height="200"
+                    Width="170">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                IsChecked="{Binding IsChecked}"
+                                Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </StackPanel>
+            <Button Width="100" Height="25" Content="Сохранить" Margin="0,20,0,0" Command="{Binding SaveChooseElementSyllabus}"/>
+        </StackPanel>
+            
+    </Grid>
+</Window>

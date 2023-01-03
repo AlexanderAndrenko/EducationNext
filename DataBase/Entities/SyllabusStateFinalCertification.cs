@@ -17,5 +17,6 @@ namespace DataBase.Entities
         public Syllabus? Syllabus { get; set; }
         public int StateFinalCertificationID { get; set; }
         public StateFinalCertification? StateFinalCertification { get; set; }
+        public int Semester { get; set; } = 0;
     }
 }

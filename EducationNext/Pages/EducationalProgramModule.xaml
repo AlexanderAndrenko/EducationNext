@@ -45,27 +45,34 @@
                             DockPanel.Dock="Top"
                             RowHeaderWidth="0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}" Width="SizeToHeader">
-                            <DataGridTextColumn.Header>
-                                <TextBlock TextAlignment="Center">
-                                    Название образовательной программы
-                                </TextBlock>
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding EducationalStandart.SpecializationCode}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Код образовательного стандарта
+                                    Код<LineBreak/>стандарта
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding EducationalStandart.Name}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Наименование образовательного стандарта
+                                    Наименование стандарта
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Name}" Width="300">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center">
+                                    Название программы
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Profile}" Width="400">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center">
+                                    Профиль программы
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>                        
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

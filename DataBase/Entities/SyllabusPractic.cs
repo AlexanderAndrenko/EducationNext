@@ -17,5 +17,6 @@ namespace DataBase.Entities
         public Syllabus? Syllabus { get; set; }
         public int PracticID { get; set; }
         public Practic? Practic { get;set; }
+        public int Semester { get; set; } = 0;
     }
 }

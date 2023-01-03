@@ -7,38 +7,50 @@
         mc:Ignorable="d"
         Title="Редактирование/Создание учебного плана" Height="850" Width="1200">
     <Grid>
-        <StackPanel
-            Orientation="Vertical"
-            Margin="10">
-            <StackPanel>
-                <StackPanel
-                    Orientation="Horizontal">
-                    <TextBlock>Наименование учебного плана</TextBlock>
-                    <TextBox
+        <DockPanel
+            Margin="20">
+            <StackPanel
+                Orientation="Horizontal"
+                DockPanel.Dock="Top">
+                <TextBlock>Наименование учебного плана</TextBlock>
+                <TextBox
                         Margin="20,0,0,0"
-                        Width="200"
+                        Width="300"
                         Text="{Binding SelectedItem.Name}"></TextBox>
-                    <TextBlock 
+                <TextBlock 
                         Width="170" 
                         TextAlignment="Center"
                         Margin="20,0,0,0">
                         Образовательная программа
-                    </TextBlock>
-                    <ComboBox 
+                </TextBlock>
+                <ComboBox 
                             Margin="20,0,0,0" 
                             Width="170"                            
                             SelectedItem="{Binding SelectedItem.EducationalProgramID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                            
                             ItemsSource="{Binding  ComboBoxEducationalProgram}"  
                             SelectedValuePath="Id"
                             DisplayMemberPath="Name">
-                    </ComboBox>
-                </StackPanel>
+                </ComboBox>
+                <Button 
+                    Margin="80,0,0,0"
+                    Width="170"
+                    Content="Выбрать элементы"
+                    Command="{Binding EditSyllabusElement}"/>
             </StackPanel>
             <StackPanel
+                DockPanel.Dock="Left"
                 Orientation="Horizontal"
-                Margin="0,10,0,0">                
+                Margin="0,10,0,0"
+                Background="Azure"
+                Width="960">
+            </StackPanel>
+            <StackPanel
+                DockPanel.Dock="Right"
+                Width="200"
+                Margin="0,10,0,0"
+                Background="Aqua">
                 
             </StackPanel>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

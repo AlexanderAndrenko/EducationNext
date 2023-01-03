@@ -1,4 +1,5 @@
 ﻿using DataBase.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,11 @@ namespace DataBase.Model
                 using (ApplicationContext db = new())
                 {
                     Syllabuss =
-                        db.Syllabuses.ToList();
+                        db.Syllabuses
+                        .Include(x=>x.SyllabusDisciplines).ThenInclude(y=>y.Discipline)
+                        .Include(x=>x.SyllabusPractics).ThenInclude(y=>y.Practic)
+                        .Include(x=>x.SyllabusStateFinalCertifications).ThenInclude(y=>y.StateFinalCertification)
+                        .ToList();
                     return Syllabuss;
                 }
             }
