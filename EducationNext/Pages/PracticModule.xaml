@@ -47,28 +47,28 @@
                                 DockPanel.Dock="Top"
                                 RowHeaderWidth="0">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Name}" Width="SizeToHeader">
+                            <DataGridTextColumn Binding="{Binding Name}" Width="Auto">
                                 <DataGridTextColumn.Header>
                                     <TextBlock TextAlignment="Center">
                                         Название практики
                                     </TextBlock>
                                 </DataGridTextColumn.Header>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding MainType}" Width="SizeToHeader">
+                            <DataGridTextColumn Binding="{Binding MainType}" Width="Auto">
                                 <DataGridTextColumn.Header>
                                     <TextBlock TextAlignment="Center">
                                         Вид практики
                                     </TextBlock>
                                 </DataGridTextColumn.Header>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Type}" Width="SizeToHeader">
+                            <DataGridTextColumn Binding="{Binding Type}" Width="Auto">
                                 <DataGridTextColumn.Header>
                                     <TextBlock TextAlignment="Center">
                                         Тип практики
                                     </TextBlock>
                                 </DataGridTextColumn.Header>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="SizeToHeader">
+                            <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="Auto">
                                 <DataGridTextColumn.Header>
                                     <TextBlock TextAlignment="Center">
                                         Количество зачетных единиц

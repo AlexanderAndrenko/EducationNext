@@ -18,13 +18,13 @@
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Название практики</TextBlock>
+                        <TextBlock Width="190" TextAlignment="Center">Название практики</TextBlock>
                         <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Name}"/>
                     </StackPanel>
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Вид практики</TextBlock>
+                        <TextBlock Width="190" TextAlignment="Center">Вид практики</TextBlock>
                         <ComboBox 
                             Margin="20,0,0,0" 
                             Width="170" 
@@ -36,7 +36,7 @@
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Тип практики</TextBlock>
+                        <TextBlock Width="190" TextAlignment="Center">Тип практики</TextBlock>
                         <ComboBox 
                             Margin="20,0,0,0" 
                             Width="170" 
@@ -47,7 +47,7 @@
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Количество зачетных единиц</TextBlock>
+                        <TextBlock Width="190" TextAlignment="Center">Количество зачетных единиц</TextBlock>
                         <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
                     </StackPanel>
                 </StackPanel>

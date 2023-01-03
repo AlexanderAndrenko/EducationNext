@@ -894,11 +894,17 @@ namespace DataBase
                         };
 
                     db.Competences.AddRange(competences);
+                    db.SaveChanges();
                     db.Disciplines.AddRange(disciplines);
+                    db.SaveChanges();
                     db.Practics.AddRange(practics);
+                    db.SaveChanges();
                     db.StateFinalCertifications.AddRange(stateFinalCertifications);
+                    db.SaveChanges();
                     db.EducationalStandarts.Add(educationalStandart);
+                    db.SaveChanges();
                     db.EducationalPrograms.Add(educationalProgram);
+                    db.SaveChanges();
                     db.Syllabuses.Add(syllabus);
                     db.SaveChanges();
                 }

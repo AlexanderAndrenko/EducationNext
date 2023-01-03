@@ -29,6 +29,8 @@ namespace EducationNext
             DeleteSyllabus = new(DeleteSelectedSyllabus);
             EditSyllabusElement = new(OpenWindowChooseElement);
             SaveChooseElementSyllabus = new(SaveChooseElement);
+            Semesters = new List<Semester>();
+            ElementsWithoutSemester = new List<Element>();
         }
 
         #region Properties
@@ -45,7 +47,6 @@ namespace EducationNext
         }
 
         private List<EducationalProgram> comboBoxEducationalProgram;
-
         public List<EducationalProgram> ComboBoxEducationalProgram
         {
             get => comboBoxEducationalProgram;
@@ -55,7 +56,6 @@ namespace EducationNext
                 RaisePropertyChanged();
             }
         }
-
 
         public Syllabus SelectedItem { get; set; }
 
@@ -113,6 +113,33 @@ namespace EducationNext
 
         #endregion //ListProperties
 
+        #region BoardProperties
+
+        private List<Semester> semesters;
+        public List<Semester> Semesters 
+        { 
+            get => semesters;
+            set
+            {
+                semesters = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private List<Element> elementsWithoutSemester;
+        public List<Element> ElementsWithoutSemester
+        { 
+            get => elementsWithoutSemester; 
+            set
+            {
+                elementsWithoutSemester = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion //BoardProperties
+
+
         #endregion //Properties
 
         #region Methods
@@ -136,6 +163,7 @@ namespace EducationNext
         }
         public void OpenWindowEdit()
         {
+            GenerateElementsWithoutSemester();
             WindowEdit = new Pages.SyllabusEdit();
             WindowEdit.DataContext = this;
             WindowEdit.ShowDialog();
@@ -198,8 +226,6 @@ namespace EducationNext
         }
 
         #endregion //ChooseElementWindowCommand
-
-
 
         #region ListPropertiesMethods
         private void UpdateListDiscipline()
@@ -283,6 +309,47 @@ namespace EducationNext
 
         #endregion //ListPropertiesMethods
 
+        #region GenerateSemester
+
+        public void GenerateSemester()
+        {
+            //Затираем список семестров, если он уже был
+            Semesters = new();
+
+            //Инициализируем все семестры
+            for (int i = 1; i <= SelectedItem.EducationalProgram.EducationalStandart.QuantityTerm; i++)
+            {
+                Semesters.Add(
+                    new Semester()
+                    {
+                        SemesterNumber = i,
+                        SemesterQuantityCreditUnit = 0,
+                        SemesterQuantityAcademicHour = 0
+                    });
+            }
+
+        }
+
+        public void GenerateElementsWithoutSemester()
+        {
+            SelectedItem.SyllabusDisciplines.ForEach(
+                x =>
+                {
+                    ElementsWithoutSemester.Add(
+                        new Element()
+                        {
+                            Id = x.Id,
+                            Name = x.Discipline.Name,
+                            FormIntermediateCertification = x.Discipline.FormIntermediateCertification,
+                            Place = x.Discipline.Place,
+                            QuantityCreditUnit = x.Discipline.QuantityCreditUnit,
+                            QuantityAcademicHour = x.Discipline.QuantityAcademicHour
+                        });
+                });
+        }
+
+        #endregion //GenerateSemester
+
         #endregion //Methods
 
         public class ListItemModel
@@ -291,6 +358,53 @@ namespace EducationNext
             public int ParentId { get; set; } = 0;
             public string Name { get; set; } = "";
             public bool IsChecked { get; set; } = false;
+        }
+
+        public class Semester
+        {
+            public Semester()
+            {
+                elements = new List<Element>();
+            }
+
+            private List<Element> elements;
+            public List<Element> Elements 
+            { 
+                get => elements;
+                set
+                {
+                    elements = value;
+                    CalculateSemesterProperties();
+                }
+            }
+
+            public float SemesterQuantityCreditUnit { get; set; }
+            public float SemesterQuantityAcademicHour { get; set; }
+            public int SemesterNumber { get; set; }
+
+            private void CalculateSemesterProperties()
+            {
+                SemesterQuantityCreditUnit = 0;
+                Elements.ForEach(
+                    x => 
+                    {
+                        SemesterQuantityCreditUnit += x.QuantityCreditUnit;
+                        SemesterQuantityAcademicHour += x.QuantityAcademicHour;
+                    }
+                    );
+
+            }            
+        }
+        public class Element
+        {
+            public int Id { get; set; } = 0;
+            public string Name { get; set; } = "";
+            public string Type { get; set; } = "Дисциплина";
+            public string FormIntermediateCertification { get; set; } = "";
+            public string Place { get; set; } = "";
+            public string CourseWork { get; set; } = "";
+            public float QuantityCreditUnit { get; set; } = 0;
+            public float QuantityAcademicHour { get; set; } = 0;
         }
     }
 }

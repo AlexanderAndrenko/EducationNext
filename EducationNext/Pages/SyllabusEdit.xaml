@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Редактирование/Создание учебного плана" Height="850" Width="1200">
+        Title="Редактирование/Создание учебного плана" Height="850" Width="1300">
     <Grid>
         <DockPanel
-            Margin="20">
+            Margin="20"
+            LastChildFill="True">
             <StackPanel
                 Orientation="Horizontal"
                 DockPanel.Dock="Top">
@@ -18,7 +19,7 @@
                         Width="300"
                         Text="{Binding SelectedItem.Name}"></TextBox>
                 <TextBlock 
-                        Width="170" 
+                        Width="200" 
                         TextAlignment="Center"
                         Margin="20,0,0,0">
                         Образовательная программа
@@ -37,19 +38,78 @@
                     Content="Выбрать элементы"
                     Command="{Binding EditSyllabusElement}"/>
             </StackPanel>
+            
+            <StackPanel
+                DockPanel.Dock="Right"
+                Width="235"
+                Margin="0,10,0,0"
+                Background="Green">
+                <StackPanel
+                    Orientation="Vertical">
+                    <TextBlock/>
+                    <ListView
+                        AllowDrop="True"
+                        ItemsSource="{Binding ElementsWithoutSemester}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel
+                                    Width="200"
+                                    Height="100"
+                                    Margin="10"
+                                    Background="White">
+                                    <TextBlock
+                                        Text="{Binding Place}"/>
+                                    <TextBlock 
+                                        Text="{Binding Name}"
+                                        TextWrapping="Wrap"/>
+                                    <TextBlock
+                                        Text="{Binding FormIntermediateCertification}"/>
+                                    <TextBlock
+                                        Text="{Binding CourseWork}"/>
+                                    <TextBlock
+                                        Text="{Binding QuantityCreditUnit}"/>
+                                    <TextBlock
+                                        Text="{Binding QuantityAcademicHour}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </StackPanel>
             <StackPanel
                 DockPanel.Dock="Left"
                 Orientation="Horizontal"
                 Margin="0,10,0,0"
                 Background="Azure"
-                Width="960">
-            </StackPanel>
-            <StackPanel
-                DockPanel.Dock="Right"
-                Width="200"
-                Margin="0,10,0,0"
-                Background="Aqua">
-                
+                Width="Auto">
+                <ItemsControl
+                    ItemsSource="{Binding Semesters}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel
+                                Orientation="Vertical">
+                                <TextBlock/>
+                                <ListView
+                                    AllowDrop="True"
+                                    ItemsSource="{Binding Elements}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Width="200"
+                                                Height="200"
+                                                Margin="10"
+                                                Background="White">
+                                                <TextBlock 
+                                                    Text="{Binding Elements.Name}"/>
+                                                
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
         </DockPanel>
     </Grid>

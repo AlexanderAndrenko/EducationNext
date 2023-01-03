@@ -23,7 +23,10 @@ namespace EducationNext
             ApplicationContext db = new ApplicationContext();
             db.Database.EnsureCreated();
             ConnectorDatabase cdb = new ConnectorDatabase();
-            cdb.InitializeDatabaseEntities();
+            if (cdb.GetEducationalStandarts().Count() == 0)
+            {
+                cdb.InitializeDatabaseEntities();
+            }
 
             #region CreateListOfPages
             MenuItemsData = new ObservableCollection<MenuItemDataVM>()
