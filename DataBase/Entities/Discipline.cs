@@ -17,6 +17,7 @@ namespace DataBase.Entities
         public string? FormIntermediateCertification { get; set; }
         public string? Place { get; set; }
         public bool IsIncludeToEducatiopnalProgram { get; set; } = true;
+        public bool IsHaveCourseWork { get; set; } = false;
 
         public List<EducationalStandartDiscipline>? EducationalStandartDisciplines { get; set; }
         public List<SyllabusDiscipline>? SyllabusDisciplines { get; set; }

@@ -25,129 +25,169 @@ namespace DataBase
                     List<Competence> competences =
                         new List<Competence>()
                         {
+                            //1 УК-1
+                            new Competence()
+                            {
+                                Name = "УК-1", 
+                                ShortTypeCompetence = "УК", 
+                                TypeCompetence = "Универсальная", 
+                                Description = "Способен осуществлять критический анализ проблемных ситуаций на основе системного подхода, вырабатывать стратегию действий"
+                            },
+                            //2 УК-2
+                            new Competence()
+                            {
+                                Name = "УК-2",
+                                ShortTypeCompetence = "УК",
+                                TypeCompetence = "Универсальная",
+                                Description = "Способен управлять проектом на всех этапах его жизненного цикла"
+                            },
+                            //3 УК-3
+                            new Competence()
+                            {
+                                Name = "УК-3",
+                                ShortTypeCompetence = "УК",
+                                TypeCompetence = "Универсальная",
+                                Description = "Способен организовать и руководить работой команды, вырабатывая командную стратегию для достижения поставленной цели"
+                            },
+                            //4 УК-4
+                            new Competence()
+                            {
+                                Name = "УК-4",
+                                ShortTypeCompetence = "УК",
+                                TypeCompetence = "Универсальная",
+                                Description = "Способен применять современные коммуникативные технологии, в том числе на иностранном(ых) языке(ах), для академического и профессионального взаимодействия"
+                            },
+                            //5 УК-5
+                            new Competence()
+                            {
+                                Name = "УК-5",
+                                ShortTypeCompetence = "УК",
+                                TypeCompetence = "Универсальная",
+                                Description = "Способен анализировать и учитывать разнообразие культур в процессе межкультурного взаимодействия"
+                            },
+                            //6 УК-6
+                            new Competence()
+                            {
+                                Name = "УК-6",
+                                ShortTypeCompetence = "УК",
+                                TypeCompetence = "Универсальная",
+                                Description = "Способен определять и реализовывать приоритеты собственной деятельности и способы ее совершенствования на основе самооценки"
+                            },
+                            //7 ОПК-1
+                            new Competence()
+                            {
+                                Name = "ОПК-1",
+                                ShortTypeCompetence = "ОПК",
+                                TypeCompetence = "Общепрофессиональная",
+                                Description = "Способен самостоятельно приобретать, развивать и применять математические, естественнонаучные, социально-экономические и профессиональные знания для решения нестандартных задач, в том числе в новой или незнакомой среде и в междисциплинарном контексте"
+                            },
+                            //8 ОПК-2
+                            new Competence()
+                            {
+                                Name = "ОПК-2",
+                                ShortTypeCompetence = "ОПК",
+                                TypeCompetence = "Общепрофессиональная",
+                                Description = " Способен разрабатывать оригинальные алгоритмы и программные средства, в том числе с использованием современных интеллектуальных технологий, для решения профессиональных задач"
+                            },
+                            //9 ОПК-3
+                            new Competence()
+                            {
+                                Name = "ОПК-3",
+                                ShortTypeCompetence = "ОПК",
+                                TypeCompetence = "Общепрофессиональная",
+                                Description = "Способен анализировать профессиональную информацию, выделять в ней главное, структурировать, оформлять и представлять в виде аналитических обзоров с обоснованными выводами и рекомендациями"
+                            },
+                            //10 ОПК-4
+                            new Competence()
+                            {
+                                Name = "ОПК-4",
+                                ShortTypeCompetence = "ОПК",
+                                TypeCompetence = "Общепрофессиональная",
+                                Description = "Способен применять на практике новые научные принципы и методы исследований"
+                            },
+                            //11 ОПК-5
+                            new Competence()
+                            {
+                                Name = "ОПК-5",
+                                ShortTypeCompetence = "ОПК",
+                                TypeCompetence = "Общепрофессиональная",
+                                Description = "Способен разрабатывать и модернизировать программное и аппаратное обеспечение информационных и автоматизированных систем"
+                            },
+                            //12 ОПК-6
+                            new Competence()
+                            {
+                                Name = "ОПК-6",
+                                ShortTypeCompetence = "ОПК",
+                                TypeCompetence = "Общепрофессиональная",
+                                Description = "Способен самостоятельно приобретать с помощью информационных технологий и использовать в практической деятельности новые знания и умения, в том числе в новых областях знаний, непосредственно не связанных со сферой деятельности"
+                            },
+                            //13 ОПК-7
+                            new Competence()
+                            {
+                                Name = "ОПК-7",
+                                ShortTypeCompetence = "ОПК",
+                                TypeCompetence = "Общепрофессиональная",
+                                Description = "Способен применять при решении профессиональных задач методы и средства получения, хранения, переработки и трансляции информации посредством современных компьютерных технологий, в том числе в глобальных компьютерных сетях"
+                            },
+                            //14 ОПК-8
+                            new Competence()
+                            {
+                                Name = "ОПК-8",
+                                ShortTypeCompetence = "ОПК",
+                                TypeCompetence = "Общепрофессиональная",
+                                Description = "Способен осуществлять эффективное управление разработкой программных средств и проектов"
+                            },
+                            //15 ПК-1
+                            new Competence()
+                            {
+                                Name = "ПК-1",
+                                ShortTypeCompetence = "ПК",
+                                TypeCompetence = "Профессиональная",
+                                Description = "Способен разрабатывать и исследовать модели объектов профессиональной деятельности, предлагать и адаптировать методики, определять качество проводимых исследований, составлять отчеты о проделанной работе, обзоры, готовить публикации"
+                            },
+                            //16 ПК-5
+                            new Competence()
+                            {
+                                Name = "ПК-5",
+                                ShortTypeCompetence = "ПК",
+                                TypeCompetence = "Профессиональная",
+                                Description = "Способен применять современные технологии разработки программных комплексов с использованием автоматизированных систем планирования и управления, осуществлять контроль качества разрабатываемых программных продуктов"
+                            },
+                            //17 ПК-8
+                            new Competence()
+                            {
+                                Name = "ПК-8",
+                                ShortTypeCompetence = "ПК",
+                                TypeCompetence = "Профессиональная",
+                                Description = "Способен выполнять техническое исследованиевозможных вариантов архитектуры компонентов, включающее описание вариантов и технико-экономическое обоснование выбранного варианта"
+                            },
+                            //18 ПК-7
                             new Competence() 
                             {
-                                Name = "ОК-1", 
-                                ShortTypeCompetence = "ОК", 
-                                TypeCompetence = "Общекультурные компетенции", 
-                                Description = "Способностью использовать основы философских знаний для формирования мировоззренческой позиции"
+                                Name = "ПК-7",
+                                ShortTypeCompetence = "ПК",
+                                TypeCompetence = "Профессиональная",
+                                Description = "Способен выполнять проекты в области программной инженерии на основе системного подхода, строить и использовать модели для описания и прогнозирования различных явлений, осуществлять их качественный и количественный анализ"
                             },
+                            //19 ПК-6
                             new Competence()
                             {
-                                Name = "ОК-2",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью анализировать основные этапы и закономерности исторического развития общества для формирования гражданской позиции"
+                                Name = "ПК-6",
+                                ShortTypeCompetence = "ПК",
+                                TypeCompetence = "Профессиональная",
+                                Description = "Способен отбирать и разрабатывать методы анализа объектов профессиональной деятельности на основе общих тенденций развития программной инженерии"
                             },
+                            //20 ПК-2
                             new Competence()
                             {
-                                Name = "ОК-3",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью использовать основы экономических знаний в различных сферах жизнедеятельности"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-4",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью использовать основы правовых знаний в различных сферах жизнедеятельности"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-5",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью к коммуникации в устной и письменной формах на русском и иностранном языках длярешения задач межличностного и межкультурного взаимодействия"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-6",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью работать в коллективе, толерантно воспринимать социальные, этнические, конфессиональные и культурные различия"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-7",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью к самоорганизации и самообразованию"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-8",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью использовать методы и средства физической культуры для обеспечения полноценной социальной и профессиональной деятельности"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-9",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью использовать приемы первой помощи, методы защиты в условиях чрезвычайныхситуаций"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-10",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Готовностью к достижению должного уровня физической подготовленности, необходимого для обеспечения полноценной социальной и профессиональной деятельности"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-11",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью к обобщению, анализу, восприятию информации, постановке цели и выбору путей ее достижения"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-12",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Готовностью критически оценить свои достоинства и недостатки, наметить пути и выбрать средства развития достоинств и устранения недостатков"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-13",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Осознанием социальной значимости своей профессии, обладанием высокой мотивацией к выполнению профессиональной деятельности"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-14",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью анализировать социально-значимые проблемы и процессы"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-15",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Использованием основных законов естественнонаучных дисциплин в профессиональной деятельности, применением методов математического анализа и моделирования, теоретического и\r\n\r\nэкспериментального исследования"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-16",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Способностью понимать сущность и значение информации в развитии современного информационного общества, соблюдать основные требования информационной безопасности, в том числе защиты государственной тайны; владением основными методами, способами и средствами получения, хранения, переработки информации"
-                            },
-                            new Competence()
-                            {
-                                Name = "ОК-17",
-                                ShortTypeCompetence = "ОК",
-                                TypeCompetence = "Общекультурные компетенции",
-                                Description = "Владением навыками работы с компьютером как средством управления информацией"
+                                Name = "ПК-2",
+                                ShortTypeCompetence = "ПК",
+                                TypeCompetence = "Профессиональная",
+                                Description = "Способен применять современные технологии разработки программных комплексов с использованием автоматизированных систем планирования и управления, осуществлять контроль качества разрабатываемых программных продуктов"
                             }
                         };
 
-                    List<EducationalStandart> educationalStandart = new List<EducationalStandart>()
-                    {
+                    EducationalStandart educationalStandart =
                         new EducationalStandart()
                         {
                             SpecializationCode = "09.04.04",
@@ -155,17 +195,586 @@ namespace DataBase
                             QuantityCreditUnit = 120,
                             QuantityTerm = 4,
                             MaxQuantityCreditUnitPerYear = 70
-                        }
-                    };
+                        };
 
-                    List<EducationalProgram> educationalPrograms = new List<EducationalProgram>()
-                    {
+                    EducationalProgram educationalProgram =
                         new EducationalProgram()
                         {
+                            Name = "Программная инженерия",
+                            Profile = "Системы программной поддержки жизненного цикла изделий",
+                            EducationalStandartID = 1
+                        };
 
-                        }
+                    Syllabus syllabus =
+                        new Syllabus()
+                        {
+                            Name = "Учебный план №1 09.04.04",
+                            EducationalProgramID = 1
+                        };
+
+                    List<Discipline> disciplines = new List<Discipline>()
+                    {
+                        //1 Методология программной инженерии
+                        new Discipline()
+                        {
+                            Name = "Методология программной инженерии",
+                            QuantityCreditUnit = 6,
+                            QuantityAcademicHour = 216,
+                            FormIntermediateCertification = "Экзамен",
+                            Place = "Б1",
+                            IsHaveCourseWork = true,
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 1
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 11
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 12
+                                }
+                            }
+                        },
+                        //2 Методы исследования интеллектуального анализа в программной инженерии (семестр 1)
+                        new Discipline()
+                        {
+                            Name = "Методы исследования интеллектуального анализа в программной инженерии (семестр 1)",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108,
+                            FormIntermediateCertification = "Зачет",
+                            Place = "Б1.Б2",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 8
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 9
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 10
+                                }
+                            }
+                        },
+                        //3 Методы исследования интеллектуального анализа в программной инженерии (семестр 2)
+                        new Discipline()
+                        {
+                            Name = "Методы исследования интеллектуального анализа в программной инженерии (семестр 2)",
+                            QuantityCreditUnit = 5,
+                            QuantityAcademicHour = 180,
+                            FormIntermediateCertification = "Экзамен",
+                            Place = "Б1.Б2",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 8
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 9
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 10
+                                }
+                            }
+                        },
+                        //4 Управление разработкой программных проектов
+                        new Discipline()
+                        {
+                            Name = "Управление разработкой программных проектов",
+                            QuantityCreditUnit = 6,
+                            QuantityAcademicHour = 216,
+                            FormIntermediateCertification = "Экзамен",
+                            Place = "Б1.Б3",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 2
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 3
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 14
+                                }
+                            }
+                        },
+                        //5 Методы передачи мультемедийных данных
+                        new Discipline()
+                        {
+                            Name = "Методы передачи мультемедийных данных",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108,
+                            FormIntermediateCertification = "Зачет",
+                            Place = "Б1.Б3",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 13
+                                }
+                            }
+                        },
+                        //6 Иностранный язык в профессиональной сфере
+                        new Discipline()
+                        {
+                            Name = "Иностранный язык в профессиональной сфере",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108,
+                            FormIntermediateCertification = "Зачет",
+                            Place = "Б1.Б5",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 4
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 5
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 7
+                                }
+                            }
+                        },
+                        //7 Теория аргументации
+                        new Discipline()
+                        {
+                            Name = "Теория аргументации",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108,
+                            FormIntermediateCertification = "Зачет",
+                            Place = "Б1.Б6",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 4
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 5
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 7
+                                }
+                            }
+                        },
+                        //8 Технологическое предпринимательство
+                        new Discipline()
+                        {
+                            Name = "Технологическое предпринимательство",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108,
+                            FormIntermediateCertification = "Зачет",
+                            Place = "Б1.Б7",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 3
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 6
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 7
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 14
+                                }
+                            }
+                        },
+                        //9 Методы самооргназации специалистов в программной инженерии
+                        new Discipline()
+                        {
+                            Name = "Методы самооргназации специалистов в программной инженерии",
+                            QuantityCreditUnit = 4,
+                            QuantityAcademicHour = 144,
+                            FormIntermediateCertification = "Экзамен",
+                            Place = "Б1.В.ДВ1.1",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 18
+                                }
+                            }
+                        },
+                        //10 Командооюразование и методы групповой работы в ИТ отрасли
+                        new Discipline()
+                        {
+                            Name = "Командооюразование и методы групповой работы в ИТ отрасли",
+                            QuantityCreditUnit = 4,
+                            QuantityAcademicHour = 144,
+                            FormIntermediateCertification = "Экзамен",
+                            Place = "Б1.В.ДВ1.2",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 18
+                                }
+                            }
+                        },
+                        //11 Управление данными об изделиях
+                        new Discipline()
+                        {
+                            Name = "Управление данными об изделиях",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108,
+                            FormIntermediateCertification = "Зачет",
+                            Place = "Б1.В.ДВ2.1",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 15
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 17
+                                }
+                            }
+                        },
+                        //12 Аналитическая обработка данных
+                        new Discipline()
+                        {
+                            Name = "Аналитическая обработка данных",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108,
+                            FormIntermediateCertification = "Зачет",
+                            Place = "Б1.В.ДВ2.2",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 15
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 17
+                                }
+                            }
+                        },
+                        //13 Корпоративные информационные системы
+                        new Discipline()
+                        {
+                            Name = "Корпоративные информационные системы",
+                            QuantityCreditUnit = 4,
+                            QuantityAcademicHour = 144,
+                            FormIntermediateCertification = "Зачет с оценкой",
+                            Place = "Б1.В.ДВ3.1",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 16
+                                }
+                            }
+                        },
+                        //14 Автоматизация управления предприятием
+                        new Discipline()
+                        {
+                            Name = "Автоматизация управления предприятием",
+                            QuantityCreditUnit = 4,
+                            QuantityAcademicHour = 144,
+                            FormIntermediateCertification = "Зачет с оценкой",
+                            Place = "Б1.В.ДВ3.2",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 16
+                                }
+                            }
+                        },
+                        //15 Сверточные сети и глубокое обучение
+                        new Discipline()
+                        {
+                            Name = "Сверточные сети и глубокое обучение",
+                            QuantityCreditUnit = 4,
+                            QuantityAcademicHour = 144,
+                            FormIntermediateCertification = "Зачет с оценкой",
+                            Place = "Б1.В.ДВ4.1",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 17
+                                }
+                            }
+                        },
+                        //16 Системно-онтологический анализ предметной области
+                        new Discipline()
+                        {
+                            Name = "Системно-онтологический анализ предметной области",
+                            QuantityCreditUnit = 4,
+                            QuantityAcademicHour = 144,
+                            FormIntermediateCertification = "Зачет с оценкой",
+                            Place = "Б1.В.ДВ4.2",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 17
+                                }
+                            }
+                        },
+                        //17 UX-Дизайн
+                        new Discipline()
+                        {
+                            Name = "UX-Дизайн",
+                            QuantityCreditUnit = 4,
+                            QuantityAcademicHour = 144,
+                            FormIntermediateCertification = "Зачет с оценкой",
+                            Place = "Б1.В.ДВ5.1",
+                            IsHaveCourseWork = true,
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 18
+                                }
+                            }
+                        },
+                        //18 Проектирование пользовательского интерфейса программных систем
+                        new Discipline()
+                        {
+                            Name = "Проектирование пользовательского интерфейса программных систем",
+                            QuantityCreditUnit = 4,
+                            QuantityAcademicHour = 144,
+                            FormIntermediateCertification = "Зачет с оценкой",
+                            Place = "Б1.В.ДВ5.2",
+                            IsHaveCourseWork = true,
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 18
+                                }
+                            }
+                        },
+                        //19 Управление информационными рисками
+                        new Discipline()
+                        {
+                            Name = "Управление информационными рисками",
+                            QuantityCreditUnit = 5,
+                            QuantityAcademicHour = 180,
+                            FormIntermediateCertification = "Экзамен",
+                            Place = "Б1.В.ДВ6.1",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 18
+                                }
+                            }
+                        },
+                        //20 Управление ИТ инфраструктурой
+                        new Discipline()
+                        {
+                            Name = "Управление ИТ инфраструктурой",
+                            QuantityCreditUnit = 5,
+                            QuantityAcademicHour = 180,
+                            FormIntermediateCertification = "Экзамен",
+                            Place = "Б1.В.ДВ6.2",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 18
+                                }
+                            }
+                        },
+                        //21 Управление жизненным циклом программных систем (семестр 1)
+                        new Discipline()
+                        {
+                            Name = "Управление жизненным циклом программных систем (семестр 1)",
+                            QuantityCreditUnit = 5,
+                            QuantityAcademicHour = 180,
+                            FormIntermediateCertification = "Зачет с оценкой",
+                            Place = "Б1.В1",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 2
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 19
+                                }
+                            }
+                        },
+                        //22 Управление жизненным циклом программных систем (семестр 2)
+                        new Discipline()
+                        {
+                            Name = "Управление жизненным циклом программных систем (семестр 2)",
+                            QuantityCreditUnit = 4,
+                            QuantityAcademicHour = 144,
+                            FormIntermediateCertification = "Экзамен",
+                            Place = "Б1.В1",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 2
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 19
+                                }
+                            }
+                        },
+                        //23 Прикладные задачи мобильных технологий
+                        new Discipline()
+                        {
+                            Name = "Прикладные задачи мобильных технологий",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108,
+                            FormIntermediateCertification = "Зачет",
+                            Place = "Б1.В2",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 20
+                                }
+                            }
+                        },
+                        //24 Имитационное моделирование физических систем (семестр 1)
+                        new Discipline()
+                        {
+                            Name = "Имитационное моделирование физических систем (семестр 1)",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108,
+                            FormIntermediateCertification = "Зачет с оценкой",
+                            Place = "Б1.В3",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 15
+                                }
+                            }
+                        },
+                        //25 Имитационное моделирование физических систем (семестр 2)
+                        new Discipline()
+                        {
+                            Name = "Имитационное моделирование физических систем (семестр 2)",
+                            QuantityCreditUnit = 5,
+                            QuantityAcademicHour = 180,
+                            FormIntermediateCertification = "Экзамен",
+                            IsHaveCourseWork = true,
+                            Place = "Б1.В3",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 15
+                                }
+                            }
+                        },
+                        //26 Системная инженерия
+                        new Discipline()
+                        {
+                            Name = "Системная инженерия",
+                            QuantityCreditUnit = 5,
+                            QuantityAcademicHour = 180,
+                            FormIntermediateCertification = "Экзамен",
+                            Place = "Б1.В4",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 1
+                                },
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 18
+                                }
+                            }
+                        },
+                        //27 Современные информационные системы управления предприятиями ракетно-космической отрасли
+                        new Discipline()
+                        {
+                            Name = "Современные информационные системы управления предприятиями ракетно-космической отрасли",
+                            QuantityCreditUnit = 1,
+                            QuantityAcademicHour = 36,
+                            FormIntermediateCertification = "Зачет",
+                            Place = "Ф1",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 16
+                                }
+                            }
+                        },
+                        //28 Промышленные SCADA-системы
+                        new Discipline()
+                        {
+                            Name = "Промышленные SCADA-системы",
+                            QuantityCreditUnit = 2,
+                            QuantityAcademicHour = 72,
+                            FormIntermediateCertification = "Зачет",
+                            Place = "Ф2",
+                            DisciplineCompetences =
+                            new List<DisciplineCompetence>()
+                            {
+                                new DisciplineCompetence()
+                                {
+                                    CompetenceID = 2
+                                }
+                            }
+                        },
                     };
-
 
                 }
             }

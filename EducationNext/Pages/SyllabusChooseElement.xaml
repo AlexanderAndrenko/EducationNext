@@ -18,7 +18,7 @@
                     <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>дисциплины</TextBlock>
                     <ListBox
                     ItemsSource="{Binding ListDiscipline}"
-                    Height="200"
+                    Height="300"
                     Width="170">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -35,7 +35,7 @@
                     <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>практики</TextBlock>
                     <ListBox
                     ItemsSource="{Binding ListPractice}"
-                    Height="200"
+                    Height="300"
                     Width="170">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -52,7 +52,7 @@
                     <TextBlock Width="170" TextAlignment="Center">Выберите обязательные<LineBreak/>ГИА</TextBlock>
                     <ListBox
                     ItemsSource="{Binding ListSFC}"
-                    Height="200"
+                    Height="300"
                     Width="170">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

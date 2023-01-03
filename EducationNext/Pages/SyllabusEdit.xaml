@@ -25,14 +25,14 @@
                 </TextBlock>
                 <ComboBox 
                             Margin="20,0,0,0" 
-                            Width="170"                            
+                            Width="230"                            
                             SelectedItem="{Binding SelectedItem.EducationalProgramID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                            
                             ItemsSource="{Binding  ComboBoxEducationalProgram}"  
                             SelectedValuePath="Id"
                             DisplayMemberPath="Name">
                 </ComboBox>
                 <Button 
-                    Margin="80,0,0,0"
+                    Margin="25,0,0,0"
                     Width="170"
                     Content="Выбрать элементы"
                     Command="{Binding EditSyllabusElement}"/>
