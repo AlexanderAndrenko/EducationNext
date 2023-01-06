@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using static EducationNext.EducationalStandartVM;
 using System.Collections.ObjectModel;
+using System.Windows.Media;
 
 namespace EducationNext
 {
@@ -341,8 +342,21 @@ namespace EducationNext
                             Name = "TEST",
                             FormIntermediateCertification = "Экзамен",
                             Place = "Б1",
+                            IsCourseWork = false,
                             QuantityCreditUnit = 3,
                             QuantityAcademicHour = 108
+                        });
+                });
+            Semesters.ForEach(
+                x =>
+                {
+                    x.Elements.ToList().ForEach(
+                        y =>
+                        {
+                            if (y.IsCourseWork == true)
+                            {
+                                y.CourseWork = "Курсовая работа";
+                            }
                         });
                 });
         }
@@ -359,9 +373,19 @@ namespace EducationNext
                             Name = x.Discipline.Name,
                             FormIntermediateCertification = x.Discipline.FormIntermediateCertification,
                             Place = x.Discipline.Place,
+                            IsCourseWork = x.Discipline.IsHaveCourseWork,
                             QuantityCreditUnit = x.Discipline.QuantityCreditUnit,
                             QuantityAcademicHour = x.Discipline.QuantityAcademicHour
                         });
+                });
+
+            ElementsWithoutSemester.ToList().ForEach(
+                x =>
+                {
+                    if (x.IsCourseWork == true)
+                    {
+                        x.CourseWork = "Курсовая работа";
+                    }
                 });
         }
 
@@ -419,9 +443,11 @@ namespace EducationNext
             public string Type { get; set; } = "Дисциплина";
             public string FormIntermediateCertification { get; set; } = "";
             public string Place { get; set; } = "";
+            public bool IsCourseWork { get; set; } = false;
             public string CourseWork { get; set; } = "";
             public float QuantityCreditUnit { get; set; } = 0;
             public float QuantityAcademicHour { get; set; } = 0;
+            public Brush ColorBrush { get; set; } = Brushes.Coral;
         }
 
         public class DragAndDropElement

@@ -38,27 +38,34 @@
                     Content="Выбрать элементы"
                     Command="{Binding EditSyllabusElement}"/>
             </StackPanel>
-            
-            <StackPanel
-                DockPanel.Dock="Right"
+            <ScrollViewer
+                DockPanel.Dock="Right">
+            <StackPanel                
                 Width="235"
                 Margin="0,3,0,0"
                 Background="#F4F5F7">
-                <StackPanel
-                    Orientation="Vertical">
-                    <TextBlock/>
+                <TextBlock Text="TEXT"/>
+                <Border
+                    CornerRadius="15"
+                    Background="#F4F5F7"
+                    BorderThickness="3"
+                    Padding="5">
                     <ListView
+                        Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
+                        BorderThickness="0"
                         AllowDrop="True"
                         ItemsSource="{Binding ElementsWithoutSemester}"
                         MouseMove="ListView_MouseMove"
-                        Drop="ListView_Drop">
+                        Drop="ListView_Drop" 
+                        PreviewMouseMove="ListView_PreviewMouseMove"
+                        MouseLeave="ListView_MouseLeave">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel
-                                    Width="200"
-                                    Height="100"
-                                    Margin="3"
-                                    Background="White">
+                                        Width="200"
+                                        Height="130"
+                                        Margin="3"
+                                        Background="White">
                                     <TextBlock
                                         Text="{Binding Place}"/>
                                     <TextBlock 
@@ -76,17 +83,22 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </StackPanel>
+                </Border>
             </StackPanel>
-            <StackPanel
-                DockPanel.Dock="Left"
+            </ScrollViewer>
+            
+            <ScrollViewer
+                DockPanel.Dock="Left">
+            <StackPanel                
                 Orientation="Horizontal"
                 Margin="0,5,0,0"
                 Background="White"
                 Width="Auto">
                 <ItemsControl
                     x:Name="ListSemester"
-                    ItemsSource="{Binding Semesters}">
+                    ItemsSource="{Binding Semesters}"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
@@ -95,47 +107,86 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <!--<Rectangle Panel.ZIndex="3" Fill="#F4F5F7" Width="200" Height="500" RadiusX="15" RadiusY="15"/>-->
-                            <StackPanel
-                                    Orientation="Horizontal"
-                                    Margin="5">
-                                <StackPanel
-                                        Orientation="Vertical">
-                                    <TextBlock Text="{Binding SemesterNumber}"/>
-                                    <ListView
-                                        Background="#F4F5F7"
-                                        AllowDrop="True"
-                                        ItemsSource="{Binding Elements}"
-                                        MouseMove="ListView_MouseMove"
-                                        Drop="ListView_Drop">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <DockPanel                                                
-                                                        Height="100"
-                                                        Margin="1"
-                                                        Background="White">
+                           <StackPanel
+                                Orientation="Vertical"
+                                Margin="5">
+                            <TextBlock Text="{Binding SemesterNumber}"/>
+                            <Border
+                                CornerRadius="15"
+                                Background="#F4F5F7"
+                                BorderThickness="3"
+                                Padding="5">
+                                <ListView
+                                    Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
+                                    BorderThickness="0"
+                                    Background="#F4F5F7"
+                                    AllowDrop="True"
+                                    ItemsSource="{Binding Elements}"
+                                    MouseMove="ListView_MouseMove"
+                                    Drop="ListView_Drop"
+                                    MinHeight="650"
+                                    Width="200"
+                                    PreviewMouseMove="ListView_PreviewMouseMove" 
+                                    MouseLeave="ListView_MouseLeave"
+                                    DragOver="ListView_DragOver"
+                                    DragLeave="ListView_DragLeave">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Orientation="Vertical"
+                                                Width="180"
+                                                Height="130"
+                                                Margin="1"
+                                                Background="{Binding ColorBrush}">
+                                                <Border
+                                                    Background="White"
+                                                    CornerRadius="5"
+                                                    Width="77"
+                                                    Height="21"
+                                                    Padding="3"
+                                                    Margin="2"
+                                                    HorizontalAlignment="Left">
                                                     <TextBlock
-                                                        Text="{Binding Place}"/>
-                                                    <TextBlock 
-                                                        Text="{Binding Name}"
-                                                        TextWrapping="Wrap"/>
-                                                    <TextBlock
-                                                        Text="{Binding FormIntermediateCertification}"/>
-                                                    <TextBlock
-                                                        Text="{Binding CourseWork}"/>
+                                                        DockPanel.Dock="Top"
+                                                        HorizontalAlignment="Left"
+                                                        Text="{Binding Place}"
+                                                        Background="White"
+                                                        Width="80"
+                                                        Height="15"/>
+                                                </Border>
+                                                <TextBlock 
+                                                    Text="{Binding Name}"
+                                                    TextWrapping="Wrap"/>
+                                                <TextBlock
+                                                    Text="{Binding FormIntermediateCertification}"/>
+                                                <TextBlock
+                                                    Text="{Binding CourseWork}"/>
+                                                
+                                                <StackPanel
+                                                    Orientation="Horizontal"
+                                                    HorizontalAlignment="Right">
                                                     <TextBlock
                                                         Text="{Binding QuantityCreditUnit}"/>
+                                                    <TextBlock Text=" з.е."/>
+                                                </StackPanel>
+                                                <StackPanel
+                                                    Orientation="Horizontal"
+                                                    HorizontalAlignment="Right">
                                                     <TextBlock
                                                         Text="{Binding QuantityAcademicHour}"/>
-                                                </DockPanel>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
-                                </StackPanel>
-                            </StackPanel>
+                                                    <TextBlock Text=" а.ч."/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Border>
+                        </StackPanel>
                         </DataTemplate>                            
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
+            </ScrollViewer>
         </DockPanel>
     </Grid>
 </Window>

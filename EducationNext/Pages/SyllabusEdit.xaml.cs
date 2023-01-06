@@ -57,5 +57,37 @@ namespace EducationNext.Pages
 
             data.SourceCollection.Remove(data.MovementElement);
         }
+
+        private void ListView_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (sender is ListView)
+            {
+                ((sender as ListView).Tag as Border).BorderBrush = new SolidColorBrush(Color.FromRgb(188, 188, 188));
+            }           
+        }
+
+        private void ListView_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (sender is ListView)
+            {
+                ((sender as ListView).Tag as Border).BorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
+            }
+        }
+
+        private void ListView_DragOver(object sender, DragEventArgs e)
+        {
+            if (sender is ListView)
+            {
+                ((sender as ListView).Tag as Border).BorderBrush = new SolidColorBrush(Color.FromRgb(188, 188, 188));
+            }
+        }
+
+        private void ListView_DragLeave(object sender, DragEventArgs e)
+        {
+            if (sender is ListView)
+            {
+                ((sender as ListView).Tag as Border).BorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
+            }
+        }
     }
 }
