@@ -47,13 +47,38 @@ namespace DataBase.Model
             }
         }
 
-        public void SetSyllabus(Syllabus Syllabus)
+        public void SetSyllabus(Syllabus syllabus)
         {
             try
             {
                 using (ApplicationContext db = new())
                 {
-                    db.Syllabuses.Add(Syllabus);
+                    if (syllabus.Id != 0)
+                    {
+                        db.Entry(syllabus).State = EntityState.Modified;
+
+                        var syllabusDiscipline = new List<SyllabusDiscipline>(syllabus.SyllabusDisciplines);
+                        var syllabusPractice = new List<SyllabusPractic>(syllabus.SyllabusPractics);
+                        var syllabusSFC = new List<SyllabusStateFinalCertification>(syllabus.SyllabusStateFinalCertifications);
+
+                        db.SyllabusDisciplines.RemoveRange(
+                            db.SyllabusDisciplines.Where(x => x.SyllabusID == syllabus.Id)
+                            );
+                        db.SyllabusPractics.RemoveRange(
+                            db.SyllabusPractics.Where(x => x.SyllabusID == syllabus.Id)
+                            );
+                        db.SyllabusStateFinalCertifications.RemoveRange(
+                            db.SyllabusStateFinalCertifications.Where(x => x.SyllabusID == syllabus.Id)
+                            );
+
+                        db.SyllabusDisciplines.AddRange(syllabusDiscipline);
+                        db.SyllabusPractics.AddRange(syllabusPractice);
+                        db.SyllabusStateFinalCertifications.AddRange(syllabusSFC);
+                    }
+                    else
+                    {
+                        db.Syllabuses.Add(syllabus);
+                    }
                     db.SaveChanges();
                 }
             }

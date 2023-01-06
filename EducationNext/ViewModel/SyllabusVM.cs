@@ -63,7 +63,6 @@ namespace EducationNext
         public Syllabus SelectedItem { get; set; }
 
         #region Command
-
         public OwnCommand EditSyllabus { get; set; }
         public OwnCommand NewSyllabus { get; set; }
         public OwnCommand SaveSyllabus { get; set; }
@@ -210,33 +209,117 @@ namespace EducationNext
             GetSyllabus();
         }
 
-
         #endregion //EditWindowCommand
 
         #region ChooseElementWindowCommand
-
         public void SaveChooseElement()
         {
+            /*
+             * Необходимо к выбранному списку элементов сопоставить те семестры, в котороые некоторые элементы уже были определены.
+             * Это нужно для того, чтобы список элементов не сбрасывался каждый раз при сохранении, а записывался в базу.
+             */
+
+            /*Подтягиваем семестры дисциплин*/
+            Semesters
+                .ToList()
+                .ForEach(
+                x =>
+                {
+                    x.Elements
+                        .Where(y => y.TypeID == 1)
+                        .ToList()
+                        .ForEach(
+                        z =>
+                        {
+                            ListDiscipline
+                                .Where(x => x.IsChecked == true)
+                                .ToList()
+                                .ForEach(
+                                y =>
+                                {
+                                    if (y.Id == z.Id)
+                                    {
+                                        y.Semester = x.SemesterNumber;
+                                    }
+                                });
+                        });
+                });
+
+            /*Формируем список записей связок по дисциплинам*/
             List<SyllabusDiscipline> SyllabusDiscipline =
                 ListDiscipline
                 .Where(x => x.IsChecked == true)
-                .Select(x => new SyllabusDiscipline() { SyllabusID = x.ParentId, DisciplineID = x.Id })
-                .ToList();
+                .Select(x => new SyllabusDiscipline() { SyllabusID = x.ParentId, DisciplineID = x.Id, Semester = x.Semester })
+                .ToList();           
 
             SelectedItem.SyllabusDisciplines = SyllabusDiscipline;
 
+            /*Подтягиваем семестры практик*/
+            Semesters
+                .ToList()
+                .ForEach(
+                x =>
+                {
+                    x.Elements
+                        .Where(y => y.TypeID == 2)
+                        .ToList()
+                        .ForEach(
+                        z =>
+                        {
+                            ListPractice
+                                .Where(x => x.IsChecked == true)
+                                .ToList()
+                                .ForEach(
+                                y =>
+                                {
+                                    if (y.Id == z.Id)
+                                    {
+                                        y.Semester = x.SemesterNumber;
+                                    }
+                                });
+                        });
+                });
+
+            /*Формируем список записей связок по практикам*/
             List<SyllabusPractic> SyllabusPractice =
                 ListPractice
                 .Where(x => x.IsChecked == true)
-                .Select(x => new SyllabusPractic() { SyllabusID = x.ParentId, PracticID = x.Id })
+                .Select(x => new SyllabusPractic() { SyllabusID = x.ParentId, PracticID = x.Id, Semester = x.Semester })
                 .ToList();
 
             SelectedItem.SyllabusPractics = SyllabusPractice;
 
+            /*Подтягиваем семестры ГИА*/
+            Semesters
+                .ToList()
+                .ForEach(
+                x =>
+                {
+                    x.Elements
+                        .Where(y => y.TypeID == 3)
+                        .ToList()
+                        .ForEach(
+                        z =>
+                        {
+                            ListSFC
+                                .Where(x => x.IsChecked == true)
+                                .ToList()
+                                .ForEach(
+                                y =>
+                                {
+                                    if (y.Id == z.Id)
+                                    {
+                                        y.Semester = x.SemesterNumber;
+                                    }
+                                });
+                        });
+                });
+
+            /*Формируем список записей связок по ГИА*/
             List<SyllabusStateFinalCertification> SyllabusStateFinalCertification =
                 ListSFC
                 .Where(x => x.IsChecked == true)
-                .Select(x => new SyllabusStateFinalCertification() { SyllabusID = x.ParentId, StateFinalCertificationID = x.Id })
+                .Select(x => new SyllabusStateFinalCertification() { SyllabusID = x.ParentId, StateFinalCertificationID = x.Id, Semester = x.Semester })
                 .ToList();
 
             SelectedItem.SyllabusStateFinalCertifications = SyllabusStateFinalCertification;
@@ -343,7 +426,6 @@ namespace EducationNext
         #endregion //ListPropertiesMethods
 
         #region GenerateSemester
-
         public void GenerateSemester()
         {
             //Затираем список семестров, если он уже был
@@ -373,6 +455,18 @@ namespace EducationNext
                             .ForEach(
                                 z => x.Elements.Add( new Element(z.Discipline))
                                 );
+                        SelectedItem.SyllabusPractics
+                            .Where(y => y.Semester == x.SemesterNumber)
+                            .ToList()
+                            .ForEach(
+                                z => x.Elements.Add(new Element(z.Practic))
+                                );
+                        SelectedItem.SyllabusStateFinalCertifications
+                            .Where(y => y.Semester == x.SemesterNumber)
+                            .ToList()
+                            .ForEach(
+                                z => x.Elements.Add(new Element(z.StateFinalCertification))
+                                );
                     });
         }
 
@@ -387,11 +481,27 @@ namespace EducationNext
                     x => 
                     { 
                         ElementsWithoutSemester.Add( new Element(x.Discipline));
-                    });           
+                    });
+
+            SelectedItem.SyllabusPractics
+                .Where(y => y.Semester == 0)
+                .ToList()
+                .ForEach(
+                    x =>
+                    {
+                        ElementsWithoutSemester.Add(new Element(x.Practic));
+                    });
+
+            SelectedItem.SyllabusStateFinalCertifications
+                .Where(y => y.Semester == 0)
+                .ToList()
+                .ForEach(
+                    x =>
+                    {
+                        ElementsWithoutSemester.Add(new Element(x.StateFinalCertification));
+                    });
         }
-
-
-
+        
         #endregion //GenerateSemester
 
         #endregion //Methods
@@ -402,8 +512,8 @@ namespace EducationNext
             public int ParentId { get; set; } = 0;
             public string Name { get; set; } = "";
             public bool IsChecked { get; set; } = false;
+            public int Semester { get; set; } = 0;
         }
-
         public class Semester
         {
             public Semester()
@@ -452,6 +562,8 @@ namespace EducationNext
                 {
                     Id = item.Id;
                     Name = item.Name;
+                    Type = "Дисциплина";
+                    TypeID = 1;
                     FormIntermediateCertification = item.FormIntermediateCertification;
                     Place = item.Place;
                     IsCourseWork = item.IsHaveCourseWork;
@@ -471,6 +583,8 @@ namespace EducationNext
                 {
                     Id = item.Id;
                     Name = item.Name;
+                    Type = "Практика";
+                    TypeID = 2;
                     FormIntermediateCertification = "";
                     Place = item.Place;
                     IsCourseWork = false;
@@ -486,6 +600,8 @@ namespace EducationNext
                 {
                     Id = item.Id;
                     Name = item.Name;
+                    Type = "ГИА";
+                    TypeID = 3;
                     FormIntermediateCertification = "";
                     Place = item.Place;
                     IsCourseWork = false;
@@ -551,6 +667,7 @@ namespace EducationNext
             public int Id { get; set; } = 0;
             public string Name { get; set; } = "";
             public string Type { get; set; } = "Дисциплина";
+            public int TypeID { get; set; } = 1;//1 - Дисциплина, 2 - Практика, 3 - ГИА
             public string FormIntermediateCertification { get; set; } = "";
             public string Place { get; set; } = "";
             public bool IsCourseWork { get; set; } = false;
@@ -561,7 +678,6 @@ namespace EducationNext
             public Brush TextBrush { get; set; } = Brushes.Black;
             public Brush CourseWorkBrush { get; set; } = Brushes.White;
         }
-
         public class DragAndDropElement
         {
             public Element MovementElement { get; set; }
