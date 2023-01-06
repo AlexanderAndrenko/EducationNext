@@ -13,8 +13,8 @@ namespace DataBase.Entities
         public int Id { get; set; }
         public string SpecializationCode { get; set; } = "";
         public string? Name { get; set; }
-        public float QuantityCreditUnit { get; set; }    
-        public int QuantityTerm { get; set; }
+        public float QuantityCreditUnit { get; set; }
+        public int QuantityTerm { get; set; } = 0;
         public float MaxQuantityCreditUnitPerYear { get; set; }
 
         public List<EducationalStandartCompetence>? EducationalStandartCompetences { get; set; }

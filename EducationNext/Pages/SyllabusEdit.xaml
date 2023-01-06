@@ -25,12 +25,12 @@
                         Образовательная программа
                 </TextBlock>
                 <ComboBox 
-                            Margin="20,0,0,0" 
-                            Width="230"                            
-                            SelectedItem="{Binding SelectedItem.EducationalProgramID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                            
-                            ItemsSource="{Binding  ComboBoxEducationalProgram}"  
-                            SelectedValuePath="Id"
-                            DisplayMemberPath="Name">
+                    Margin="20,0,0,0" 
+                    Width="230"                            
+                    SelectedValue="{Binding SelectedItem.EducationalProgramID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                            
+                    ItemsSource="{Binding ComboBoxEducationalProgram}"  
+                    SelectedValuePath="Id"
+                    DisplayMemberPath="Name">
                 </ComboBox>
                 <Button 
                     Margin="25,0,0,0"
@@ -50,40 +50,89 @@
                     Background="#F4F5F7"
                     BorderThickness="3"
                     Padding="5">
-                    <ListView
-                        Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
-                        BorderThickness="0"
-                        AllowDrop="True"
-                        ItemsSource="{Binding ElementsWithoutSemester}"
-                        MouseMove="ListView_MouseMove"
-                        Drop="ListView_Drop" 
-                        PreviewMouseMove="ListView_PreviewMouseMove"
-                        MouseLeave="ListView_MouseLeave">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel
-                                        Width="200"
-                                        Height="130"
-                                        Margin="3"
-                                        Background="White">
-                                    <TextBlock
-                                        Text="{Binding Place}"/>
-                                    <TextBlock 
-                                        Text="{Binding Name}"
-                                        TextWrapping="Wrap"/>
-                                    <TextBlock
-                                        Text="{Binding FormIntermediateCertification}"/>
-                                    <TextBlock
-                                        Text="{Binding CourseWork}"/>
-                                    <TextBlock
-                                        Text="{Binding QuantityCreditUnit}"/>
-                                    <TextBlock
-                                        Text="{Binding QuantityAcademicHour}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Border>
+                        <ListView
+                            Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
+                            BorderThickness="0"
+                            Background="#F4F5F7"
+                            AllowDrop="True"
+                            ItemsSource="{Binding ElementsWithoutSemester}"
+                            MouseMove="ListView_MouseMove"
+                            Drop="ListView_Drop"
+                            MinHeight="650"
+                            Width="200"
+                            PreviewMouseMove="ListView_PreviewMouseMove" 
+                            MouseLeave="ListView_MouseLeave"
+                            DragOver="ListView_DragOver"
+                            DragLeave="ListView_DragLeave">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border
+                                                    Padding="3"
+                                                    CornerRadius="5"
+                                                    Background="{Binding ColorBrush}">
+                                        <StackPanel
+                                                        Orientation="Vertical"
+                                                        Width="180">
+                                            <!--Место дисциплины в ОП-->
+                                            <Border
+                                                            Background="White"
+                                                            CornerRadius="5"
+                                                            Width="77"
+                                                            Height="21"
+                                                            Padding="3"
+                                                            Margin="2"
+                                                            HorizontalAlignment="Left">
+                                                <TextBlock
+                                                                DockPanel.Dock="Top"
+                                                                HorizontalAlignment="Left"
+                                                                Text="{Binding Place}"
+                                                                Background="White"
+                                                                Width="80"
+                                                                Height="15"/>
+                                            </Border>
+                                            <!--Наименование дисциплины-->
+                                            <TextBlock 
+                                                            Text="{Binding Name}"
+                                                            TextWrapping="Wrap"/>
+                                            <TextBlock
+                                                            Text="{Binding CourseWork}"/>
+                                            <!--Нижняя панель с формой аттестации, з.е. и академическими часами-->
+                                            <Border
+                                                                Background="White"
+                                                                Padding="3"
+                                                                Margin="2"
+                                                                CornerRadius="5">
+                                                <StackPanel
+                                                                Orientation="Horizontal">
+                                                    <TextBlock
+                                                                    Text="{Binding FormIntermediateCertification}"
+                                                                    Width="115"/>
+                                                    <StackPanel
+                                                                    Orientation="Vertical"
+                                                                    Width="60">
+                                                        <StackPanel
+                                                                        Orientation="Horizontal"
+                                                                        HorizontalAlignment="Right">
+                                                            <TextBlock
+                                                                            Text="{Binding QuantityCreditUnit}"/>
+                                                            <TextBlock Text=" з.е."/>
+                                                        </StackPanel>
+                                                        <StackPanel
+                                                                        Orientation="Horizontal"
+                                                                        HorizontalAlignment="Right">
+                                                            <TextBlock
+                                                                            Text="{Binding QuantityAcademicHour}"/>
+                                                            <TextBlock Text=" а.ч."/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
             </StackPanel>
             </ScrollViewer>
             
@@ -106,82 +155,119 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <!--<Rectangle Panel.ZIndex="3" Fill="#F4F5F7" Width="200" Height="500" RadiusX="15" RadiusY="15"/>-->
-                           <StackPanel
+                            <StackPanel
                                 Orientation="Vertical"
                                 Margin="5">
-                            <TextBlock Text="{Binding SemesterNumber}"/>
-                            <Border
-                                CornerRadius="15"
-                                Background="#F4F5F7"
-                                BorderThickness="3"
-                                Padding="5">
-                                <ListView
-                                    Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
-                                    BorderThickness="0"
+                                <!--Заголовок колонки-->
+                                <Border>
+                                    <StackPanel
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
+                                        <TextBlock 
+                                            Text="{Binding SemesterNumber}"
+                                            FontSize="14"/>
+                                        <TextBlock
+                                            Text=" семестр"
+                                            FontSize="14"/>
+                                    </StackPanel>
+                                </Border>
+                                <!--Список элементов-->
+                                <Border
+                                    CornerRadius="15"
                                     Background="#F4F5F7"
-                                    AllowDrop="True"
-                                    ItemsSource="{Binding Elements}"
-                                    MouseMove="ListView_MouseMove"
-                                    Drop="ListView_Drop"
-                                    MinHeight="650"
-                                    Width="200"
-                                    PreviewMouseMove="ListView_PreviewMouseMove" 
-                                    MouseLeave="ListView_MouseLeave"
-                                    DragOver="ListView_DragOver"
-                                    DragLeave="ListView_DragLeave">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel
-                                                Orientation="Vertical"
-                                                Width="180"
-                                                Height="130"
-                                                Margin="1"
-                                                Background="{Binding ColorBrush}">
+                                    BorderThickness="3"
+                                    Padding="5">
+                                    <ListView
+                                        Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
+                                        BorderThickness="0"
+                                        Background="#F4F5F7"
+                                        AllowDrop="True"
+                                        ItemsSource="{Binding Elements}"
+                                        MouseMove="ListView_MouseMove"
+                                        Drop="ListView_Drop"
+                                        MinHeight="650"
+                                        Width="200"
+                                        PreviewMouseMove="ListView_PreviewMouseMove" 
+                                        MouseLeave="ListView_MouseLeave"
+                                        DragOver="ListView_DragOver"
+                                        DragLeave="ListView_DragLeave">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
                                                 <Border
-                                                    Background="White"
-                                                    CornerRadius="5"
-                                                    Width="77"
-                                                    Height="21"
                                                     Padding="3"
-                                                    Margin="2"
-                                                    HorizontalAlignment="Left">
-                                                    <TextBlock
-                                                        DockPanel.Dock="Top"
-                                                        HorizontalAlignment="Left"
-                                                        Text="{Binding Place}"
-                                                        Background="White"
-                                                        Width="80"
-                                                        Height="15"/>
+                                                    CornerRadius="5"
+                                                    Background="{Binding ColorBrush}">
+                                                    <StackPanel
+                                                        Orientation="Vertical"
+                                                        Width="180">
+                                                        <!--Место дисциплины в ОП-->
+                                                        <Border
+                                                            Background="White"
+                                                            CornerRadius="5"
+                                                            Width="77"
+                                                            Height="21"
+                                                            Padding="3"
+                                                            Margin="2"
+                                                            HorizontalAlignment="Left">
+                                                            <TextBlock
+                                                                DockPanel.Dock="Top"
+                                                                HorizontalAlignment="Left"
+                                                                Text="{Binding Place}"
+                                                                Background="White"
+                                                                Width="80"
+                                                                Height="15"/>
+                                                        </Border>
+                                                        <!--Наименование дисциплины-->
+                                                        <TextBlock 
+                                                            Text="{Binding Name}"
+                                                            TextWrapping="Wrap"
+                                                            Foreground="{Binding TextBrush}"/>
+                                                        <Border
+                                                            Padding="3"
+                                                            Margin="2"
+                                                            CornerRadius="5"
+                                                            Background="{Binding CourseWorkBrush}">
+                                                            <TextBlock
+                                                                Text="{Binding CourseWork}"/>
+                                                        </Border>
+                                                            <!--Нижняя панель с формой аттестации, з.е. и академическими часами-->
+                                                            <Border
+                                                                Background="White"
+                                                                Padding="3"
+                                                                Margin="2"
+                                                                CornerRadius="5">
+                                                            <StackPanel
+                                                                Orientation="Horizontal">
+                                                                <TextBlock
+                                                                    Text="{Binding FormIntermediateCertification}"
+                                                                    Width="115"/>
+                                                                <StackPanel
+                                                                    Orientation="Vertical"
+                                                                    Width="60">
+                                                                    <StackPanel
+                                                                        Orientation="Horizontal"
+                                                                        HorizontalAlignment="Right">
+                                                                        <TextBlock
+                                                                            Text="{Binding QuantityCreditUnit}"/>
+                                                                        <TextBlock Text=" з.е."/>
+                                                                    </StackPanel>
+                                                                    <StackPanel
+                                                                        Orientation="Horizontal"
+                                                                        HorizontalAlignment="Right">
+                                                                        <TextBlock
+                                                                            Text="{Binding QuantityAcademicHour}"/>
+                                                                        <TextBlock Text=" а.ч."/>
+                                                                    </StackPanel>
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                            </Border>
+                                                        </StackPanel>
                                                 </Border>
-                                                <TextBlock 
-                                                    Text="{Binding Name}"
-                                                    TextWrapping="Wrap"/>
-                                                <TextBlock
-                                                    Text="{Binding FormIntermediateCertification}"/>
-                                                <TextBlock
-                                                    Text="{Binding CourseWork}"/>
-                                                
-                                                <StackPanel
-                                                    Orientation="Horizontal"
-                                                    HorizontalAlignment="Right">
-                                                    <TextBlock
-                                                        Text="{Binding QuantityCreditUnit}"/>
-                                                    <TextBlock Text=" з.е."/>
-                                                </StackPanel>
-                                                <StackPanel
-                                                    Orientation="Horizontal"
-                                                    HorizontalAlignment="Right">
-                                                    <TextBlock
-                                                        Text="{Binding QuantityAcademicHour}"/>
-                                                    <TextBlock Text=" а.ч."/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </Border>
-                        </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Border>
+                           </StackPanel>
                         </DataTemplate>                            
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

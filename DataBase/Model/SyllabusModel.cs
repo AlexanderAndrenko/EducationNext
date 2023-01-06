@@ -35,6 +35,7 @@ namespace DataBase.Model
                         .Include(x=>x.SyllabusDisciplines).ThenInclude(y=>y.Discipline)
                         .Include(x=>x.SyllabusPractics).ThenInclude(y=>y.Practic)
                         .Include(x=>x.SyllabusStateFinalCertifications).ThenInclude(y=>y.StateFinalCertification)
+                        .Include(x=>x.EducationalProgram).ThenInclude(y=>y.EducationalStandart)
                         .ToList();
                     return Syllabuss;
                 }

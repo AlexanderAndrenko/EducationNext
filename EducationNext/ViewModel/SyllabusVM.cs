@@ -25,13 +25,14 @@ namespace EducationNext
         private SyllabusVM()
         {
             GetSyllabus();
+            GetEducationalProgram();
             EditSyllabus = new(OpenWindowEditSyllabus);
             NewSyllabus = new(OpenWindowNewSyllabus);
             SaveSyllabus = new(SaveNewSyllabus);
             DeleteSyllabus = new(DeleteSelectedSyllabus);
             EditSyllabusElement = new(OpenWindowChooseElement);
             SaveChooseElementSyllabus = new(SaveChooseElement);
-            Semesters = new List<Semester>();
+            Semesters = new ObservableCollection<Semester>();
             ElementsWithoutSemester = new ObservableCollection<Element>();
         }
 
@@ -117,8 +118,8 @@ namespace EducationNext
 
         #region BoardProperties
 
-        private List<Semester> semesters;
-        public List<Semester> Semesters 
+        private ObservableCollection<Semester> semesters;
+        public ObservableCollection<Semester> Semesters 
         { 
             get => semesters;
             set
@@ -150,6 +151,11 @@ namespace EducationNext
             ConnectorDatabase cdb = new ConnectorDatabase();
             DataGridSyllabus = cdb.GetSyllabuses();
         }
+        public void GetEducationalProgram()
+        {
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            ComboBoxEducationalProgram = cdb.GetEducationalPrograms();
+        }
 
         #region WindowMethods
         private void OpenWindowEditSyllabus()
@@ -161,12 +167,18 @@ namespace EducationNext
         private void OpenWindowNewSyllabus()
         {
             SelectedItem = new();
+            ElementsWithoutSemester = new();
+            Semesters = new();
             OpenWindowEdit();
         }
         public void OpenWindowEdit()
         {
-            GenerateElementsWithoutSemester();
-            GenerateSemester();
+            if (SelectedItem.Id != 0)
+            {
+                GenerateElementsWithoutSemester();
+                GenerateSemester();
+            }
+
             WindowEdit = new Pages.SyllabusEdit();
             WindowEdit.DataContext = this;
             WindowEdit.ShowDialog();
@@ -176,7 +188,6 @@ namespace EducationNext
             UpdateListDiscipline();
             UpdateListPractice();
             UpdateListSFC();
-            GenerateSemester();
             WindowChooseElement = new Pages.SyllabusChooseElement();
             WindowChooseElement.DataContext = this;
             WindowChooseElement.ShowDialog();
@@ -198,6 +209,8 @@ namespace EducationNext
             cdb.DeleteSyllabus(SelectedItem);
             GetSyllabus();
         }
+
+
         #endregion //EditWindowCommand
 
         #region ChooseElementWindowCommand
@@ -227,6 +240,22 @@ namespace EducationNext
                 .ToList();
 
             SelectedItem.SyllabusStateFinalCertifications = SyllabusStateFinalCertification;
+
+            ConnectorDatabase cdb = new ConnectorDatabase();
+            cdb.SetSyllabus(SelectedItem);
+
+            int IdSyllabus = SelectedItem.Id;
+            GetSyllabus();
+            SelectedItem = DataGridSyllabus.Where(x => x.Id == IdSyllabus).First();
+
+            GenerateElementsWithoutSemester();
+
+            if (SelectedItem.EducationalProgram != null && SelectedItem.EducationalProgram.EducationalStandart != null)
+            {
+                GenerateSemester();
+            }
+
+            WindowChooseElement.DialogResult = true;
         }
 
         #endregion //ChooseElementWindowCommand
@@ -321,7 +350,7 @@ namespace EducationNext
             Semesters = new();
 
             //Инициализируем все семестры
-            for (int i = 1; i <= 3; i++) //SelectedItem.EducationalProgram.EducationalStandart.QuantityTerm
+            for (int i = 1; i <= SelectedItem.EducationalProgram.EducationalStandart.QuantityTerm; i++)
             {
                 Semesters.Add(
                     new Semester()
@@ -332,62 +361,36 @@ namespace EducationNext
                     });
             }
 
-            Semesters.ForEach(
-                x =>
-                {
-                    x.Elements.Add(
-                        new Element()
-                        {
-                            Id = 1,
-                            Name = "TEST",
-                            FormIntermediateCertification = "Экзамен",
-                            Place = "Б1",
-                            IsCourseWork = false,
-                            QuantityCreditUnit = 3,
-                            QuantityAcademicHour = 108
-                        });
-                });
-            Semesters.ForEach(
-                x =>
-                {
-                    x.Elements.ToList().ForEach(
-                        y =>
-                        {
-                            if (y.IsCourseWork == true)
-                            {
-                                y.CourseWork = "Курсовая работа";
-                            }
-                        });
-                });
+            //Наполняет семестры дисциплинами
+            Semesters
+                .ToList()
+                .ForEach(
+                    x =>
+                    {
+                        SelectedItem.SyllabusDisciplines
+                            .Where(y => y.Semester == x.SemesterNumber)
+                            .ToList()
+                            .ForEach(
+                                z => x.Elements.Add( new Element(z.Discipline))
+                                );
+                    });
         }
 
         public void GenerateElementsWithoutSemester()
         {
-            SelectedItem.SyllabusDisciplines.ForEach(
-                x =>
-                {
-                    ElementsWithoutSemester.Add(
-                        new Element()
-                        {
-                            Id = x.Id,
-                            Name = x.Discipline.Name,
-                            FormIntermediateCertification = x.Discipline.FormIntermediateCertification,
-                            Place = x.Discipline.Place,
-                            IsCourseWork = x.Discipline.IsHaveCourseWork,
-                            QuantityCreditUnit = x.Discipline.QuantityCreditUnit,
-                            QuantityAcademicHour = x.Discipline.QuantityAcademicHour
-                        });
-                });
+            ElementsWithoutSemester = new();
 
-            ElementsWithoutSemester.ToList().ForEach(
-                x =>
-                {
-                    if (x.IsCourseWork == true)
-                    {
-                        x.CourseWork = "Курсовая работа";
-                    }
-                });
+            SelectedItem.SyllabusDisciplines
+                .Where(y=>y.Semester == 0)
+                .ToList()
+                .ForEach(
+                    x => 
+                    { 
+                        ElementsWithoutSemester.Add( new Element(x.Discipline));
+                    });           
         }
+
+
 
         #endregion //GenerateSemester
 
@@ -438,6 +441,113 @@ namespace EducationNext
         }
         public class Element
         {
+            public Element()
+            {
+
+            }
+
+            public Element(Discipline? item)
+            {
+                if (item != null)
+                {
+                    Id = item.Id;
+                    Name = item.Name;
+                    FormIntermediateCertification = item.FormIntermediateCertification;
+                    Place = item.Place;
+                    IsCourseWork = item.IsHaveCourseWork;
+                    QuantityCreditUnit = item.QuantityCreditUnit;
+                    QuantityAcademicHour = item.QuantityAcademicHour;
+                    SetColor(item.Id);
+                    if (item.IsHaveCourseWork)
+                    {
+                        CourseWork = "Курсовая работа";
+                        CourseWorkBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    }
+                }
+            }
+            public Element(Practic? item)
+            {
+                if (item != null)
+                {
+                    Id = item.Id;
+                    Name = item.Name;
+                    FormIntermediateCertification = "";
+                    Place = item.Place;
+                    IsCourseWork = false;
+                    QuantityCreditUnit = item.QuantityCreditUnit;
+                    QuantityAcademicHour = item.QuantityAcademicHour;
+                    SetColor(item.Id);
+                }
+            }
+
+            public Element(StateFinalCertification? item)
+            {
+                if (item != null)
+                {
+                    Id = item.Id;
+                    Name = item.Name;
+                    FormIntermediateCertification = "";
+                    Place = item.Place;
+                    IsCourseWork = false;
+                    QuantityCreditUnit = item.QuantityCreditUnit;
+                    QuantityAcademicHour = item.QuantityAcademicHour;
+                    SetColor(item.Id);
+                }
+            }
+            
+            private void SetColor(int ID)
+            {
+                switch (ID % 10)
+                {
+                    case 0:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(0, 18, 25));
+                        TextBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                    case 1:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(0, 95, 115));
+                        TextBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                    case 2:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(10, 147, 150));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                    case 3:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(148, 210, 189));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                    case 4:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(233, 216, 166));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                    case 5:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(238, 155, 0));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                    case 6:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(202, 103, 2));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                    case 7:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(187, 62, 3));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                    case 8:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(174, 32, 18));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                    case 9:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(155, 34, 38));
+                        TextBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                    default:
+                        ColorBrush = new SolidColorBrush(Color.FromRgb(245, 222, 179));
+                        CourseWorkBrush = ColorBrush;
+                        break;
+                }
+            }
             public int Id { get; set; } = 0;
             public string Name { get; set; } = "";
             public string Type { get; set; } = "Дисциплина";
@@ -447,7 +557,9 @@ namespace EducationNext
             public string CourseWork { get; set; } = "";
             public float QuantityCreditUnit { get; set; } = 0;
             public float QuantityAcademicHour { get; set; } = 0;
-            public Brush ColorBrush { get; set; } = Brushes.Coral;
+            public Brush ColorBrush { get; set; } = Brushes.Wheat;
+            public Brush TextBrush { get; set; } = Brushes.Black;
+            public Brush CourseWorkBrush { get; set; } = Brushes.White;
         }
 
         public class DragAndDropElement
