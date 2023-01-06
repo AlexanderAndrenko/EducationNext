@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using static EducationNext.EducationalStandartVM;
+using System.Collections.ObjectModel;
 
 namespace EducationNext
 {
@@ -30,7 +31,7 @@ namespace EducationNext
             EditSyllabusElement = new(OpenWindowChooseElement);
             SaveChooseElementSyllabus = new(SaveChooseElement);
             Semesters = new List<Semester>();
-            ElementsWithoutSemester = new List<Element>();
+            ElementsWithoutSemester = new ObservableCollection<Element>();
         }
 
         #region Properties
@@ -126,8 +127,8 @@ namespace EducationNext
             }
         }
 
-        private List<Element> elementsWithoutSemester;
-        public List<Element> ElementsWithoutSemester
+        private ObservableCollection<Element> elementsWithoutSemester;
+        public ObservableCollection<Element> ElementsWithoutSemester
         { 
             get => elementsWithoutSemester; 
             set
@@ -164,6 +165,7 @@ namespace EducationNext
         public void OpenWindowEdit()
         {
             GenerateElementsWithoutSemester();
+            GenerateSemester();
             WindowEdit = new Pages.SyllabusEdit();
             WindowEdit.DataContext = this;
             WindowEdit.ShowDialog();
@@ -173,6 +175,7 @@ namespace EducationNext
             UpdateListDiscipline();
             UpdateListPractice();
             UpdateListSFC();
+            GenerateSemester();
             WindowChooseElement = new Pages.SyllabusChooseElement();
             WindowChooseElement.DataContext = this;
             WindowChooseElement.ShowDialog();
@@ -317,7 +320,7 @@ namespace EducationNext
             Semesters = new();
 
             //Инициализируем все семестры
-            for (int i = 1; i <= SelectedItem.EducationalProgram.EducationalStandart.QuantityTerm; i++)
+            for (int i = 1; i <= 3; i++) //SelectedItem.EducationalProgram.EducationalStandart.QuantityTerm
             {
                 Semesters.Add(
                     new Semester()
@@ -328,6 +331,20 @@ namespace EducationNext
                     });
             }
 
+            Semesters.ForEach(
+                x =>
+                {
+                    x.Elements.Add(
+                        new Element()
+                        {
+                            Id = 1,
+                            Name = "TEST",
+                            FormIntermediateCertification = "Экзамен",
+                            Place = "Б1",
+                            QuantityCreditUnit = 3,
+                            QuantityAcademicHour = 108
+                        });
+                });
         }
 
         public void GenerateElementsWithoutSemester()
@@ -364,11 +381,11 @@ namespace EducationNext
         {
             public Semester()
             {
-                elements = new List<Element>();
+                elements = new ObservableCollection<Element>();
             }
 
-            private List<Element> elements;
-            public List<Element> Elements 
+            private ObservableCollection<Element> elements;
+            public ObservableCollection<Element> Elements 
             { 
                 get => elements;
                 set
@@ -385,7 +402,7 @@ namespace EducationNext
             private void CalculateSemesterProperties()
             {
                 SemesterQuantityCreditUnit = 0;
-                Elements.ForEach(
+                Elements.ToList().ForEach(
                     x => 
                     {
                         SemesterQuantityCreditUnit += x.QuantityCreditUnit;
@@ -405,6 +422,12 @@ namespace EducationNext
             public string CourseWork { get; set; } = "";
             public float QuantityCreditUnit { get; set; } = 0;
             public float QuantityAcademicHour { get; set; } = 0;
+        }
+
+        public class DragAndDropElement
+        {
+            public Element MovementElement { get; set; }
+            public ObservableCollection<Element> SourceCollection { get; set; }
         }
     }
 }
