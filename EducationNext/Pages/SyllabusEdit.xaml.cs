@@ -27,14 +27,6 @@ namespace EducationNext.Pages
             InitializeComponent();
         }
 
-        private void GenerateListOfSemester()
-        {
-            var data = SyllabusVM.GetInstance();
-            ListSemester.ItemsSource = data.Semesters;
-
-
-        }
-
         private void ListView_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)

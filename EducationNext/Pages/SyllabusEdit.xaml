@@ -96,38 +96,41 @@
                         <DataTemplate>
                             <!--<Rectangle Panel.ZIndex="3" Fill="#F4F5F7" Width="200" Height="500" RadiusX="15" RadiusY="15"/>-->
                             <StackPanel
-                                    Orientation="Vertical"
+                                    Orientation="Horizontal"
                                     Margin="5">
-                                <TextBlock Panel.ZIndex="1" Text="{Binding SemesterNumber}"/>
-                                <ListView                 
-                                        Panel.ZIndex="1"
+                                <StackPanel
+                                        Orientation="Vertical">
+                                    <TextBlock Text="{Binding SemesterNumber}"/>
+                                    <ListView
+                                        Background="#F4F5F7"
                                         AllowDrop="True"
                                         ItemsSource="{Binding Elements}"
                                         MouseMove="ListView_MouseMove"
                                         Drop="ListView_Drop">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <DockPanel                                                
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <DockPanel                                                
                                                         Height="100"
                                                         Margin="1"
                                                         Background="White">
-                                                <TextBlock
-                                                            Text="{Binding Place}"/>
-                                                <TextBlock 
-                                                            Text="{Binding Name}"
-                                                            TextWrapping="Wrap"/>
-                                                <TextBlock
-                                                            Text="{Binding FormIntermediateCertification}"/>
-                                                <TextBlock
-                                                            Text="{Binding CourseWork}"/>
-                                                <TextBlock
-                                                            Text="{Binding QuantityCreditUnit}"/>
-                                                <TextBlock
-                                                            Text="{Binding QuantityAcademicHour}"/>
-                                            </DockPanel>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
+                                                    <TextBlock
+                                                        Text="{Binding Place}"/>
+                                                    <TextBlock 
+                                                        Text="{Binding Name}"
+                                                        TextWrapping="Wrap"/>
+                                                    <TextBlock
+                                                        Text="{Binding FormIntermediateCertification}"/>
+                                                    <TextBlock
+                                                        Text="{Binding CourseWork}"/>
+                                                    <TextBlock
+                                                        Text="{Binding QuantityCreditUnit}"/>
+                                                    <TextBlock
+                                                        Text="{Binding QuantityAcademicHour}"/>
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackPanel>
                             </StackPanel>
                         </DataTemplate>                            
                     </ItemsControl.ItemTemplate>
