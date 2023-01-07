@@ -84,6 +84,7 @@ namespace EducationNext
         {
             SelectedItem = new();
             GetEducationalStandart();
+            OpenWindow();
         }
         private void SaveNewEducationalProgram()
         {

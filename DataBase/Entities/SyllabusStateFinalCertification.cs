@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataBase.Entities
 {
+    [Index("Id")]
     [Index("SyllabusID", "StateFinalCertificationID", IsUnique = true)]
     public class SyllabusStateFinalCertification
     {

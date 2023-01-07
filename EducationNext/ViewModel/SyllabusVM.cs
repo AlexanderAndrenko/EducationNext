@@ -9,6 +9,7 @@ using System.Windows;
 using static EducationNext.EducationalStandartVM;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
+using System.Collections.Specialized;
 
 namespace EducationNext
 {
@@ -32,6 +33,7 @@ namespace EducationNext
             DeleteSyllabus = new(DeleteSelectedSyllabus);
             EditSyllabusElement = new(OpenWindowChooseElement);
             SaveChooseElementSyllabus = new(SaveChooseElement);
+            CBSelectionChangedEP = new(CBSelectionChanged);
             Semesters = new ObservableCollection<Semester>();
             ElementsWithoutSemester = new ObservableCollection<Element>();
         }
@@ -59,7 +61,6 @@ namespace EducationNext
                 RaisePropertyChanged();
             }
         }
-
         public Syllabus SelectedItem { get; set; }
 
         #region Command
@@ -69,6 +70,7 @@ namespace EducationNext
         public OwnCommand DeleteSyllabus { get; set; }
         public OwnCommand EditSyllabusElement { get; set; }
         public OwnCommand SaveChooseElementSyllabus { get; set; }
+        public OwnCommand CBSelectionChangedEP { get; set; }
 
         #endregion //Command
 
@@ -139,6 +141,9 @@ namespace EducationNext
             }
         }
 
+        public float TotalCreditUnuits { get; set; }
+        public float TotalAcademicHours { get; set; }
+
         #endregion //BoardProperties
 
 
@@ -196,10 +201,13 @@ namespace EducationNext
         #region EditWindowCommand
         private void SaveNewSyllabus()
         {
-            ConnectorDatabase cdb = new ConnectorDatabase();
+            //ConnectorDatabase cdb = new ConnectorDatabase();
+            //cdb.SetSyllabus(SelectedItem);
 
-            cdb.SetSyllabus(SelectedItem);
-            GetSyllabus();
+            UpdateListDiscipline();
+            UpdateListPractice();
+            UpdateListSFC();
+            SaveChooseElement();
             WindowEdit.DialogResult = true;
         }
         private void DeleteSelectedSyllabus()
@@ -208,6 +216,14 @@ namespace EducationNext
             cdb.DeleteSyllabus(SelectedItem);
             GetSyllabus();
         }
+        public void CBSelectionChanged()
+        {
+            SelectedItem.SyllabusDisciplines.ForEach(syllabus => syllabus.Semester = 0);
+            SelectedItem.SyllabusPractics.ForEach(practice => practice.Semester = 0);
+            SelectedItem.SyllabusStateFinalCertifications.ForEach(sfc => sfc.Semester = 0);
+            GenerateSemester();
+            GenerateElementsWithoutSemester();
+        }
 
         #endregion //EditWindowCommand
 
@@ -215,7 +231,7 @@ namespace EducationNext
         public void SaveChooseElement()
         {
             /*
-             * Необходимо к выбранному списку элементов сопоставить те семестры, в котороые некоторые элементы уже были определены.
+             * Необходимо к выбранному списку элементов сопоставить те семестры, в которые некоторые элементы уже были определены.
              * Это нужно для того, чтобы список элементов не сбрасывался каждый раз при сохранении, а записывался в базу.
              */
 
@@ -338,7 +354,10 @@ namespace EducationNext
                 GenerateSemester();
             }
 
-            WindowChooseElement.DialogResult = true;
+            if (WindowChooseElement != null && (WindowChooseElement.DialogResult == false || WindowChooseElement.DialogResult == null))
+            {
+                WindowChooseElement.DialogResult = true;
+            }            
         }
 
         #endregion //ChooseElementWindowCommand
@@ -367,6 +386,18 @@ namespace EducationNext
                             item.IsChecked = true;
                         }
                     }
+
+                    if (SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartDisciplines != null)
+                    {
+                        foreach (var itemSI in SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartDisciplines)
+                        {
+                            if (item.Id == itemSI.DisciplineID)
+                            {
+                                item.IsChecked = true;
+                                item.IsNotMandatory = false;
+                            }
+                        }
+                    }                    
                 }
             }
         }
@@ -393,7 +424,20 @@ namespace EducationNext
                             item.IsChecked = true;
                         }
                     }
+
+                    if (SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartPractices != null)
+                    {
+                        foreach (var itemSI in SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartPractices)
+                        {
+                            if (item.Id == itemSI.PracticeID)
+                            {
+                                item.IsChecked = true;
+                                item.IsNotMandatory = false;
+                            }
+                        }
+                    }                    
                 }
+
             }
         }
         private void UpdateListSFC()
@@ -419,6 +463,19 @@ namespace EducationNext
                             item.IsChecked = true;
                         }
                     }
+
+                    if (SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartStateFinalCertifications != null)
+                    {
+                        foreach (var itemSI in SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartStateFinalCertifications)
+                        {
+                            if (item.Id == itemSI.StateFinalCertificationID)
+                            {
+                                item.IsChecked = true;
+                                item.IsNotMandatory = false;
+                            }
+                        }
+                    }
+                    
                 }
             }
         }
@@ -439,11 +496,12 @@ namespace EducationNext
                     {
                         SemesterNumber = i,
                         SemesterQuantityCreditUnit = 0,
-                        SemesterQuantityAcademicHour = 0
+                        SemesterQuantityAcademicHour = 0,
+                        MaxCreditUnit = SelectedItem.EducationalProgram.EducationalStandart.MaxQuantityCreditUnitPerYear
                     });
             }
 
-            //Наполняет семестры дисциплинами
+            //Наполняет семестры дисциплинами, практиками и ГИА
             Semesters
                 .ToList()
                 .ForEach(
@@ -468,8 +526,47 @@ namespace EducationNext
                                 z => x.Elements.Add(new Element(z.StateFinalCertification))
                                 );
                     });
+            RecalculateSemester();
         }
+        public void CheckIsOverSemesters()
+        {
+            for (int i = 0; i < Semesters.Count(); i = i + 2)
+            {
+                int indexFirst = i;
+                int indexSecond = i + 1;
 
+                if (indexSecond < Semesters.Count())
+                {
+                    if (Semesters[indexFirst].SemesterQuantityCreditUnit + Semesters[indexSecond].SemesterQuantityCreditUnit > SelectedItem.EducationalProgram.EducationalStandart.MaxQuantityCreditUnitPerYear)
+                    {
+                        Semesters[indexFirst].IsOverMax = true;
+                        Semesters[indexFirst].ListBorderBrush = new SolidColorBrush(Color.FromRgb(254, 192, 191));
+                        Semesters[indexSecond].IsOverMax = true;
+                        Semesters[indexSecond].ListBorderBrush = new SolidColorBrush(Color.FromRgb(254, 192, 191));
+                    }
+                    else
+                    {
+                        Semesters[indexFirst].IsOverMax = false;
+                        Semesters[indexFirst].ListBorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
+                        Semesters[indexSecond].IsOverMax = false;
+                        Semesters[indexSecond].ListBorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
+                    }
+
+                }
+                else if (Semesters[indexFirst].SemesterQuantityCreditUnit > SelectedItem.EducationalProgram.EducationalStandart.MaxQuantityCreditUnitPerYear)
+                {
+                    Semesters[indexFirst].IsOverMax = true;
+                    Semesters[indexFirst].ListBorderBrush = new SolidColorBrush(Color.FromRgb(254, 192, 191));
+                }
+                else
+                {
+                    Semesters[indexFirst].IsOverMax = false;
+                    Semesters[indexFirst].ListBorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
+                }
+            }
+
+            Semesters.Where(x=>x.IsOverMax == false).ToList().ForEach(x=>x.ListBorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247)));
+        }
         public void GenerateElementsWithoutSemester()
         {
             ElementsWithoutSemester = new();
@@ -500,6 +597,53 @@ namespace EducationNext
                     {
                         ElementsWithoutSemester.Add(new Element(x.StateFinalCertification));
                     });
+            RecalculateSemester();
+        }
+        public void RecalculateSemester()
+        {
+            Semesters.ToList().ForEach(
+                x => x.CalculateSemesterProperties()
+                );
+            RecalculateTotal();
+            CheckIsOverSemesters();
+            CheckNullElement();
+        }
+        public void RecalculateTotal()
+        {
+            TotalCreditUnuits = 0;
+            TotalAcademicHours = 0;
+
+            Semesters.ToList().ForEach(
+                x => 
+                {
+                    TotalCreditUnuits += x.SemesterQuantityCreditUnit;
+                    TotalAcademicHours += x.SemesterQuantityAcademicHour;
+                });
+            RaisePropertyChanged(nameof(TotalCreditUnuits));
+            RaisePropertyChanged(nameof(TotalAcademicHours));
+        }
+        public void CheckNullElement()
+        {
+            Semesters.ToList().ForEach(
+                semesters =>
+                {
+                    semesters.Elements.ToList().ForEach(x =>
+                    {
+                        if (x == null)
+                        {
+                            semesters.Elements.Remove(x);
+                        }
+                    });
+                });
+            ElementsWithoutSemester.ToList().ForEach(
+                x =>
+                {
+                    if (x == null)
+                    {
+                        ElementsWithoutSemester.Remove(x);
+                    }
+                }
+                );
         }
         
         #endregion //GenerateSemester
@@ -513,12 +657,21 @@ namespace EducationNext
             public string Name { get; set; } = "";
             public bool IsChecked { get; set; } = false;
             public int Semester { get; set; } = 0;
+            public bool IsNotMandatory { get; set; } = true;
+
         }
-        public class Semester
+        public class Semester : BaseVM
         {
             public Semester()
             {
-                elements = new ObservableCollection<Element>();
+                Elements = new ObservableCollection<Element>();
+                Elements.CollectionChanged += Elements_CollectionChanged;
+                ListBorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
+            }
+
+            private void Elements_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+            {
+                CalculateSemesterProperties();
             }
 
             private ObservableCollection<Element> elements;
@@ -536,17 +689,38 @@ namespace EducationNext
             public float SemesterQuantityAcademicHour { get; set; }
             public int SemesterNumber { get; set; }
 
-            private void CalculateSemesterProperties()
+            private Brush listBorderBrush;
+            public Brush ListBorderBrush
+            {
+                get => listBorderBrush;
+                set
+                {
+                    listBorderBrush = value;
+                    RaisePropertyChanged();
+                }
+            }
+            public bool IsOverMax { get; set; } = false;
+            public float MaxCreditUnit { get; set; } = 0;
+            public void CalculateSemesterProperties()
             {
                 SemesterQuantityCreditUnit = 0;
-                Elements.ToList().ForEach(
-                    x => 
-                    {
-                        SemesterQuantityCreditUnit += x.QuantityCreditUnit;
-                        SemesterQuantityAcademicHour += x.QuantityAcademicHour;
-                    }
-                    );
+                SemesterQuantityAcademicHour = 0;
 
+                if (Elements.Count() > 0)
+                {
+                    Elements.ToList().ForEach(
+                        x =>
+                        {
+                            if (x != null)
+                            {
+                                SemesterQuantityCreditUnit += x.QuantityCreditUnit;
+                                SemesterQuantityAcademicHour += x.QuantityAcademicHour;
+                            }                            
+                        }
+                        );
+                }
+                RaisePropertyChanged(nameof(SemesterQuantityCreditUnit));
+                RaisePropertyChanged(nameof(SemesterQuantityAcademicHour));
             }            
         }
         public class Element
@@ -575,6 +749,7 @@ namespace EducationNext
                         CourseWork = "Курсовая работа";
                         CourseWorkBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
                     }
+
                 }
             }
             public Element(Practic? item)
@@ -582,7 +757,7 @@ namespace EducationNext
                 if (item != null)
                 {
                     Id = item.Id;
-                    Name = item.Name;
+                    Name = item.MainType + "\n" + item.Type + "\n" + item.Name;
                     Type = "Практика";
                     TypeID = 2;
                     FormIntermediateCertification = "";
@@ -593,7 +768,6 @@ namespace EducationNext
                     SetColor(item.Id);
                 }
             }
-
             public Element(StateFinalCertification? item)
             {
                 if (item != null)
@@ -677,6 +851,8 @@ namespace EducationNext
             public Brush ColorBrush { get; set; } = Brushes.Wheat;
             public Brush TextBrush { get; set; } = Brushes.Black;
             public Brush CourseWorkBrush { get; set; } = Brushes.White;
+            public bool IsNotMandatory { get; set; } = true;
+            public Visibility Visibility { get; set; } = Visibility.Hidden;
         }
         public class DragAndDropElement
         {

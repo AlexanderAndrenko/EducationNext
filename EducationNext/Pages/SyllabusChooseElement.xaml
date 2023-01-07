@@ -25,6 +25,7 @@
                             <DataTemplate>
                                 <CheckBox
                                 IsChecked="{Binding IsChecked}"
+                                IsEnabled="{Binding IsNotMandatory}"
                                 Content="{Binding Name}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -43,6 +44,7 @@
                             <DataTemplate>
                                 <CheckBox
                                 IsChecked="{Binding IsChecked}"
+                                IsEnabled="{Binding IsNotMandatory}"
                                 Content="{Binding Name}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -61,6 +63,7 @@
                             <DataTemplate>
                                 <CheckBox
                                 IsChecked="{Binding IsChecked}"
+                                IsEnabled="{Binding IsNotMandatory}"
                                 Content="{Binding Name}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

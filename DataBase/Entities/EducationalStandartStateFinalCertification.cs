@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace DataBase.Entities
 {
+    [Index("Id")]
     [Index("EducationalStandartID", "StateFinalCertificationID", IsUnique = true)]
+    [Index("EducationalStandartID")]
     public class EducationalStandartStateFinalCertification
     {
         [Key]

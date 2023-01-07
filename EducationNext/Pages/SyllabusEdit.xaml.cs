@@ -39,8 +39,9 @@ namespace EducationNext.Pages
                     MovementElement = (Element)(sender as ListView).SelectedItem,
                     SourceCollection = (sender as ListView).ItemsSource as ObservableCollection<Element>
                 });
-
+                
                 DragDrop.DoDragDrop((ListView)sender, data, DragDropEffects.Copy | DragDropEffects.Move);
+                GetInstance().RecalculateSemester();
             }
         }
 
@@ -56,6 +57,7 @@ namespace EducationNext.Pages
             collectionView.Add(data.MovementElement);
 
             data.SourceCollection.Remove(data.MovementElement);
+            GetInstance().RecalculateSemester();
         }
 
         private void ListView_PreviewMouseMove(object sender, MouseEventArgs e)
@@ -88,6 +90,11 @@ namespace EducationNext.Pages
             {
                 ((sender as ListView).Tag as Border).BorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
             }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GetInstance().CBSelectionChanged();
         }
     }
 }

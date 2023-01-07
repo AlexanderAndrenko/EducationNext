@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Редактирование/Создание образовательной программы" Height="200" Width="400">
+        Title="Редактирование/Создание образовательной программы" Height="200" Width="410">
     <Grid
         Margin="15">
         <StackPanel
