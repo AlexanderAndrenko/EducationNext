@@ -37,6 +37,7 @@ namespace DataBase.Model
                         .Include(x=>x.SyllabusDisciplines).ThenInclude(y=>y.Discipline)
                         .Include(x=>x.SyllabusPractics).ThenInclude(y=>y.Practic)
                         .Include(x=>x.SyllabusStateFinalCertifications).ThenInclude(y=>y.StateFinalCertification)
+                        /*
                         .Include(x => x.EducationalProgram)                        
                             .ThenInclude(y=>y.EducationalStandart)
                             .ThenInclude(z => z.EducationalStandartDisciplines)
@@ -49,48 +50,32 @@ namespace DataBase.Model
                         .Include(x => x.EducationalProgram)
                             .ThenInclude(y => y.EducationalStandart)
                             .ThenInclude(z => z.EducationalStandartCompetences)                        
+                        */
                         .ToList();
 
-                    //EducationalPrograms =
-                    //    db.EducationalPrograms.ToList();
+                    EducationalPrograms =
+                        db.EducationalPrograms.ToList();
 
-                    //EducationalStandarts =
-                    //    db.EducationalStandarts
-                    //    .Include(x => x.EducationalStandartDisciplines)
-                    //    .Include(x => x.EducationalStandartPractices)
-                    //    .Include(x => x.EducationalStandartStateFinalCertifications)
-                    //    .Include(x => x.EducationalStandartCompetences)
-                    //    .ToList();
+                    EducationalStandarts =
+                        db.EducationalStandarts
+                        .Include(x => x.EducationalStandartDisciplines)
+                        .Include(x => x.EducationalStandartPractices)
+                        .Include(x => x.EducationalStandartStateFinalCertifications)
+                        .Include(x => x.EducationalStandartCompetences)
+                        .ToList();
 
-                    //var NewEduProg = from ep in EducationalPrograms
-                    //                 join ed in EducationalStandarts
-                    //                  on ep.EducationalStandartID equals ed.Id
-                    //                  select new EducationalProgram()
-                    //                  {
-                    //                      Id = ep.Id,
-                    //                      Name= ep.Name,
-                    //                      Profile= ep.Profile,
-                    //                      EducationalStandartID= ep.EducationalStandartID,
-                    //                      EducationalStandart = ed
-                    //                  };
+                    EducationalPrograms.ForEach(
+                        x =>
+                        {
+                            x.EducationalStandart = EducationalStandarts.Where(y => y.Id == x.EducationalStandartID).First();
+                        }
+                        );
 
-                    //List<Syllabus> NewSyllabus = new List<Syllabus>();
-
-                    //NewSyllabus = (List < Syllabus >) from s in Syllabuss
-                    //                  join ep in NewEduProg
-                    //                  on s.EducationalProgramID equals ep.Id
-                    //                  select new Syllabus()
-                    //                  {
-                    //                      Id = s.Id,
-                    //                      Name = s.Name,
-                    //                      EducationalProgramID = s.EducationalProgramID,
-                    //                      EducationalProgram = ep,
-                    //                      SyllabusDisciplines = s.SyllabusDisciplines,
-                    //                      SyllabusPractics = s.SyllabusPractics,
-                    //                      SyllabusStateFinalCertifications = s.SyllabusStateFinalCertifications
-                    //                  };
-
-
+                    Syllabuss.ForEach(
+                        x =>
+                        {
+                            x.EducationalProgram = EducationalPrograms.Where(y => y.Id == x.EducationalProgramID).First();
+                        });
 
                     return Syllabuss;
                 }
