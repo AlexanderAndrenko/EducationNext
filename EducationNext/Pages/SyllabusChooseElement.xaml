@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Настройка элементов учебного плана" Height="450" Width="1200">
+        Title="Настройка элементов учебного плана" Height="500" Width="1200">
     <Grid>
         <StackPanel
             Orientation="Vertical"

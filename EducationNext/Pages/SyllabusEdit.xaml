@@ -17,8 +17,7 @@
                 <TextBox
                         Margin="20,0,0,0"
                         Width="300"
-                        Text="{Binding SelectedItem.Name}"></TextBox>
-                
+                        Text="{Binding SelectedItem.Name}"></TextBox>                
                 <Button 
                     Margin="25,0,0,0"
                     Width="170"
@@ -38,22 +37,28 @@
                     DockPanel.Dock="Top">
                     <Border
                             CornerRadius="15"
-                            Background="#F4F5F7"
+                            Background="{Binding TotalBrush}"
                             BorderThickness="3"
                             Padding="5"
-                            Height="100">
+                            Height="150">
                         <StackPanel
                             Orientation="Vertical">
                             <StackPanel
                                     Orientation="Horizontal">
-                                <TextBlock Text="Всего з.е.: "/>
-                                <TextBlock Text="{Binding TotalCreditUnuits}"/>
-                                <TextBlock Text="/"/>
-                                <TextBlock Text="{Binding SelectedItem.EducationalProgram.EducationalStandart.QuantityCreditUnit}"/>
+                                <TextBlock Text="Всего з.е.: " FontSize="14"/>
+                                <TextBlock Text="{Binding TotalCreditUnuits}" FontSize="14"/>
+                                <TextBlock Text="/" FontSize="14"/>
+                                <TextBlock Text="{Binding SelectedItem.EducationalProgram.EducationalStandart.QuantityCreditUnit}" FontSize="14"/>
                             </StackPanel>
                             <StackPanel
-                                Orientation="Horizontal">
-                                <TextBlock Text="{Binding AllElementsDistribute}"/>
+                                Orientation="Horizontal"
+                                Margin="0,3,0,0">
+                                <TextBlock Text="{Binding AllElementsDistribute}" FontSize="14"/>
+                            </StackPanel>
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Margin="0,3,0,0">
+                                <TextBlock Text="{Binding AllSemesterIsOver}" FontSize="14"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -122,7 +127,7 @@
                                                                         Text="*"
                                                                         FontSize="16"
                                                                         Width="20"
-                                                                        Foreground="#fd625e"
+                                                                        Foreground="#e01e37"
                                                                         Visibility="{Binding Visibility}"
                                                                         VerticalAlignment="Center"/>
                                                     </StackPanel>
@@ -303,7 +308,7 @@
                                                                         Text="*"
                                                                         FontSize="16"
                                                                         Width="20"
-                                                                        Foreground="#fd625e"
+                                                                        Foreground="#e01e37"
                                                                         Visibility="{Binding Visibility}"
                                                                         VerticalAlignment="Center"/>
                                                                 </StackPanel>

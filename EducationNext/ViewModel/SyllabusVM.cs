@@ -143,7 +143,11 @@ namespace EducationNext
         public float TotalCreditUnuits { get; set; }
         public float TotalAcademicHours { get; set; }
         public string AllElementsDistribute { get; set; }
-
+        public string AllSemesterIsOver { get; set; }
+        public Brush TotalBrush { get; set; }
+        public int EducationalProgramIdPrev { get; set; } = 0;
+        public List<MandatoryComtenece> MandatoryComteneces { get; set; }
+        public string NoCompetence { get; set; }
         #endregion //BoardProperties
 
         public bool IsOpenWindowChooseElements { get;set; } = false;
@@ -190,6 +194,7 @@ namespace EducationNext
             {
                 GenerateElementsWithoutSemester();
                 GenerateSemester();
+                EducationalProgramIdPrev = SelectedItem.EducationalProgramID;
             }
 
             GetEducationalProgram();
@@ -228,29 +233,33 @@ namespace EducationNext
         }
         public void CBSelectionChanged()
         {
-            if (SelectedItem.SyllabusDisciplines == null)
+            if (EducationalProgramIdPrev != SelectedItem.EducationalProgramID)
             {
-                SelectedItem.SyllabusDisciplines = new List<SyllabusDiscipline>();
-            }
+                if (SelectedItem.SyllabusDisciplines == null)
+                {
+                    SelectedItem.SyllabusDisciplines = new List<SyllabusDiscipline>();
+                }
 
-            if (SelectedItem.SyllabusPractics == null)
-            {
-                SelectedItem.SyllabusPractics = new List<SyllabusPractic>();
-            }
+                if (SelectedItem.SyllabusPractics == null)
+                {
+                    SelectedItem.SyllabusPractics = new List<SyllabusPractic>();
+                }
 
-            if (SelectedItem.SyllabusStateFinalCertifications == null)
-            {
-                SelectedItem.SyllabusStateFinalCertifications = new List<SyllabusStateFinalCertification>();
-            }
+                if (SelectedItem.SyllabusStateFinalCertifications == null)
+                {
+                    SelectedItem.SyllabusStateFinalCertifications = new List<SyllabusStateFinalCertification>();
+                }
 
-            SelectedItem.SyllabusDisciplines.ForEach(syllabus => syllabus.Semester = 0);
-            SelectedItem.SyllabusPractics.ForEach(practice => practice.Semester = 0);
-            SelectedItem.SyllabusStateFinalCertifications.ForEach(sfc => sfc.Semester = 0);
+                SelectedItem.SyllabusDisciplines.ForEach(syllabus => syllabus.Semester = 0);
+                SelectedItem.SyllabusPractics.ForEach(practice => practice.Semester = 0);
+                SelectedItem.SyllabusStateFinalCertifications.ForEach(sfc => sfc.Semester = 0);
 
-            SelectedItem.EducationalProgram = ComboBoxEducationalProgram.Where(x => x.Id == SelectedItem.EducationalProgramID).FirstOrDefault();
+                SelectedItem.EducationalProgram = ComboBoxEducationalProgram.Where(x => x.Id == SelectedItem.EducationalProgramID).FirstOrDefault();
 
-            GenerateSemester();
-            GenerateElementsWithoutSemester();        
+                GenerateSemester();
+                GenerateElementsWithoutSemester();
+                EducationalProgramIdPrev = SelectedItem.EducationalProgramID;
+            }                
         }
 
         #endregion //EditWindowCommand
@@ -578,6 +587,7 @@ namespace EducationNext
                         Semesters[indexFirst].ListBorderBrush = new SolidColorBrush(Color.FromRgb(254, 192, 191));
                         Semesters[indexSecond].IsOverMax = true;
                         Semesters[indexSecond].ListBorderBrush = new SolidColorBrush(Color.FromRgb(254, 192, 191));
+                        AllSemesterIsOver = "Превышение максимальной\nнагрузки в год";
                     }
                     else
                     {
@@ -585,6 +595,7 @@ namespace EducationNext
                         Semesters[indexFirst].ListBorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
                         Semesters[indexSecond].IsOverMax = false;
                         Semesters[indexSecond].ListBorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
+                        AllSemesterIsOver = "";
                     }
 
                 }
@@ -592,12 +603,16 @@ namespace EducationNext
                 {
                     Semesters[indexFirst].IsOverMax = true;
                     Semesters[indexFirst].ListBorderBrush = new SolidColorBrush(Color.FromRgb(254, 192, 191));
+                    AllSemesterIsOver = "Превышение максимальной\nнагрузки в год";
                 }
                 else
                 {
                     Semesters[indexFirst].IsOverMax = false;
                     Semesters[indexFirst].ListBorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
+                    AllSemesterIsOver = "";
                 }
+
+                RaisePropertyChanged(nameof(AllSemesterIsOver));
             }
 
             Semesters.Where(x=>x.IsOverMax == false).ToList().ForEach(x=>x.ListBorderBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247)));
@@ -807,6 +822,17 @@ namespace EducationNext
                 });
             RaisePropertyChanged(nameof(TotalCreditUnuits));
             RaisePropertyChanged(nameof(TotalAcademicHours));
+
+            if (TotalCreditUnuits < SelectedItem.EducationalProgram.EducationalStandart.QuantityCreditUnit || AllSemesterIsOver != "" || AllElementsDistribute != "")
+            {
+                TotalBrush = new SolidColorBrush(Color.FromRgb(254, 192, 191));
+            }
+            else
+            {
+                TotalBrush = new SolidColorBrush(Color.FromRgb(244, 245, 247));
+            }
+
+            RaisePropertyChanged(nameof(TotalBrush));
         }
         public void CheckDistributeMandatoryElements()
         {
@@ -820,6 +846,37 @@ namespace EducationNext
             }
 
             RaisePropertyChanged(nameof(AllElementsDistribute));
+        }
+        public void CheckMandatoryCompetence()
+        {
+            if (SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartCompetences == null)
+            {
+                SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartCompetences = new List<EducationalStandartCompetence>();
+            }
+
+            SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartCompetences.ForEach(
+                x=>
+                {
+                    MandatoryComteneces.Add(
+                        new MandatoryComtenece()
+                        {
+                            Id = x.CompetenceID,
+                            Name = "",
+                            IsSet = false
+                        });
+                }
+                );
+
+            ConnectorDatabase cdb = new ConnectorDatabase();
+
+            List<Competence> competences = new List<Competence>();
+            List<Discipline> disciplines = cdb.GetDisciplines();
+            List<Practic> practics = cdb.GetPractices();
+
+            /*
+             Надо сформировать distinсt по компетенциям тех эелементов которые уже есть в семестрах
+             Далее из списка обязательных компетенций вычесть те которыое уже есть и если что-то осталось, то вывести на экран, что не все обязательные компетенции закрыты
+             */
         }
         #endregion //CalculationGlobalProperties
 
@@ -958,8 +1015,7 @@ namespace EducationNext
                     QuantityAcademicHour = item.QuantityAcademicHour;
                     SetColor(item.Id);
                 }
-            }
-            
+            }            
             private void SetColor(int ID)
             {
                 switch (ID % 10)
@@ -1034,5 +1090,12 @@ namespace EducationNext
             public Element MovementElement { get; set; }
             public ObservableCollection<Element> SourceCollection { get; set; }
         }
+        public class MandatoryComtenece
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public bool IsSet { get; set; }
+        }
+
     }
 }
