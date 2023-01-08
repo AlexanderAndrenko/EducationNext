@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,9 @@ namespace DataBase.Entities
         public string? Place { get; set; }
         public bool IsIncludeToEducatiopnalProgram { get; set; } = true;
         public bool IsHaveCourseWork { get; set; } = false;
+
+        [NotMapped]
+        public string CourseWork { get; set; } = string.Empty;
 
         public List<EducationalStandartDiscipline>? EducationalStandartDisciplines { get; set; }
         public List<SyllabusDiscipline>? SyllabusDisciplines { get; set; }

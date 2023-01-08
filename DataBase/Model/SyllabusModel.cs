@@ -67,14 +67,14 @@ namespace DataBase.Model
                     EducationalPrograms.ForEach(
                         x =>
                         {
-                            x.EducationalStandart = EducationalStandarts.Where(y => y.Id == x.EducationalStandartID).First();
+                            x.EducationalStandart = EducationalStandarts.Where(y => y.Id == x.EducationalStandartID).FirstOrDefault();
                         }
                         );
 
                     Syllabuss.ForEach(
                         x =>
                         {
-                            x.EducationalProgram = EducationalPrograms.Where(y => y.Id == x.EducationalProgramID).First();
+                            x.EducationalProgram = EducationalPrograms.Where(y => y.Id == x.EducationalProgramID).FirstOrDefault();
                         });
 
                     return Syllabuss;
@@ -117,6 +117,7 @@ namespace DataBase.Model
                     }
                     else
                     {
+                        syllabus.EducationalProgram = null;
                         db.Syllabuses.Add(syllabus);
                     }
                     db.SaveChanges();

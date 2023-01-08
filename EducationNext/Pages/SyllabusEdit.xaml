@@ -18,21 +18,7 @@
                         Margin="20,0,0,0"
                         Width="300"
                         Text="{Binding SelectedItem.Name}"></TextBox>
-                <TextBlock 
-                        Width="200" 
-                        TextAlignment="Center"
-                        Margin="20,0,0,0">
-                        Образовательная программа
-                </TextBlock>
-                <ComboBox 
-                    Margin="20,0,0,0" 
-                    Width="230"                            
-                    SelectedValue="{Binding SelectedItem.EducationalProgramID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                            
-                    ItemsSource="{Binding ComboBoxEducationalProgram}"  
-                    SelectedValuePath="Id"
-                    DisplayMemberPath="Name" 
-                    SelectionChanged="ComboBox_SelectionChanged">
-                </ComboBox>
+                
                 <Button 
                     Margin="25,0,0,0"
                     Width="170"
@@ -46,10 +32,10 @@
             </StackPanel>
 
             <!--Список нераспределенных элементов-->
-            <StackPanel
-                DockPanel.Dock="Right"
-                Orientation="Vertical">
-                <StackPanel>
+            <DockPanel
+                DockPanel.Dock="Right">
+                <StackPanel
+                    DockPanel.Dock="Top">
                     <Border
                             CornerRadius="15"
                             Background="#F4F5F7"
@@ -57,22 +43,31 @@
                             Padding="5"
                             Height="100">
                         <StackPanel
+                            Orientation="Vertical">
+                            <StackPanel
+                                    Orientation="Horizontal">
+                                <TextBlock Text="Всего з.е.: "/>
+                                <TextBlock Text="{Binding TotalCreditUnuits}"/>
+                                <TextBlock Text="/"/>
+                                <TextBlock Text="{Binding SelectedItem.EducationalProgram.EducationalStandart.QuantityCreditUnit}"/>
+                            </StackPanel>
+                            <StackPanel
                                 Orientation="Horizontal">
-                            <TextBlock Text="Всего з.е.: "/>
-                            <TextBlock Text="{Binding TotalCreditUnuits}"/>
-                            <TextBlock Text="/"/>
-                            <TextBlock Text="{Binding SelectedItem.EducationalProgram.EducationalStandart.QuantityCreditUnit}"/>
+                                <TextBlock Text="{Binding AllElementsDistribute}"/>
+                            </StackPanel>
                         </StackPanel>
                     </Border>
                 </StackPanel>
-                <ScrollViewer               
+            <ScrollViewer            
+                DockPanel.Dock="Top"
                 Margin="0,3,0,0"
                 ScrollViewer.VerticalScrollBarVisibility="Auto">
             <StackPanel       
                 Orientation="Vertical"
                 Width="235"
                 Margin="0,3,0,0"
-                Background="#FFFFFF">
+                Background="#FFFFFF"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
                     
                 <TextBlock Text="Нераспределенные элементы"
                            FontSize="14"
@@ -83,19 +78,19 @@
                                     BorderThickness="3"
                                     Padding="5">
                         <ListView
-                                        Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
-                                        BorderThickness="0"
-                                        Background="#F4F5F7"
-                                        AllowDrop="True"
-                                        ItemsSource="{Binding ElementsWithoutSemester}"
-                                        MouseMove="ListView_MouseMove"
-                                        Drop="ListView_Drop"
-                                        MinHeight="650"
-                                        Width="200"
-                                        PreviewMouseMove="ListView_PreviewMouseMove" 
-                                        MouseLeave="ListView_MouseLeave"
-                                        DragOver="ListView_DragOver"
-                                        DragLeave="ListView_DragLeave">
+                            Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
+                            BorderThickness="0"
+                            Background="#F4F5F7"
+                            AllowDrop="True"
+                            ItemsSource="{Binding ElementsWithoutSemester}"
+                            MouseMove="ListView_MouseMove"
+                            Drop="ListView_Drop"
+                            MinHeight="650"
+                            Width="200"
+                            PreviewMouseMove="ListView_PreviewMouseMove" 
+                            MouseLeave="ListView_MouseLeave"
+                            DragOver="ListView_DragOver"
+                            DragLeave="ListView_DragLeave">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Border
@@ -109,19 +104,29 @@
                                             <Border
                                                             Background="White"
                                                             CornerRadius="5"
-                                                            Width="77"
+                                                            Width="100"
                                                             Height="21"
                                                             Padding="3"
                                                             Margin="2"
                                                             HorizontalAlignment="Left">
-                                                <TextBlock
-                                                                DockPanel.Dock="Top"
-                                                                HorizontalAlignment="Left"
-                                                                Text="{Binding Place}"
-                                                                Background="White"
-                                                                Width="80"
-                                                                Height="15"/>
-                                            </Border>
+                                                    <StackPanel
+                                                                    Orientation="Horizontal">
+                                                        <TextBlock
+                                                                    DockPanel.Dock="Top"
+                                                                    HorizontalAlignment="Left"
+                                                                    Text="{Binding Place}"
+                                                                    Background="White"
+                                                                    Width="80"
+                                                                    Height="15"/>
+                                                        <TextBlock 
+                                                                        Text="*"
+                                                                        FontSize="16"
+                                                                        Width="20"
+                                                                        Foreground="#fd625e"
+                                                                        Visibility="{Binding Visibility}"
+                                                                        VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Border>
                                             <!--Наименование дисциплины-->
                                             <TextBlock 
                                                             Text="{Binding Name}"
@@ -174,7 +179,7 @@
                     </Border>
                 </StackPanel>
             </ScrollViewer>
-            </StackPanel>
+            </DockPanel>
             <!--Доска с семестрами-->
             <ScrollViewer
                 DockPanel.Dock="Left"
@@ -280,7 +285,7 @@
                                                             <Border
                                                             Background="White"
                                                             CornerRadius="5"
-                                                            Width="77"
+                                                            Width="100"
                                                             Height="21"
                                                             Padding="3"
                                                             Margin="2"
@@ -297,8 +302,10 @@
                                                                     <TextBlock 
                                                                         Text="*"
                                                                         FontSize="16"
+                                                                        Width="20"
                                                                         Foreground="#fd625e"
-                                                                        Visibility="{Binding Visibility}"/>
+                                                                        Visibility="{Binding Visibility}"
+                                                                        VerticalAlignment="Center"/>
                                                                 </StackPanel>
                                                             </Border>
                                                             <!--Наименование дисциплины-->

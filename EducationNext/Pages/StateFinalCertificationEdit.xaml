@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Редактирование/Создание ГИА" Height="200" Width="400">
+        Title="Редактирование/Создание ГИА" Height="450" Width="700">
     <Grid
         Margin="15">
         <StackPanel
-            Orientation="Vertical">
+            Orientation="Vertical"
+            HorizontalAlignment="Center">
             <StackPanel
                 Orientation="Horizontal">
                 <StackPanel
@@ -18,14 +19,38 @@
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Название ГИА</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Name}"/>
+                        <TextBlock Width="200" TextAlignment="Center">Название ГИА</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.Name}"/>
                     </StackPanel>
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="170" TextAlignment="Center">Количество зачетных единиц</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
+                        <TextBlock Width="200" TextAlignment="Center">Количество зачетных единиц</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="200" TextAlignment="Center">Объём в зачетных единицах</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="200" TextAlignment="Center">Объём в академических часах</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.QuantityAcademicHour}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="200" TextAlignment="Center">Место<LineBreak/>практики в структуре<LineBreak/>образовательной программы</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.Place}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="200" TextAlignment="Center">Учитывается<LineBreak/>при расчете объёма<LineBreak/>образовательной программы</TextBlock>
+                        <CheckBox Margin="20,0,0,0" IsChecked="{Binding SelectedItem.IsIncludeToEducatiopnalProgram}" VerticalAlignment="Center" ></CheckBox>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

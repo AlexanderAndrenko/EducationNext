@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1500">
     <Grid>
-        <DockPanel>
+        <DockPanel Margin="5">
             <DockPanel DockPanel.Dock="Top" Margin="5">
                 <Button
                     Height="20"
@@ -81,7 +81,7 @@
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel
+                <!--<StackPanel
                     Orientation="Vertical"
                     Width="220">
                     <TextBlock Width="170" TextAlignment="Center">Обязательные<LineBreak/>дисциплины</TextBlock>
@@ -110,7 +110,7 @@
                         Width="170">
 
                     </ListBox>
-                </StackPanel>
+                </StackPanel>-->
             </StackPanel>
         </DockPanel>
     </Grid>

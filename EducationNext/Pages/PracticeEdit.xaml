@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Редактирование/Создание практики" Height="350" Width="600">
+        Title="Редактирование/Создание практики" Height="500" Width="900">
     <Grid
         Margin="15">
         <StackPanel
-            Orientation="Vertical">
+            Orientation="Vertical"
+            HorizontalAlignment="Center">
             <StackPanel
                 Orientation="Horizontal">
                 <StackPanel
@@ -18,16 +19,16 @@
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="190" TextAlignment="Center">Название практики</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Name}"/>
+                        <TextBlock Width="200" TextAlignment="Center">Название практики</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.Name}"/>
                     </StackPanel>
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="190" TextAlignment="Center">Вид практики</TextBlock>
+                        <TextBlock Width="200" TextAlignment="Center">Вид практики</TextBlock>
                         <ComboBox 
                             Margin="20,0,0,0" 
-                            Width="170" 
+                            Width="300" 
                             Text="{Binding MainTypeNewPractice}">
                             <TextBlock>Учебная</TextBlock>
                             <TextBlock>Производственная</TextBlock>
@@ -36,10 +37,10 @@
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="190" TextAlignment="Center">Тип практики</TextBlock>
+                        <TextBlock Width="200" TextAlignment="Center">Тип практики</TextBlock>
                         <ComboBox 
                             Margin="20,0,0,0" 
-                            Width="170" 
+                            Width="300" 
                             SelectedItem="{Binding SelectedItem.Type}" 
                             ItemsSource="{Binding ComboBoxList}">
                         </ComboBox>
@@ -47,15 +48,33 @@
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="190" TextAlignment="Center">Количество зачетных единиц</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
+                        <TextBlock Width="200" TextAlignment="Center">Объём в зачетных единицах</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="200" TextAlignment="Center">Объём в академических часах</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.QuantityAcademicHour}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="200" TextAlignment="Center">Место<LineBreak/>практики в структуре<LineBreak/>образовательной программы</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.Place}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="200" TextAlignment="Center">Учитывается<LineBreak/>при расчете объёма<LineBreak/>образовательной программы</TextBlock>
+                        <CheckBox Margin="20,0,0,0" IsChecked="{Binding SelectedItem.IsIncludeToEducatiopnalProgram}" VerticalAlignment="Center" ></CheckBox>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Width="170" TextAlignment="Center">Выберите компетенции<LineBreak/> в практике</TextBlock>
                     <ListBox
                         ItemsSource="{Binding ListCompetenceListItem}"
-                        Height="200"
+                        Height="300"
                         Width="170">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

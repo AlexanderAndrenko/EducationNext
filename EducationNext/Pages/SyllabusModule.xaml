@@ -14,7 +14,7 @@
                     Width="180"
                     HorizontalAlignment="Left"
                     Command="{Binding NewSyllabus}">
-                    Создать Учебный план
+                    Создать учебный план
                 </Button>
                 <Button
                     Height="20"
@@ -45,7 +45,7 @@
                             DockPanel.Dock="Top"
                             RowHeaderWidth="0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}" Width="SizeToHeader">
+                        <DataGridTextColumn Binding="{Binding Name}" Width="Auto">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
                                     Название учебного плана
@@ -66,7 +66,7 @@
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding EducationalProgram.EducationalStandart.SpecializationCode}" Width="SizeToHeader">
+                        <DataGridTextColumn Binding="{Binding EducationalProgram.Profile}" Width="Auto">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
                                     Профиль образовательной программы

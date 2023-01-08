@@ -16,6 +16,7 @@ namespace DataBase.Entities
         public int Id { get; set; }
         public string Name { get; set; } = "";
         public int EducationalProgramID { get; set; }
+
         public EducationalProgram? EducationalProgram { get; set; }
 
         public List<SyllabusDiscipline>? SyllabusDisciplines { get; set; }

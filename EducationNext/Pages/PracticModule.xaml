@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1200">
     <Grid>
-        <DockPanel Grid.ColumnSpan="2">
+        <DockPanel Grid.ColumnSpan="2" Margin="5">
             <DockPanel DockPanel.Dock="Top" Margin="5">
                 <Button
                     Height="20"
@@ -71,13 +71,42 @@
                             <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="Auto">
                                 <DataGridTextColumn.Header>
                                     <TextBlock TextAlignment="Center">
-                                        Количество зачетных единиц
+                                        Количество<LineBreak/>з.е.
                                     </TextBlock>
                                 </DataGridTextColumn.Header>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding QuantityAcademicHour}" Width="Auto">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock TextAlignment="Center">
+                                        Количество<LineBreak/>а.ч.
+                                    </TextBlock>
+                                </DataGridTextColumn.Header>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Place}" Width="Auto">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock TextAlignment="Center">
+                                    Место<LineBreak/>практики<LineBreak/>в структуре<LineBreak/>образовательной<LineBreak/>программы
+                                    </TextBlock>
+                                </DataGridTextColumn.Header>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <StackPanel
+                    <!--<StackPanel
                         Orientation="Vertical"
                         Width="220">
                         <TextBlock Width="170" TextAlignment="Center">Обязательные<LineBreak/>дисциплины</TextBlock>
@@ -87,7 +116,7 @@
                             ItemsSource="{Binding SelectedItem.PracticCompetences.Practic}"
                             DisplayMemberPath="Name">
                         </ListBox>
-                    </StackPanel>
+                    </StackPanel>-->
                 </StackPanel>
             </DockPanel>                
         </DockPanel>

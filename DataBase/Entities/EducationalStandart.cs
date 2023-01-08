@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace DataBase.Entities
         public float QuantityCreditUnit { get; set; }
         public int QuantityTerm { get; set; } = 0;
         public float MaxQuantityCreditUnitPerYear { get; set; }
+        [NotMapped]
+        public string CodePlusName { get; set; } = string.Empty;
 
         public List<EducationalStandartCompetence>? EducationalStandartCompetences { get; set; }
         public List<EducationalStandartDiscipline>? EducationalStandartDisciplines { get; set; }

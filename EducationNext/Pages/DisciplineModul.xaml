@@ -6,8 +6,13 @@
              xmlns:local="clr-namespace:EducationNext.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1200">
+    <UserControl.Resources>
+        <Style x:Key="NameCellStyle" TargetType="DataGridCell">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <DockPanel Grid.ColumnSpan="2">
+        <DockPanel Grid.ColumnSpan="2" Margin="5">
             <DockPanel DockPanel.Dock="Top" Margin="5">
                 <Button
                     Height="20"
@@ -46,28 +51,35 @@
                             DockPanel.Dock="Top"
                             RowHeaderWidth="0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}" Width="SizeToHeader">
+                        <DataGridTextColumn Binding="{Binding Name}" Width="*">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
                                     Название дисциплины
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding CourseWork}" Width="Auto">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center" HorizontalAlignment="Center">
+                                    Курсовая<LineBreak/>работа
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding QuantityCreditUnit}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Объём<LineBreak/>учебной дисциплины<LineBreak/>в зачетных единицах
+                                    Объём<LineBreak/>учебной<LineBreak/>дисциплины<LineBreak/>в з.е.
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding QuantityAcademicHour}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Объём дисциплины<LineBreak/>в академических часах
+                                    Объём<LineBreak/>учебной<LineBreak/>дисциплины<LineBreak/>в а.ч.
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding FormIntermediateCertification}" Width="SizeToHeader">
+                        <DataGridTextColumn Binding="{Binding FormIntermediateCertification}" Width="Auto">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
                                     Форма<LineBreak/>промежуточной<LineBreak/>аттестации
@@ -77,17 +89,17 @@
                         <DataGridTextColumn Binding="{Binding Place}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Место<LineBreak/>дисциплины в структуре<LineBreak/>образовательной программы
+                                    Место<LineBreak/>дисциплины<LineBreak/>в структуре<LineBreak/>образовательной<LineBreak/>программы
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding IsIncludeToEducatiopnalProgramm}" Width="SizeToHeader">
+                        <!--<DataGridTextColumn Binding="{Binding IsIncludeToEducatiopnalProgramm}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Учитывается<LineBreak/>при расчете объёма<LineBreak/>образовательной программы
+                                    Учитывается<LineBreak/>при расчете<LineBreak/>объёма<LineBreak/>образовательной<LineBreak/>программы
                                 </TextBlock>
                             </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
+                        </DataGridTextColumn>-->
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

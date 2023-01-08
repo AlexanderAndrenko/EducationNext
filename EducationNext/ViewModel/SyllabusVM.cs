@@ -35,7 +35,6 @@ namespace EducationNext
             SaveChooseElementSyllabus = new(SaveChooseElement);
             CBSelectionChangedEP = new(CBSelectionChanged);
             Semesters = new ObservableCollection<Semester>();
-            ElementsWithoutSemester = new ObservableCollection<Element>();
         }
 
         #region Properties
@@ -143,9 +142,11 @@ namespace EducationNext
 
         public float TotalCreditUnuits { get; set; }
         public float TotalAcademicHours { get; set; }
+        public string AllElementsDistribute { get; set; }
 
         #endregion //BoardProperties
 
+        public bool IsOpenWindowChooseElements { get;set; } = false;
 
         #endregion //Properties
 
@@ -159,6 +160,14 @@ namespace EducationNext
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
             ComboBoxEducationalProgram = cdb.GetEducationalPrograms();
+            ComboBoxEducationalProgram.ToList().ForEach(
+                e =>
+                {
+                    e.CodePlusNamePlusProfile = 
+                        e.EducationalStandart.SpecializationCode + " " +
+                        e.Name + " \"" +
+                        e.Profile + "\"";
+                });
         }
 
         #region WindowMethods
@@ -183,6 +192,7 @@ namespace EducationNext
                 GenerateSemester();
             }
 
+            GetEducationalProgram();
             WindowEdit = new Pages.SyllabusEdit();
             WindowEdit.DataContext = this;
             WindowEdit.ShowDialog();
@@ -218,11 +228,29 @@ namespace EducationNext
         }
         public void CBSelectionChanged()
         {
+            if (SelectedItem.SyllabusDisciplines == null)
+            {
+                SelectedItem.SyllabusDisciplines = new List<SyllabusDiscipline>();
+            }
+
+            if (SelectedItem.SyllabusPractics == null)
+            {
+                SelectedItem.SyllabusPractics = new List<SyllabusPractic>();
+            }
+
+            if (SelectedItem.SyllabusStateFinalCertifications == null)
+            {
+                SelectedItem.SyllabusStateFinalCertifications = new List<SyllabusStateFinalCertification>();
+            }
+
             SelectedItem.SyllabusDisciplines.ForEach(syllabus => syllabus.Semester = 0);
             SelectedItem.SyllabusPractics.ForEach(practice => practice.Semester = 0);
             SelectedItem.SyllabusStateFinalCertifications.ForEach(sfc => sfc.Semester = 0);
+
+            SelectedItem.EducationalProgram = ComboBoxEducationalProgram.Where(x => x.Id == SelectedItem.EducationalProgramID).FirstOrDefault();
+
             GenerateSemester();
-            GenerateElementsWithoutSemester();
+            GenerateElementsWithoutSemester();        
         }
 
         #endregion //EditWindowCommand
@@ -345,7 +373,14 @@ namespace EducationNext
 
             int IdSyllabus = SelectedItem.Id;
             GetSyllabus();
-            SelectedItem = DataGridSyllabus.Where(x => x.Id == IdSyllabus).First();
+            if (IdSyllabus == 0)
+            {
+                SelectedItem = DataGridSyllabus.OrderBy(x=>x.Id).Last();
+            }
+            else
+            {
+                SelectedItem = DataGridSyllabus.Where(x => x.Id == IdSyllabus).FirstOrDefault();
+            }            
 
             GenerateElementsWithoutSemester();
 
@@ -597,6 +632,7 @@ namespace EducationNext
                     {
                         ElementsWithoutSemester.Add(new Element(x.StateFinalCertification));
                     });
+            CheckMandatoryElementsWithoutSemester();
             RecalculateSemester();
         }
         public void RecalculateSemester()
@@ -607,21 +643,9 @@ namespace EducationNext
             RecalculateTotal();
             CheckIsOverSemesters();
             CheckNullElement();
-        }
-        public void RecalculateTotal()
-        {
-            TotalCreditUnuits = 0;
-            TotalAcademicHours = 0;
-
-            Semesters.ToList().ForEach(
-                x => 
-                {
-                    TotalCreditUnuits += x.SemesterQuantityCreditUnit;
-                    TotalAcademicHours += x.SemesterQuantityAcademicHour;
-                });
-            RaisePropertyChanged(nameof(TotalCreditUnuits));
-            RaisePropertyChanged(nameof(TotalAcademicHours));
-        }
+            CheckMandatorySemesters();
+            CheckDistributeMandatoryElements();
+        }        
         public void CheckNullElement()
         {
             Semesters.ToList().ForEach(
@@ -645,8 +669,159 @@ namespace EducationNext
                 }
                 );
         }
-        
+        public void CheckMandatoryElementsWithoutSemester()
+        {
+            ElementsWithoutSemester.ToList().ForEach(
+                x =>
+                {
+                    switch (x.TypeID)
+                    {
+                        case 1:
+                            if (SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartDisciplines == null)
+                            {
+                                SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartDisciplines = new List<EducationalStandartDiscipline>();
+                            }
+
+                            SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartDisciplines.ForEach(
+                                y =>
+                                {
+                                    if (y.DisciplineID == x.Id)
+                                    {
+                                        x.Visibility = Visibility.Visible;
+                                        x.IsNotMandatory = false;
+                                    }
+                                }
+                                );
+                            break;
+                        case 2:
+                            if (SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartPractices == null)
+                            {
+                                SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartPractices = new List<EducationalStandartPractice>();
+                            }
+
+                            SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartPractices.ForEach(
+                                y =>
+                                {
+                                    if (y.PracticeID == x.Id)
+                                    {
+                                        x.Visibility = Visibility.Visible;
+                                        x.IsNotMandatory = false;
+                                    }
+                                }
+                                );
+                            break;
+                        case 3:
+                            if (SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartStateFinalCertifications == null)
+                            {
+                                SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartStateFinalCertifications = new List<EducationalStandartStateFinalCertification>();
+                            }
+
+                            SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartStateFinalCertifications.ForEach(
+                                y =>
+                                {
+                                    if (y.StateFinalCertificationID == x.Id)
+                                    {
+                                        x.Visibility = Visibility.Visible;
+                                        x.IsNotMandatory = false;
+                                    }
+                                }
+                                );
+                            break;
+                        default:
+                            x.Visibility = Visibility.Hidden;
+                            x.IsNotMandatory = true;
+                            break;
+                    }
+                }
+                );
+        }
+        public void CheckMandatorySemesters()
+        {
+            Semesters.ToList().ForEach(
+                x =>
+                {
+                    x.Elements.ToList().ForEach(
+                        y =>
+                        {
+                            switch (y.TypeID)
+                            {
+                                case 1:
+                                    SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartDisciplines.ForEach(
+                                        z =>
+                                        {
+                                            if (z.DisciplineID == y.Id)
+                                            {
+                                                y.Visibility = Visibility.Visible;
+                                                y.IsNotMandatory = false;
+                                            }
+                                        }
+                                        );
+                                    break;
+                                case 2:
+                                    SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartPractices.ForEach(
+                                        z =>
+                                        {
+                                            if (z.PracticeID == y.Id)
+                                            {
+                                                y.Visibility = Visibility.Visible;
+                                                y.IsNotMandatory = false;
+                                            }
+                                        }
+                                        );
+                                    break;
+                                case 3:
+                                    SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartStateFinalCertifications.ForEach(
+                                        z =>
+                                        {
+                                            if (z.StateFinalCertificationID == y.Id)
+                                            {
+                                                y.Visibility = Visibility.Visible;
+                                                y.IsNotMandatory = false;
+                                            }
+                                        }
+                                        );
+                                    break;
+                                default:
+                                    y.Visibility = Visibility.Hidden;
+                                    y.IsNotMandatory = true;
+                                    break;
+                            }
+                        }
+                        );
+                });
+        }
+
         #endregion //GenerateSemester
+
+        #region CalculationGlobalProperties
+        public void RecalculateTotal()
+        {
+            TotalCreditUnuits = 0;
+            TotalAcademicHours = 0;
+
+            Semesters.ToList().ForEach(
+                x =>
+                {
+                    TotalCreditUnuits += x.SemesterQuantityCreditUnit;
+                    TotalAcademicHours += x.SemesterQuantityAcademicHour;
+                });
+            RaisePropertyChanged(nameof(TotalCreditUnuits));
+            RaisePropertyChanged(nameof(TotalAcademicHours));
+        }
+        public void CheckDistributeMandatoryElements()
+        {
+            if (ElementsWithoutSemester.Where(x=>x.IsNotMandatory == false).ToList().Count() > 0)
+            {
+                AllElementsDistribute = "Распределены не все\nобязательные элементы";
+            }
+            else
+            {
+                AllElementsDistribute = "";
+            }
+
+            RaisePropertyChanged(nameof(AllElementsDistribute));
+        }
+        #endregion //CalculationGlobalProperties
 
         #endregion //Methods
 

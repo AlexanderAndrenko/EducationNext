@@ -73,6 +73,7 @@ namespace EducationNext
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
             ComboBoxListES = cdb.GetEducationalStandarts();
+            ComboBoxListES.ToList().ForEach(e => { e.CodePlusName = e.SpecializationCode + " " + e.Name; });
         }
         private void OpenWindowEditEducationalProgram()
         {
@@ -102,6 +103,7 @@ namespace EducationNext
 
         public void OpenWindow()
         {
+            GetEducationalStandart();
             WindowEdit = new Pages.EducationalProgramEdit();
             WindowEdit.DataContext = this;
             WindowEdit.ShowDialog();

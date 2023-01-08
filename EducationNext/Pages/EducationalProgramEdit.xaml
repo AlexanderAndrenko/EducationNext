@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Редактирование/Создание образовательной программы" Height="200" Width="410">
+        Title="Редактирование/Создание образовательной программы" Height="400" Width="700">
     <Grid
         Margin="15">
         <StackPanel
-            Orientation="Vertical">
+            Orientation="Vertical"
+            HorizontalAlignment="Center">
             <StackPanel
                 Orientation="Horizontal">
                 <StackPanel
@@ -19,7 +20,13 @@
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
                         <TextBlock Width="170" TextAlignment="Center">Название программы</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Name}"/>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="430" Text="{Binding SelectedItem.Name}"/>
+                    </StackPanel>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="0,20,0,0">
+                        <TextBlock Width="170" TextAlignment="Center">Профиль программы</TextBlock>
+                        <TextBox Margin="20,0,0,0" Height="20" Width="430" Text="{Binding SelectedItem.Profile}"/>
                     </StackPanel>
                     <StackPanel 
                         Orientation="Horizontal"
@@ -27,11 +34,11 @@
                         <TextBlock Width="170" TextAlignment="Center">ФГОС</TextBlock>
                         <ComboBox 
                             Margin="20,0,0,0" 
-                            Width="170"                            
+                            Width="430"                            
                             SelectedValue="{Binding SelectedItem.EducationalStandartID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                            
                             ItemsSource="{Binding  ComboBoxListES}"  
                             SelectedValuePath="Id"
-                            DisplayMemberPath="Name">
+                            DisplayMemberPath="CodePlusName">
                         </ComboBox>
                     </StackPanel>
                 </StackPanel>

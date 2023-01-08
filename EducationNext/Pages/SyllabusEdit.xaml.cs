@@ -92,9 +92,6 @@ namespace EducationNext.Pages
             }
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            GetInstance().CBSelectionChanged();
-        }
+        
     }
 }

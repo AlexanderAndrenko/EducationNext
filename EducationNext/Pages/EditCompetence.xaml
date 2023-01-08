@@ -5,22 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Редактирование компетенции" Height="380" Width="440"
+        Title="Редактирование компетенции" Height="400" Width="500"
         Name="WindowCompetence">
     <Grid
         Margin="15">
         <StackPanel
-            Orientation="Vertical">
+            Orientation="Vertical"
+            HorizontalAlignment="Center">
             <StackPanel 
                 Orientation="Horizontal"
                 Margin="0,20,0,0">
-                <TextBlock Width="200">Название компетенции (код)</TextBlock>
-                <TextBox Margin="20,0,0,0" Width="170" Text="{Binding NameNewCompetence}"/>
+                <TextBlock Width="200" VerticalAlignment="Center">Название компетенции (код)</TextBlock>
+                <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding NameNewCompetence}"/>
             </StackPanel>
             <StackPanel 
                 Orientation="Horizontal"
                 Margin="0,20,0,0">
-                <TextBlock Width="200">Вид компетенции</TextBlock>
+                <TextBlock Width="200" VerticalAlignment="Center">Вид компетенции</TextBlock>
                 <!--<TextBox Margin="20,0,0,0" Width="170" Text="{Binding TypeNewCompetence}"/>-->
                 <ComboBox Margin="20,0,0,0" Width="170" SelectedValue="{Binding TypeNewCompetence}" SelectedValuePath="Text">
                     <TextBlock>Универсальная</TextBlock>

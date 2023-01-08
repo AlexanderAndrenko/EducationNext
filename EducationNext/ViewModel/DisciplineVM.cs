@@ -55,7 +55,6 @@ namespace EducationNext
 
 
         public Discipline SelectedItem { get; set; }
-
         public OwnCommand EditDiscipline { get; set; }
         public OwnCommand NewDiscipline { get; set; }
         public OwnCommand SaveDiscipline { get; set; }
@@ -70,6 +69,7 @@ namespace EducationNext
         {
             ConnectorDatabase cdb = new ConnectorDatabase();
             DataGridDiscipline = cdb.GetDisciplines();
+            DataGridDiscipline.Where(x => x.IsHaveCourseWork == true).ToList().ForEach(x=>x.CourseWork = "Курсовая работа");
         }
         private void OpenWindowEditDiscipline()
         {

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1200">
     <Grid>
-        <DockPanel Grid.ColumnSpan="2">
+        <DockPanel Grid.ColumnSpan="2" Margin="5">
             <DockPanel DockPanel.Dock="Top" Margin="5">
                 <Button
                     Height="20"
@@ -46,16 +46,51 @@
                             DockPanel.Dock="Top"
                             RowHeaderWidth="0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}" Width="SizeToHeader">
+                        <DataGridTextColumn Binding="{Binding Name}" Width="Auto">
                             <DataGridTextColumn.Header>
-                                <TextBlock TextAlignment="Center">
+                                <TextBlock TextAlignment="Center" VerticalAlignment="Center">
                                     Название компетенции <LineBreak/> (код)
                                 </TextBlock>
                             </DataGridTextColumn.Header>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding TypeCompetence}" Width="SizeToHeader" Header="Вид компетенции"/>
-                        <DataGridTextColumn Binding="{Binding ShortTypeCompetence}" Width="SizeToHeader" Header="Тип компетенции"/>
-                        <DataGridTextColumn Binding="{Binding Description}" Width="SizeToHeader" Header="Описание компетенции"/>
+                        <DataGridTextColumn Binding="{Binding TypeCompetence}" Width="Auto">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center" VerticalAlignment="Center">
+                                    Вид компетенции
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding ShortTypeCompetence}" Width="SizeToHeader" Header="Тип компетенции">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Description}" Width="*" Header="Описание компетенции">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

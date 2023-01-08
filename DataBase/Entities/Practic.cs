@@ -19,6 +19,7 @@ namespace DataBase.Entities
         public string Place { get; set; } = "";
         public float QuantityCreditUnit { get; set; } = 0;
         public float QuantityAcademicHour { get; set; } = 0;
+        public bool IsIncludeToEducatiopnalProgram { get; set; } = true;
         public List<PracticCompetence>? PracticCompetences { get; set; }
         public List<SyllabusPractic>? SyllabusPractics { get; set; }
         public List<EducationalStandartPractice>? EducationalStandartPractices { get; set; }

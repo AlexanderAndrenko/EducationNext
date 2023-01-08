@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1200">
     <Grid>
-        <DockPanel Grid.ColumnSpan="2">
+        <DockPanel>
             <DockPanel DockPanel.Dock="Top" Margin="5">
                 <Button
                     Height="20"
@@ -52,7 +52,7 @@
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding EducationalStandart.Name}" Width="SizeToHeader">
+                        <DataGridTextColumn Binding="{Binding EducationalStandart.Name}" Width="Auto">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
                                     Наименование стандарта
