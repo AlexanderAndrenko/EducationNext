@@ -29,41 +29,41 @@
                     Content="Сохранить"
                     Command="{Binding SaveSyllabus}"/>
             </StackPanel>
-
             <!--Список нераспределенных элементов-->
             <DockPanel
                 DockPanel.Dock="Right">
-                <StackPanel
-                    DockPanel.Dock="Top">
-                    <Border
+                <Border
+                    DockPanel.Dock="Top"
                             CornerRadius="15"
                             Background="{Binding TotalBrush}"
                             BorderThickness="3"
                             Padding="5"
-                            Height="150">
+                            Height="200">
+                    <DockPanel>
                         <StackPanel
-                            Orientation="Vertical">
-                            <StackPanel
+                                DockPanel.Dock="Top"
                                     Orientation="Horizontal">
-                                <TextBlock Text="Всего з.е.: " FontSize="14"/>
-                                <TextBlock Text="{Binding TotalCreditUnuits}" FontSize="14"/>
-                                <TextBlock Text="/" FontSize="14"/>
-                                <TextBlock Text="{Binding SelectedItem.EducationalProgram.EducationalStandart.QuantityCreditUnit}" FontSize="14"/>
-                            </StackPanel>
-                            <StackPanel
-                                Orientation="Horizontal"
-                                Margin="0,3,0,0">
-                                <TextBlock Text="{Binding AllElementsDistribute}" FontSize="14"/>
-                            </StackPanel>
-                            <StackPanel
-                                Orientation="Horizontal"
-                                Margin="0,3,0,0">
-                                <TextBlock Text="{Binding AllSemesterIsOver}" FontSize="14"/>
-                            </StackPanel>
+                            <TextBlock Text="Всего з.е.: " FontSize="14"/>
+                            <TextBlock Text="{Binding TotalCreditUnuits}" FontSize="14"/>
+                            <TextBlock Text="/" FontSize="14"/>
+                            <TextBlock Text="{Binding SelectedItem.EducationalProgram.EducationalStandart.QuantityCreditUnit}" FontSize="14"/>
                         </StackPanel>
-                    </Border>
-                </StackPanel>
-            <ScrollViewer            
+                        <StackPanel
+                                DockPanel.Dock="Top"
+                                Orientation="Horizontal"
+                                Margin="0,3,0,0">
+                            <TextBlock Text="{Binding AllElementsDistribute}" FontSize="14"/>
+                        </StackPanel>
+                        <StackPanel
+                                DockPanel.Dock="Top"
+                                Orientation="Horizontal"
+                                Margin="0,3,0,0">
+                            <TextBlock Text="{Binding AllSemesterIsOver}" FontSize="14"/>
+                        </StackPanel>
+                        <TextBlock Margin="0,3,0,0" DockPanel.Dock="Top" Text="{Binding NoCompetence}" TextWrapping="Wrap" FontSize="14"/>
+                    </DockPanel>
+                </Border>
+                <ScrollViewer            
                 DockPanel.Dock="Top"
                 Margin="0,3,0,0"
                 ScrollViewer.VerticalScrollBarVisibility="Auto">

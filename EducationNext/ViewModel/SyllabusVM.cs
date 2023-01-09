@@ -35,6 +35,7 @@ namespace EducationNext
             SaveChooseElementSyllabus = new(SaveChooseElement);
             CBSelectionChangedEP = new(CBSelectionChanged);
             Semesters = new ObservableCollection<Semester>();
+            MandatoryComteneces = new List<MandatoryComtenece>();
         }
 
         #region Properties
@@ -660,6 +661,7 @@ namespace EducationNext
             CheckNullElement();
             CheckMandatorySemesters();
             CheckDistributeMandatoryElements();
+            CheckMandatoryCompetence();
         }        
         public void CheckNullElement()
         {
@@ -823,7 +825,7 @@ namespace EducationNext
             RaisePropertyChanged(nameof(TotalCreditUnuits));
             RaisePropertyChanged(nameof(TotalAcademicHours));
 
-            if (TotalCreditUnuits < SelectedItem.EducationalProgram.EducationalStandart.QuantityCreditUnit || AllSemesterIsOver != "" || AllElementsDistribute != "")
+            if (TotalCreditUnuits < SelectedItem.EducationalProgram.EducationalStandart.QuantityCreditUnit || AllSemesterIsOver != "" || AllElementsDistribute != "" || NoCompetence != "")
             {
                 TotalBrush = new SolidColorBrush(Color.FromRgb(254, 192, 191));
             }
@@ -854,6 +856,8 @@ namespace EducationNext
                 SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartCompetences = new List<EducationalStandartCompetence>();
             }
 
+            MandatoryComteneces.Clear();
+
             SelectedItem.EducationalProgram.EducationalStandart.EducationalStandartCompetences.ForEach(
                 x=>
                 {
@@ -869,7 +873,14 @@ namespace EducationNext
 
             ConnectorDatabase cdb = new ConnectorDatabase();
 
-            List<Competence> competences = new List<Competence>();
+            List<Competence> competences = cdb.GetCompetences();
+
+            MandatoryComteneces.ForEach(
+                mand =>
+                {
+                    mand.Name = competences.Where(x => x.Id == mand.Id).First().Name;
+                });
+
             List<Discipline> disciplines = cdb.GetDisciplines();
             List<Practic> practics = cdb.GetPractices();
 
@@ -877,7 +888,84 @@ namespace EducationNext
              Надо сформировать distinсt по компетенциям тех эелементов которые уже есть в семестрах
              Далее из списка обязательных компетенций вычесть те которыое уже есть и если что-то осталось, то вывести на экран, что не все обязательные компетенции закрыты
              */
+
+            List<int> competeceIds = new List<int>();
+            //Собрали все ID компетенций элементов, которые распределены на доске
+            Semesters.ToList().ForEach(
+                x =>
+                {
+                    x.Elements.ToList().ForEach(
+                        y =>
+                        {
+                            if(y.TypeID == 1)
+                            {
+                                disciplines.Where(disc => disc.Id == y.Id).ToList().ForEach(
+                                    disc =>
+                                    {
+                                        disc.DisciplineCompetences.ForEach(
+                                            comp => competeceIds.Add(comp.Id)
+                                            );
+                                    });
+                            }
+                            else if (y.TypeID == 2)
+                            {
+                                practics.Where(prac => prac.Id == y.Id).ToList().ForEach(
+                                    prac =>
+                                    {
+                                        prac.PracticCompetences.ForEach(
+                                            comp => competeceIds.Add(comp.Id)
+                                            );
+                                    });
+                            }
+                        });
+                });
+
+            competeceIds = competeceIds.Distinct().ToList();
+            MandatoryComteneces.ForEach(
+                mand =>
+                {
+                    if (competeceIds.Contains(mand.Id))
+                    {
+                        mand.IsSet = true;
+                    }
+                    else
+                    {
+                        mand.IsSet = false;
+                    }
+                });
+
+            CalculateNoCompetence();
         }
+        public void CalculateNoCompetence()
+        {
+            if (MandatoryComteneces.Where(x=>x.IsSet == false).ToList().Count() > 0)
+            {
+                NoCompetence = "Не закрытые компетенции:\n";
+            }
+            else
+            {
+                NoCompetence = "";
+            }
+            
+            int counter = 1;
+
+            MandatoryComteneces.Where(x => x.IsSet == false).ToList().ForEach(
+                mand =>
+                {
+                    
+                    NoCompetence += mand.Name + ", ";     
+
+                    if (counter % 3 == 0)
+                    {
+                        NoCompetence += "\n";
+                    }
+
+                    counter++;
+                });
+
+            RaisePropertyChanged(nameof(NoCompetence));
+        }
+
         #endregion //CalculationGlobalProperties
 
         #endregion //Methods
