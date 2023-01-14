@@ -98,15 +98,32 @@
                             DragLeave="ListView_DragLeave">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
+                                        <StackPanel Orientation="Vertical"
+                                                     Width="180">
+                                            <Button 
+                                                    Name="TOP"
+                                                    Height="10"
+                                                    AllowDrop="True"
+                                                    Drop="Button_Drop"
+                                                    Tag="{Binding RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}"
+                                                    Content="{Binding}"
+                                                    Foreground="Transparent"
+                                                    Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                DragOver="Border_DragOver"
+                                                Margin="0,0,0,5"
+                                                DragLeave="Border_DragLeave"
+                                                />
                                     <Border
-                                                    Padding="3"
-                                                    CornerRadius="5"
-                                                    Background="{Binding ColorBrush}">
+                                        Padding="3"
+                                        CornerRadius="5"
+                                        Background="{Binding ColorBrush}">
                                         <StackPanel
                                                         Orientation="Vertical"
                                                         Width="180">
                                             <!--Место дисциплины в ОП-->
-                                            <Border
+                                                
+                                                <Border
                                                             Background="White"
                                                             CornerRadius="5"
                                                             Width="100"
@@ -176,9 +193,17 @@
                                                     </StackPanel>
                                                 </StackPanel>
                                             </Border>
-                                        </StackPanel>
+                                                <!--<Button
+                                                    Name="BOTTOM"
+                                                    Height="40"
+                                                    AllowDrop="True"
+                                                    Drop="Button_Drop"
+                                                    Tag="{Binding RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}"
+                                                    Content="{Binding}"></Button>-->
+                                            </StackPanel>
                                     </Border>
-                                </DataTemplate>
+                                        </StackPanel>
+                                    </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
                     </Border>
@@ -279,15 +304,31 @@
                                         DragLeave="ListView_DragLeave">
                                             <ListView.ItemTemplate>
                                                 <DataTemplate>
-                                                    <Border
+                                                    <StackPanel Orientation="Vertical"
+                                                     Width="180">
+                                                        <Button 
+                                                    Name="TOP"
+                                                    Height="10"
+                                                    AllowDrop="True"
+                                                    Drop="Button_Drop"
+                                                    Tag="{Binding RelativeSource={RelativeSource AncestorType=ListView, Mode=FindAncestor}}"
+                                                    Content="{Binding}"
+                                                    Foreground="Transparent"
+                                                    Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                DragOver="Border_DragOver"
+                                                Margin="0,0,0,5"
+                                                DragLeave="Border_DragLeave"
+                                                />
+                                                        <Border
                                                     Padding="3"
                                                     CornerRadius="5"
                                                     Background="{Binding ColorBrush}">
-                                                        <StackPanel
+                                                            <StackPanel
                                                         Orientation="Vertical"
                                                         Width="180">
-                                                            <!--Место дисциплины в ОП-->
-                                                            <Border
+                                                                <!--Место дисциплины в ОП-->
+                                                                <Border
                                                             Background="White"
                                                             CornerRadius="5"
                                                             Width="100"
@@ -295,70 +336,71 @@
                                                             Padding="3"
                                                             Margin="2"
                                                             HorizontalAlignment="Left">
-                                                                <StackPanel
+                                                                    <StackPanel
                                                                     Orientation="Horizontal">
-                                                                    <TextBlock
+                                                                        <TextBlock
                                                                     DockPanel.Dock="Top"
                                                                     HorizontalAlignment="Left"
                                                                     Text="{Binding Place}"
                                                                     Background="White"
                                                                     Width="80"
                                                                     Height="15"/>
-                                                                    <TextBlock 
+                                                                        <TextBlock 
                                                                         Text="*"
                                                                         FontSize="16"
                                                                         Width="20"
                                                                         Foreground="#e01e37"
                                                                         Visibility="{Binding Visibility}"
                                                                         VerticalAlignment="Center"/>
-                                                                </StackPanel>
-                                                            </Border>
-                                                            <!--Наименование дисциплины-->
-                                                            <TextBlock 
+                                                                    </StackPanel>
+                                                                </Border>
+                                                                <!--Наименование дисциплины-->
+                                                                <TextBlock 
                                                             Text="{Binding Name}"
                                                             TextWrapping="Wrap"
                                                             Foreground="{Binding TextBrush}"/>
-                                                            <Border
+                                                                <Border
                                                             Padding="3"
                                                             Margin="2"
                                                             CornerRadius="5"
                                                             Background="{Binding CourseWorkBrush}">
-                                                                <TextBlock
+                                                                    <TextBlock
                                                                 Text="{Binding CourseWork}"/>
-                                                            </Border>
-                                                            <!--Нижняя панель с формой аттестации, з.е. и академическими часами-->
-                                                            <Border
+                                                                </Border>
+                                                                <!--Нижняя панель с формой аттестации, з.е. и академическими часами-->
+                                                                <Border
                                                                 Background="White"
                                                                 Padding="3"
                                                                 Margin="2"
                                                                 CornerRadius="5">
-                                                                <StackPanel
+                                                                    <StackPanel
                                                                 Orientation="Horizontal">
-                                                                    <TextBlock
+                                                                        <TextBlock
                                                                     Text="{Binding FormIntermediateCertification}"
                                                                     Width="110"/>
-                                                                    <StackPanel
+                                                                        <StackPanel
                                                                     Orientation="Vertical"
                                                                     Width="60">
-                                                                        <StackPanel
+                                                                            <StackPanel
                                                                         Orientation="Horizontal"
                                                                         HorizontalAlignment="Right">
-                                                                            <TextBlock
+                                                                                <TextBlock
                                                                             Text="{Binding QuantityCreditUnit}"/>
-                                                                            <TextBlock Text=" з.е."/>
-                                                                        </StackPanel>
-                                                                        <StackPanel
+                                                                                <TextBlock Text=" з.е."/>
+                                                                            </StackPanel>
+                                                                            <StackPanel
                                                                         Orientation="Horizontal"
                                                                         HorizontalAlignment="Right">
-                                                                            <TextBlock
+                                                                                <TextBlock
                                                                             Text="{Binding QuantityAcademicHour}"/>
-                                                                            <TextBlock Text=" а.ч."/>
+                                                                                <TextBlock Text=" а.ч."/>
+                                                                            </StackPanel>
                                                                         </StackPanel>
                                                                     </StackPanel>
-                                                                </StackPanel>
-                                                            </Border>
-                                                        </StackPanel>
-                                                    </Border>
+                                                                </Border>
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </StackPanel>
                                                 </DataTemplate>
                                             </ListView.ItemTemplate>
                                         </ListView>

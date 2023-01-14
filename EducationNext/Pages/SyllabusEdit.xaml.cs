@@ -92,6 +92,39 @@ namespace EducationNext.Pages
             }
         }
 
-        
+        private void Button_Drop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(typeof(DragAndDropElement)))
+                return;
+
+
+            var data = (DragAndDropElement)e.Data.GetData(typeof(DragAndDropElement));
+            var collectionView = (((sender as Button).Tag) as ListView).ItemsSource as ObservableCollection<Element>;
+            var item = ((sender as Button).Content) as Element;
+            var index = collectionView.IndexOf(item);
+            var position = (sender as Button).Name == "TOP" ? 0 : 1;
+
+            collectionView.Insert(index + position, data.MovementElement);            
+
+            data.SourceCollection.Remove(data.MovementElement);
+            GetInstance().RecalculateSemester();
+            e.Handled = true;
+        }
+
+        private void Border_DragOver(object sender, DragEventArgs e)
+        {
+            if (sender is Button)
+            {
+                (sender as Button).Background = new SolidColorBrush(Color.FromRgb(188, 188, 188));
+            }
+        }
+
+        private void Border_DragLeave(object sender, DragEventArgs e)
+        {
+            if (sender is Button)
+            {
+                (sender as Button).Background = new SolidColorBrush(Color.FromRgb(244, 245, 247));
+            }
+        }
     }
 }
