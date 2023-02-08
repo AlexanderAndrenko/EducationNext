@@ -865,7 +865,6 @@ namespace DataBase
                             SpecializationCode = "09.04.04",
                             Name = "Программная инженерия",
                             QuantityCreditUnit = 120,
-                            QuantityTerm = 4,
                             MaxQuantityCreditUnitPerYear = 70,
                             EducationalStandartDisciplines = educationalStandartDisciplines,
                             EducationalStandartPractices = educationalStandartPractices,
@@ -879,6 +878,7 @@ namespace DataBase
                         {
                             Name = "Программная инженерия",
                             Profile = "Системы программной поддержки жизненного цикла изделий",
+                            QuantityTerm = 4,
                             EducationalStandartID = 1
                         };
 

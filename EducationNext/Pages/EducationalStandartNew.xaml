@@ -39,12 +39,7 @@
                 <StackPanel
                     Orientation="Vertical"
                     Margin="20,0,0,0">
-                    <StackPanel 
-                        Orientation="Horizontal"
-                        Margin="0,12,0,0">
-                        <TextBlock Width="200" TextAlignment="Center">Сроки получения образования<LineBreak/>(семестров)</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.QuantityTerm}"/>
-                    </StackPanel>
+                    
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,12,0,0">

@@ -17,6 +17,7 @@ namespace DataBase.Entities
         public int Id { get; set; }
         public string Name { get; set; } = "";
         public string Profile { get; set; } = "";
+        public int QuantityTerm { get; set; } = 0;
         public int EducationalStandartID { get; set; }
         [NotMapped]
         public string CodePlusNamePlusProfile { get; set; }

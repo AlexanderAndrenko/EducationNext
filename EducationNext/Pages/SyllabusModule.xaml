@@ -52,24 +52,24 @@
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding EducationalProgram.Name}" Width="SizeToHeader">
-                            <DataGridTextColumn.Header>
-                                <TextBlock TextAlignment="Center">
-                                    Код образовательной программы
-                                </TextBlock>
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding EducationalProgram.EducationalStandart.SpecializationCode}" Width="SizeToHeader">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Название образовательной программы
+                                    Код<LineBreak/>образовательной программы
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding EducationalProgram.Name}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock TextAlignment="Center">
+                                    Название<LineBreak/>образовательной программы
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding EducationalProgram.Profile}" Width="Auto">
                             <DataGridTextColumn.Header>
                                 <TextBlock TextAlignment="Center">
-                                    Профиль образовательной программы
+                                    Профиль<LineBreak/>образовательной программы
                                 </TextBlock>
                             </DataGridTextColumn.Header>
                         </DataGridTextColumn>

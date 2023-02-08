@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Редактирование/Создание дисциплины" Height="500" Width="700">
+        Title="Редактирование/Создание дисциплины" Height="550" Width="700">
     <Grid
         Margin="15">
         <StackPanel
@@ -18,9 +18,10 @@
                     Margin="0,0,20,0">
                     <StackPanel 
                         Orientation="Horizontal"
-                        Margin="0,20,0,0">
+                        Margin="0,20,0,0"
+                        VerticalAlignment="Center">
                         <TextBlock Width="200" TextAlignment="Center">Название дисциплины</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="170" Text="{Binding SelectedItem.Name}"/>
+                        <TextBox Margin="20,0,0,0" Height="70" Width="170" Text="{Binding SelectedItem.Name}" TextWrapping="Wrap"/>
                     </StackPanel>
                     <StackPanel 
                         Orientation="Horizontal"

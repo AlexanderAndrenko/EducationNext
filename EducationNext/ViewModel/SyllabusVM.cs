@@ -399,7 +399,7 @@ namespace EducationNext
                 GenerateSemester();
             }
 
-            if (WindowChooseElement != null && (WindowChooseElement.DialogResult == false || WindowChooseElement.DialogResult == null))
+            if (WindowChooseElement != null && (WindowChooseElement.DialogResult == false || WindowChooseElement.DialogResult == null) && WindowChooseElement.IsActive)
             {
                 WindowChooseElement.DialogResult = true;
             }            
@@ -534,7 +534,7 @@ namespace EducationNext
             Semesters = new();
 
             //Инициализируем все семестры
-            for (int i = 1; i <= SelectedItem.EducationalProgram.EducationalStandart.QuantityTerm; i++)
+            for (int i = 1; i <= SelectedItem.EducationalProgram.QuantityTerm; i++)
             {
                 Semesters.Add(
                     new Semester()
@@ -655,13 +655,13 @@ namespace EducationNext
         {
             Semesters.ToList().ForEach(
                 x => x.CalculateSemesterProperties()
-                );
-            RecalculateTotal();
+                );            
             CheckIsOverSemesters();
             CheckNullElement();
             CheckMandatorySemesters();
             CheckDistributeMandatoryElements();
             CheckMandatoryCompetence();
+            RecalculateTotal();
         }        
         public void CheckNullElement()
         {

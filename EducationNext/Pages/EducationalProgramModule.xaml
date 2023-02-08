@@ -72,7 +72,15 @@
                                     Профиль программы
                                 </TextBlock>
                             </DataGridTextColumn.Header>
-                        </DataGridTextColumn>                        
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding QuantityTerm}" Width="SizeToHeader">
+                            <DataGridTextColumn.Header>
+                                <TextBlock
+                                    TextAlignment="Center">
+                                    Сроки получения<LineBreak/>образования (семестров)
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationNext.Pages"
         mc:Ignorable="d"
-        Title="Редактирование/Создание ГИА" Height="450" Width="700">
+        Title="Редактирование/Создание ГИА" Height="400" Width="700">
     <Grid
         Margin="15">
         <StackPanel
@@ -20,13 +20,7 @@
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
                         <TextBlock Width="200" TextAlignment="Center">Название ГИА</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.Name}"/>
-                    </StackPanel>
-                    <StackPanel 
-                        Orientation="Horizontal"
-                        Margin="0,20,0,0">
-                        <TextBlock Width="200" TextAlignment="Center">Количество зачетных единиц</TextBlock>
-                        <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.QuantityCreditUnit}"/>
+                        <TextBox Margin="20,0,0,0" Height="50" Width="300" Text="{Binding SelectedItem.Name}" TextWrapping="Wrap"/>
                     </StackPanel>
                     <StackPanel 
                         Orientation="Horizontal"
@@ -43,7 +37,7 @@
                     <StackPanel 
                         Orientation="Horizontal"
                         Margin="0,20,0,0">
-                        <TextBlock Width="200" TextAlignment="Center">Место<LineBreak/>практики в структуре<LineBreak/>образовательной программы</TextBlock>
+                        <TextBlock Width="200" TextAlignment="Center">Место<LineBreak/>ГИА в структуре<LineBreak/>образовательной программы</TextBlock>
                         <TextBox Margin="20,0,0,0" Height="20" Width="300" Text="{Binding SelectedItem.Place}"/>
                     </StackPanel>
                     <StackPanel 

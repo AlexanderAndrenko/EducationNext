@@ -57,6 +57,13 @@
                                     Название дисциплины
                                 </TextBlock>
                             </DataGridTextColumn.Header>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Binding="{Binding CourseWork}" Width="Auto">
                             <DataGridTextColumn.Header>

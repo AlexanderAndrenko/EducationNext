@@ -83,7 +83,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding Description}" Width="*" Header="Описание компетенции">
+                        <DataGridTextColumn Binding="{Binding Description}" Width="700" Header="Описание компетенции">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
                                     <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>

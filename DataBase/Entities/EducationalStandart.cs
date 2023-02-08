@@ -17,7 +17,6 @@ namespace DataBase.Entities
         public string SpecializationCode { get; set; } = "";
         public string? Name { get; set; }
         public float QuantityCreditUnit { get; set; }
-        public int QuantityTerm { get; set; } = 0;
         public float MaxQuantityCreditUnitPerYear { get; set; }
         [NotMapped]
         public string CodePlusName { get; set; } = string.Empty;
